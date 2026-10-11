@@ -1,0 +1,24 @@
+{
+  "bundleItems": [
+    { "image": "/images/product3.png", "title": "Tinh chất vỏ chuối 30ml", "price": "590.000 đ", "link": "/products/serum" },
+    { "image": "/images/product4.png", "title": "Kem dưỡng vỏ chuối 50g", "price": "490.000 đ", "link": "/products/cream" }
+  ],
+  "keyIngredients": [
+    { "name": "Chiết xuất chuối - vỏ chuối", "description": "Đây là nguồn nguyên liệu lành tính giúp kích thích tăng sinh Procollagen, khôi phục độ đàn hồi, đồng thời ngăn chặn các tác nhân gây đứt gãy collagen." },
+    { "name": "Bakuchiol", "description": "Được ví như \"Retinol tự nhiên\" giúp thúc đẩy tái tạo tế bào, làm mịn bề mặt và mờ thâm mà không gây kích ứng, mang lại làn da trắng sáng." },
+    { "name": "Peptide Matrixyl 3000", "description": "Làm mờ nếp nhăn, tăng độ săn chắc và kích thích sản sinh collagen và elastin." }
+  ],
+  "ingredientsDetail": [
+    { "title": "Thành phần TINH CHẤT VỎ CHUỐI", "content": "Aqua, Glycerin (and) Aqua (and) Butylene Glycol (and) Carbomer (and) Polysorbate 20 (and) Palmitoyl Tripeptide-1 (and) Palmitoyl Tetrapeptide-7 (and) Sodium Lactate, Musa Sapientum (Banana) Peel Extract (and) Water (and) Glycerin (and) 1,2-Hexanediol, Water (and) Butylene Glycol (and) Glycerin (and) Musa Sapientum (Banana) Fruit Extract, Glyceryl Stearate (and) PEG-100 Stearate, Bakuchiol, Bis-Ethoxydiglycol Cyclohexane 1,4-Dicarboxylate, Water (and) Ethyl Hexanediol (and) 1,2-Hexanediol (and) Beta-Glucan, Phenoxyethanol (and) Chlorophenesin (and) Aqua (and) Glycerin, Sodium PCA (and) Water, Ubiquinone, Coco-Caprylate/Caprate, Neopentyl Glycol Diheptanoate, Adenosine, Hydroxyethyl Acrylate/Sodium Acryloyldimethyl Taurate Copolymer, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, Disodium EDTA." },
+    { "title": "Thành phần KEM DƯỠNG VỎ CHUỐI", "content": "Aqua, Glycerin (and) Water (and) Glyceryl Acrylate/ Acrylic Acid Copolymer (and) 1,2-Hexanediol, Pentylene Glycol, Musa Sapientum (Banana) Peel Extract (and) Water (and) Glycerin (and) 1,2-Hexanediol, Water (and) Butylene Glycol (and) Glycerin (and) Musa Sapientum (Banana) Fruit Extract, Sodium Acrylate/Sodium Acryloyldimethyl Taurate Copolymer, Squalane, Dibutyl Adipate, Phenoxyethanol (and) Chlorophenesin (and) Aqua (and) Glycerin, Jojoba Esters (and) Tocopherol, Glycerin (and) Aqua (and) Butylene Glycol (and) Carbomer (and) Polysorbate 20 (and) Palmitoyl Tripeptide-1 (and) Palmitoyl Tetrapeptide-7 (and) Sodium Lactate, Adenosine, Bakuchiol, Hydroxyethyl Urea (and) Water, Allantoin, Ubiquinone, Trehalose, Panthenol, Polyacrylate-13 (and) Polyisobutene (and) Polysorbate 20 (and) Water (and) Sorbitan Isostearate." }
+  ],
+  "usageSteps": [
+    { "step": "BƯỚC 1", "title": "Làm sạch & Bổ sung tinh chất", "description": "Làm sạch da mặt, sử dụng 4 - 6 giọt Serum - Tinh chất vỏ chuối bôi và mát xa đều da mặt và cổ.", "texture": "Dung dịch dạng lỏng", "image": "/images/mission_img.webp", "imageSide": "right" },
+    { "step": "BƯỚC 2", "title": "Tái tạo & Phục hồi", "description": "Sử dụng kem dưỡng ẩm giúp khóa lớp dưỡng chất, cấp ẩm và mềm làn da", "texture": "Dạng kem đặc", "image": "/images/commit_img.webp", "imageSide": "left" }
+  ],
+  "reviews": [
+    { "name": "Minh Anh", "stars": 4, "content": "Serum thấm nhanh, còn kem dưỡng giúp da giữ được độ ẩm cả ngày nên sáng hôm sau da mềm và căng hơn. Sau một thời gian sử dụng, mình thấy da đều màu và trông có sức sống hơn." },
+    { "name": "Thu Trang", "stars": 5, "content": "Trước đây mình chỉ dùng serum nên da vẫn hơi khô. Khi chuyển sang dùng cả combo của Musase thì cảm giác da đủ ẩm hơn hẳn. Mình thích nhất là chất kem không quá dày, dùng cùng nhau rất dễ chịu và không gây bí." },
+    { "name": "Ngọc Linh", "stars": 4, "content": "Da mình nhạy cảm nên không dùng được Retinol nên đổi sang loại này. Sau gần một tháng sử dụng đều đặn, da nhìn mịn hơn, vùng da quanh khóe miệng cũng đỡ nhăn, trông trẻ hẳn." }
+  ]
+}

@@ -1,0 +1,16 @@
+/* Fonts are now loaded via next/font/google and @fontsource-variable in layout.tsx for optimal performance */
+/* Keep CSS variables for backward compatibility */
+:root {
+  --font-opensans: 'Mona Sans Variable', 'Open Sans', sans-serif;
+  --font-orbitron: var(--font-orbitron-google), 'Orbitron', sans-serif;
+  --font-serif-logo: var(--font-cinzel), 'Cinzel', serif;
+}
+
+body,
+html,
+input,
+button,
+select,
+textarea {
+  font-family: var(--font-opensans);
+}
