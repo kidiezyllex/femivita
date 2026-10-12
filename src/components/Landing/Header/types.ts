@@ -15,10 +15,11 @@ export interface NavLinkItem {
 }
 
 export const NAV_LINKS: NavLinkItem[] = [
-  { label: "Về thương hiệu", href: "#" },
-  { label: "Kiến thức", href: "#" },
-  { label: "Nhà phân phối", href: "#" },
+  { label: "Về thương hiệu", href: "/story" },
+  { label: "Kiến thức", href: "#knowledge" },
+  { label: "Nhà phân phối", href: "#distributors" },
 ];
+
 
 export const HEADER_CTA: NavLinkItem = { label: "Mua chính hãng", href: "/order" };
 

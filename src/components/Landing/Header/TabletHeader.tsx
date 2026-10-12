@@ -73,7 +73,7 @@ export const TabletHeader: React.FC = () => {
 
           return (
             <Link
-              key={link.href}
+              key={link.href + link.label}
               href={link.href}
               onClick={() => setIsDropdownOpen(false)}
               className={cn(NAV_ITEM_CLASS, isActive && "text-brand")}
@@ -82,6 +82,7 @@ export const TabletHeader: React.FC = () => {
             </Link>
           );
         })}
+
 
         {/* Language switch */}
         <button type="button" aria-label="Ngôn ngữ" className={NAV_ITEM_CLASS}>

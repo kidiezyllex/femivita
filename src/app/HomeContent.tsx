@@ -7,12 +7,14 @@ import { Hero } from "@/components/Landing/Hero";
 import { KnowledgeArticles } from "@/components/Landing/KnowledgeArticles";
 import { ProductShowcase } from "@/components/Landing/ProductShowcase";
 import { WhyFemivita } from "@/components/Landing/WhyFemivita";
+import { ScrollProgressBar } from "@/components/ui/ScrollReveal";
 import { LandingProvider } from "@/context/LandingContext";
 
 export default function HomeContent() {
   return (
     <LandingProvider initialEditMode={false}>
       <div className="flex min-h-screen flex-col bg-[#FAF8F0] text-[#333333]">
+        <ScrollProgressBar />
         <Header overlay />
         <main className="w-full flex-1">
           <Hero />
@@ -31,3 +33,4 @@ export default function HomeContent() {
     </LandingProvider>
   );
 }
+

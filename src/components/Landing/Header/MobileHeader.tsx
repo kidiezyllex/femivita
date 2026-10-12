@@ -142,7 +142,7 @@ export const MobileHeader: React.FC = () => {
 
                   return (
                     <Link
-                      key={link.href}
+                      key={link.href + link.label}
                       href={link.href}
                       onClick={handleClose}
                       className={cn(
@@ -154,6 +154,7 @@ export const MobileHeader: React.FC = () => {
                     </Link>
                   );
                 })}
+
               </div>
 
               {/* Language & CTA inside Menu */}

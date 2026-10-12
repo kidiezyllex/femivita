@@ -1,8 +1,12 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ProductShowcaseData, ShowcaseBenefit, ShowcaseProduct } from "./types";
+
 
 export const BenefitItem: React.FC<{ benefit: ShowcaseBenefit; className?: string }> = ({
   benefit,
@@ -104,33 +108,61 @@ export const ProductCard: React.FC<{ product: ShowcaseProduct; className?: strin
 /**
  * Decorative stage with the rotated hero bottle, glow and spotlight card.
  * Everything is positioned in percentages of the stage so it scales with the viewport (Figma: 1440 x 1301).
+ * Enhanced with scroll-linked floating parallax synced to Lenis inertia.
  */
-export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data }) => (
-  <div className="relative aspect-[1440/1301] w-full">
-    <div
-      aria-hidden
-      className="absolute left-[51.2%] top-[16.9%] aspect-[600.683/972.798] w-[41.7%] rotate-[25.59deg]"
-    >
-      <Image
-        src="/images/product-showcase/glow.svg"
-        alt=""
-        fill
-        draggable={false}
-        className="max-w-none"
-      />
+export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data }) => {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: stageRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax trôi nổi theo đà cuộn Lenis
+  const bottleY = useTransform(scrollYProgress, [0, 1], [-25, 25]);
+  const bottleRotate = useTransform(scrollYProgress, [0, 1], [24.5, 28]);
+  const glowScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.94, 1.05, 0.96]);
+
+  return (
+    <div ref={stageRef} className="relative aspect-[1440/1301] w-full">
+      <motion.div
+        aria-hidden
+        style={{ scale: glowScale }}
+        className="absolute left-[51.2%] top-[16.9%] aspect-[600.683/972.798] w-[41.7%] rotate-[25.59deg]"
+      >
+        <Image
+          src="/images/product-showcase/glow.svg"
+          alt=""
+          fill
+          draggable={false}
+          className="max-w-none"
+        />
+      </motion.div>
+
+      <motion.div
+        style={{ y: bottleY, rotate: bottleRotate }}
+        className="absolute left-[7.15%] top-[-9.75%] h-auto w-[95.5%] max-w-none"
+      >
+        <Image
+          src="/images/product-showcase/gel-venus-thumbnail.png"
+          alt={data.heroImageAlt}
+          width={1024}
+          height={1024}
+          quality={100}
+          sizes="100vw"
+          draggable={false}
+          className="h-auto w-full max-w-none"
+        />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true, amount: 0.3 }}
+        className="absolute left-[18.8%] top-[30.1%]"
+      >
+        <SpotlightCard data={data.spotlight} />
+      </motion.div>
     </div>
-
-    <Image
-      src="/images/product-showcase/gel-venus-thumbnail.png"
-      alt={data.heroImageAlt}
-      width={1024}
-      height={1024}
-      quality={100}
-      sizes="100vw"
-      draggable={false}
-      className="absolute left-[7.15%] top-[-9.75%] h-auto w-[95.5%] max-w-none rotate-[26.24deg]"
-    />
-
-    <SpotlightCard data={data.spotlight} className="absolute left-[18.8%] top-[30.1%]" />
-  </div>
-);
+  );
+};
