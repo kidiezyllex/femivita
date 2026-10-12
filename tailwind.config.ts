@@ -71,6 +71,7 @@ const config: Config = {
 					surface: "#FAF9FF",
 					lavender: "#C3B2E8",
 					pink: "#F4EEF6",
+					soft: "#F2F1F8", // Figma: Purple bg, used by the header CTA once the page is scrolled
 				},
 				ink: {
 					DEFAULT: "#1E1E1E",

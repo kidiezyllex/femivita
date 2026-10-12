@@ -44,6 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ adminBarContext, overlay = false
   }, [overlay]);
 
   const isSolid = !overlay || isScrolled;
+  const solidBackgroundClass = cn("transition-colors duration-300", isSolid ? "bg-white" : "bg-transparent");
 
   // Spacer heights: header is 90px (mobile), 60px (tablet) or 104px (desktop, per Figma); the admin bar adds 48/56/62px.
   let spacerClass: string;
@@ -64,21 +65,20 @@ export const Header: React.FC<HeaderProps> = ({ adminBarContext, overlay = false
         {/* Admin Bar at the very top (above the header) */}
         <AdminEditBar contextValue={adminBarContext} />
 
-        <div className={cn("transition-colors duration-300", isSolid ? "bg-white" : "bg-transparent")}>
-          {/* Mobile Header: < 768px (<360px, 360px-480px, 481px-767px) */}
-          <div className="block md:hidden">
-            <MobileHeader />
-          </div>
+        {/* Mobile Header: < 768px (<360px, 360px-480px, 481px-767px) */}
+        <div className={cn("block md:hidden", solidBackgroundClass)}>
+          <MobileHeader />
+        </div>
 
-          {/* Tablet Header: 768px - 991px (Tablet dọc) */}
-          <div className="hidden md:block lg:hidden">
-            <TabletHeader />
-          </div>
+        {/* Tablet Header: 768px - 991px (Tablet dọc) */}
+        <div className={cn("hidden md:block lg:hidden", solidBackgroundClass)}>
+          <TabletHeader />
+        </div>
 
-          {/* Desktop Header: >= 992px / 1024px+ (Tablet ngang, Laptop 1280-1439px, Figma 1440-1919px, >=1920px) */}
-          <div className="hidden lg:block">
-            <DesktopHeader />
-          </div>
+        {/* Desktop Header: >= 992px / 1024px+ (Tablet ngang, Laptop 1280-1439px, Figma 1440-1919px, >=1920px).
+            It draws its own floating white card once solid, so it has no full-width background. */}
+        <div className="hidden lg:block">
+          <DesktopHeader isSolid={isSolid} />
         </div>
       </div>
     </div>

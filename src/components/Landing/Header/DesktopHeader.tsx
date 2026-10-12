@@ -12,7 +12,12 @@ import { NAV_LINKS } from "./types";
 const NAV_ITEM_CLASS =
   "flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap px-3 py-1 font-google-sans text-base leading-[1.6] text-ink transition-colors hover:text-brand xl:px-4";
 
-export const DesktopHeader: React.FC = () => {
+interface DesktopHeaderProps {
+  /** Once solid (page scrolled, or a page without a hero) the bar becomes a floating white card. */
+  isSolid?: boolean;
+}
+
+export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isSolid = true }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const pathname = usePathname();
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -38,7 +43,12 @@ export const DesktopHeader: React.FC = () => {
   return (
     <header className="relative z-50 w-full">
       <div className="p-4 xl:px-5">
-        <div className="flex h-[72px] items-center px-4 xl:px-6">
+        <div
+          className={cn(
+            "flex h-[72px] items-center rounded-[8px] px-4 transition-[background-color,box-shadow] duration-300 xl:px-6",
+            isSolid ? "bg-white shadow-[0_4px_24px_rgba(30,30,30,0.08)]" : "bg-transparent shadow-none",
+          )}
+        >
           {/* Logo */}
           <div className="flex h-full w-40 shrink-0 flex-col items-start pb-4 pt-2 xl:w-[200px]">
             <HeaderLogo onClick={() => setIsDropdownOpen(false)} />
@@ -103,7 +113,7 @@ export const DesktopHeader: React.FC = () => {
 
           {/* CTA */}
           <div className="flex h-full shrink-0 items-center justify-end xl:w-[200px]">
-            <HeaderCTA onClick={() => setIsDropdownOpen(false)} />
+            <HeaderCTA variant={isSolid ? "soft" : "solid"} onClick={() => setIsDropdownOpen(false)} />
           </div>
         </div>
       </div>

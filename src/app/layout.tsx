@@ -105,6 +105,7 @@ import {
   SITE_TITLE,
   SITE_URL,
 } from '@/constants/site';
+import { LenisProvider } from '@/provider/LenisProvider';
 import { ReactQueryClientProvider } from '@/provider/ReactQueryClientProvider';
 import { ToastProvider } from '@/provider/ToastProvider';
 import NextTopLoader from 'nextjs-toploader';
@@ -127,7 +128,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="vi" className={cn("dark scroll-smooth", openSans.variable, orbitron.variable, cinzel.variable, inter.variable)}>
+    <html lang="vi" className={cn("dark", openSans.variable, orbitron.variable, cinzel.variable, inter.variable)}>
       <head>
         <script
           type="application/ld+json"
@@ -147,9 +148,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           shadow="0 0 10px #ffffff,0 0 5px #ffffff"
         />
         <ReactQueryClientProvider>
-          <LandingLayout>
-            {children}
-          </LandingLayout>
+          <LenisProvider>
+            <LandingLayout>
+              {children}
+            </LandingLayout>
+          </LenisProvider>
           <ToastProvider />
         </ReactQueryClientProvider>
       </body>

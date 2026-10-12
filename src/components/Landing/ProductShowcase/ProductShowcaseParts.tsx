@@ -121,7 +121,7 @@ export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data })
     </div>
 
     <Image
-      src={data.heroImage}
+      src="/images/product-showcase/product-image.webp"
       alt={data.heroImageAlt}
       width={1024}
       height={1024}

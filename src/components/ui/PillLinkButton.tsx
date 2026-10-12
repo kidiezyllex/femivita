@@ -3,37 +3,58 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+type PillLinkButtonVariant = "solid" | "soft";
+
 interface PillLinkButtonProps {
   href: string;
   label: string;
   onClick?: () => void;
   className?: string;
+  /** "solid": purple pill with a white arrow circle. "soft": light lavender pill with a purple arrow circle. */
+  variant?: PillLinkButtonVariant;
 }
+
+const VARIANT_STYLES: Record<PillLinkButtonVariant, { button: string; circle: string; arrow: string }> = {
+  solid: {
+    button: "bg-brand-light text-white hover:bg-brand",
+    circle: "bg-white",
+    arrow: "/logos/arrow-right.svg",
+  },
+  soft: {
+    button: "bg-brand-soft text-black hover:bg-brand-lavender/40",
+    circle: "bg-brand",
+    arrow: "/logos/arrow-right-white.svg",
+  },
+};
 
 export const PillLinkButton: React.FC<PillLinkButtonProps> = ({
   href,
   label,
   onClick,
   className,
-}) => (
-  <Link
-    href={href}
-    onClick={onClick}
-    className={cn(
-      "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full bg-brand-light py-2 pl-4 pr-2 font-inter text-sm font-medium leading-normal text-white transition-colors hover:bg-brand",
-      className,
-    )}
-  >
-    {label}
-    <span className="flex size-[26px] shrink-0 items-center justify-center rounded-full bg-white">
-      <Image
-        src="/logos/arrow-right.svg"
-        alt=""
-        width={18}
-        height={18}
-        quality={100}
-        draggable={false}
-      />
-    </span>
-  </Link>
-);
+  variant = "solid",
+}) => {
+  const styles = VARIANT_STYLES[variant];
+
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className={cn(
+        "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full py-2 pl-4 pr-2 font-inter text-sm font-medium leading-normal transition-colors",
+        styles.button,
+        className,
+      )}
+    >
+      {label}
+      <span
+        className={cn(
+          "flex size-[26px] shrink-0 items-center justify-center rounded-full transition-colors",
+          styles.circle,
+        )}
+      >
+        <Image src={styles.arrow} alt="" width={18} height={18} quality={100} draggable={false} />
+      </span>
+    </Link>
+  );
+};
