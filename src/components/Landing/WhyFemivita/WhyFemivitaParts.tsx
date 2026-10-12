@@ -24,9 +24,16 @@ export const RatingSummary: React.FC<{
           draggable={false}
         />
       ))}
-      <Image src="/logos/star-half.svg" alt="" width={12} height={12} quality={100} draggable={false} />
+      <Image
+        src="/logos/star-half.svg"
+        alt=""
+        width={12}
+        height={12}
+        quality={100}
+        draggable={false}
+      />
     </div>
-    <p className="whitespace-nowrap font-google-sans text-sm font-medium leading-[1.2] text-secondaryV1">
+    <p className="whitespace-nowrap font-google-sans text-base font-medium leading-[1.2] text-secondaryV1">
       {score} ({count} đánh giá)
     </p>
   </div>

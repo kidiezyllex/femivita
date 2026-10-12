@@ -131,7 +131,7 @@ export const FooterPurchaseInfo: React.FC<{ data: FooterContent }> = ({ data }) 
 export const FooterPolicyList: React.FC<{ links: FooterContent["policyLinks"] }> = ({ links }) => (
   <ul className="flex flex-col gap-8">
     {links.map((link) => (
-      <li key={link.href}>
+      <li key={link.href + link.label}>
         <Link
           href={link.href}
           className="font-inter text-lg font-light leading-7 tracking-[0.2px] text-white underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-white"
@@ -141,6 +141,7 @@ export const FooterPolicyList: React.FC<{ links: FooterContent["policyLinks"] }>
       </li>
     ))}
   </ul>
+
 );
 
 export const FooterCopyright: React.FC<{ text: string; className?: string }> = ({

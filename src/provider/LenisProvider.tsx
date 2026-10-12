@@ -10,21 +10,17 @@ import { usePathname } from "next/navigation";
 const SCROLL_LOCK_ATTRIBUTE = "data-scroll-locked";
 
 /**
- * Cấu hình Lenis Smooth Scrolling với hiệu ứng DELAY / QUÁN TÍNH TRÔI RÕ RỆT:
- * - Sử dụng lerp (Linear Interpolation): thay vì dịch chuyển tức thì, trang sẽ trôi chậm
- *   phía sau con lăn chuột một nhịp (delay/inertia lag) cực kỳ mượt mà.
- * - lerp: 0.05 là mức lý tưởng để thấy rõ độ trôi bồng bềnh chuẩn Locomotive Scroll/Awwwards.
- * - wheelMultiplier: 1.15 giúp tăng đà lướt để cảm nhận rõ hiệu ứng delay.
+ * Cấu hình Lenis dựa trên https://www.quakerschool.org/ (đọc từ window.lenis.options, Lenis 1.3.25):
+ * wheelMultiplier 1, touchMultiplier 1 (mặc định của Lenis), stopInertiaOnNavigate bật.
+ * Riêng lerp đặt 0.05 (trang gốc dùng 0.1): một cú lăn chuột 100px dừng ở 50% sau ~225ms, 90% sau ~750ms.
  */
 export const LENIS_CONFIG: LenisOptions = {
-	// Độ mượt và độ trễ (delay) vật lý:
-	// - 0.04: Siêu trễ (Heavy floating delay)
-	// - 0.05: Trễ mượt mà rõ rệt (Khuyên dùng - Chuẩn cinematic lag)
-	// - 0.08: Trễ nhẹ, nhạy hơn
+	// Độ trễ vật lý: lerp càng nhỏ trang càng trôi lâu, càng "nặng tay".
+	// 0.1 = mặc định, êm nhưng phản hồi nhanh (quakerschool.org); 0.05 ≈ chậm gấp đôi.
 	lerp: 0.05,
 
-	// Hệ số lực cuộn của con lăn chuột: tăng nhẹ để tạo đà lướt dài hơn, thấy rõ độ delay
-	wheelMultiplier: 1.15,
+	// Hệ số lực cuộn của con lăn chuột (1 = đúng quãng đường con lăn gửi lên)
+	wheelMultiplier: 1,
 
 	// Hướng cuộn chính
 	orientation: "vertical",
@@ -34,7 +30,7 @@ export const LENIS_CONFIG: LenisOptions = {
 	smoothWheel: true,
 
 	// Hệ số cho trackpad / thao tác chạm
-	touchMultiplier: 1.5,
+	touchMultiplier: 1,
 
 	// Giữ scroll gốc tự nhiên trên mobile để không bị lag thao tác vuốt màn hình
 	syncTouch: false,
@@ -45,8 +41,11 @@ export const LENIS_CONFIG: LenisOptions = {
 	// In-page anchor links (#id) với độ trượt êm ái
 	anchors: {
 		offset: -90,
-		lerp: 0.06,
+		lerp: 0.1,
 	},
+
+	// Dừng quán tính đang chạy khi bấm link nội bộ (giống quakerschool.org)
+	stopInertiaOnNavigate: true,
 
 	// Cho phép các container cuộn lồng nhau (modal, table, dropdown) cuộn tự nhiên
 	allowNestedScroll: true,
@@ -54,8 +53,9 @@ export const LENIS_CONFIG: LenisOptions = {
 	// Tự động tính toán lại kích thước DOM
 	autoResize: true,
 
-	// Tôn trọng thiết lập giảm chuyển động của hệ điều hành
-	respectReducedMotion: true,
+	// Khi Windows/macOS bật "giảm chuyển động" (prefers-reduced-motion), Lenis mặc định tắt hẳn hiệu ứng trễ.
+	// Đặt false để luôn giữ smooth scroll như quakerschool.org (bản Lenis 1.3.25 chưa có tùy chọn này).
+	respectReducedMotion: false,
 };
 
 // Đồng bộ trạng thái khóa cuộn khi mở Modal, Sheet, Dialog

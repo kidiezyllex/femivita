@@ -8,7 +8,7 @@ import { BenefitItem, ProductCard, ShowcaseStage } from "./ProductShowcaseParts"
 import { ProductShowcaseProps } from "./types";
 
 const HEADING_CLASS =
-  "font-sans font-semibold leading-[1.3] text-black [font-size:clamp(32px,3.34vw,48px)]";
+  "font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)]";
 
 export const DesktopProductShowcase: React.FC<ProductShowcaseProps> = ({ data }) => (
   <div className="relative overflow-hidden bg-brand-lavender">
@@ -29,7 +29,7 @@ export const DesktopProductShowcase: React.FC<ProductShowcaseProps> = ({ data })
       {/* Title */}
       <ScrollReveal direction="up" delay={0.05}>
         <div className="flex flex-col items-center gap-2 px-8 pt-20 xl:px-[161px]">
-          <p className="whitespace-nowrap font-google-sans text-lg leading-[1.6] text-ink-muted">
+          <p className="whitespace-nowrap font-google-sans text-lg italic leading-[1.6] text-ink-muted">
             {data.eyebrow}
           </p>
           <h2 className={HEADING_CLASS}>
@@ -39,7 +39,10 @@ export const DesktopProductShowcase: React.FC<ProductShowcaseProps> = ({ data })
       </ScrollReveal>
 
       {/* Benefits */}
-      <ScrollStagger className="flex items-start justify-between px-8 pt-20 xl:px-[161px]" staggerDelay={0.15}>
+      <ScrollStagger
+        className="flex items-start justify-between px-8 pt-20 xl:px-[161px]"
+        staggerDelay={0.15}
+      >
         {data.benefits.map((benefit) => (
           <ScrollStaggerItem key={benefit.title}>
             <BenefitItem benefit={benefit} />
@@ -77,4 +80,3 @@ export const DesktopProductShowcase: React.FC<ProductShowcaseProps> = ({ data })
     </div>
   </div>
 );
-

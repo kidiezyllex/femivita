@@ -1,8 +1,8 @@
 "use client";
 
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import Image from "next/image";
 import React from "react";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { BrandStoryGlassCard, RatingSummary, ResearchCopy } from "./WhyFemivitaParts";
 import { WhyFemivitaProps } from "./types";
 
@@ -11,9 +11,11 @@ export const DesktopWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
     {/* Title */}
     <div className="col-span-12 flex flex-col items-start gap-2">
       <ScrollReveal direction="up" delay={0.05} className="w-full">
-        <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{data.eyebrow}</p>
+        <p className="font-google-sans text-lg italic leading-[1.6] text-ink-muted">
+          {data.eyebrow}
+        </p>
         <div className="flex w-full items-end justify-between">
-          <h2 className="font-sans font-semibold leading-[1.3] text-black [font-size:clamp(32px,3.34vw,48px)]">
+          <h2 className="font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)]">
             {data.headlineStart} <span className="text-brand-text">{data.headlineHighlight}</span>
             <br />
             {data.headlineEnd}
@@ -60,7 +62,7 @@ export const DesktopWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
               quality={100}
               sizes="(min-width: 992px) 50vw, 100vw"
               draggable={false}
-              className="object-cover object-right max-xl:[mask-image:linear-gradient(to_bottom,transparent_0%,black_30%)] xl:object-[86%_center] transition-transform duration-700 ease-out hover:scale-105"
+              className="object-cover object-right transition-transform duration-700 ease-out hover:scale-105 max-xl:[mask-image:linear-gradient(to_bottom,transparent_0%,black_30%)] xl:object-[86%_center]"
             />
           </div>
           <div className="absolute inset-0 bg-[linear-gradient(40.6deg,#E5D3F5_6.67%,rgba(229,211,245,0)_39.6%)]" />
@@ -87,4 +89,3 @@ export const DesktopWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
     </div>
   </div>
 );
-

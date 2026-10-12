@@ -1,12 +1,12 @@
 "use client";
 
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { cn } from "@/lib/utils";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { ProductShowcaseData, ShowcaseBenefit, ShowcaseProduct } from "./types";
-
 
 export const BenefitItem: React.FC<{ benefit: ShowcaseBenefit; className?: string }> = ({
   benefit,
@@ -105,6 +105,14 @@ export const ProductCard: React.FC<{ product: ShowcaseProduct; className?: strin
   </Link>
 );
 
+// Tilt in degrees from Figma, and the scroll progress of the stage (0 = entering at the bottom, 0.5 = centred) at which it is upright.
+const BOTTLE_TILT = 24.5;
+const GLOW_TILT = 25.59;
+const UPRIGHT_AT = 0.5;
+// How much bigger the bottle and glow get by UPRIGHT_AT (1.2 = +20%); the glow starts slightly smaller than its Figma size.
+const ZOOM = 1.2;
+const GLOW_START_SCALE = 0.94;
+
 /**
  * Decorative stage with the rotated hero bottle, glow and spotlight card.
  * Everything is positioned in percentages of the stage so it scales with the viewport (Figma: 1440 x 1301).
@@ -119,15 +127,18 @@ export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data })
 
   // Parallax trôi nổi theo đà cuộn Lenis
   const bottleY = useTransform(scrollYProgress, [0, 1], [-25, 25]);
-  const bottleRotate = useTransform(scrollYProgress, [0, 1], [24.5, 28]);
-  const glowScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.94, 1.05, 0.96]);
+  // Bottle and glow start at their Figma tilt and size, then ease back to upright (0deg) and zoom in by UPRIGHT_AT, and stay there.
+  const bottleRotate = useTransform(scrollYProgress, [0, UPRIGHT_AT], [BOTTLE_TILT, 0]);
+  const glowRotate = useTransform(scrollYProgress, [0, UPRIGHT_AT], [GLOW_TILT, 0]);
+  const bottleScale = useTransform(scrollYProgress, [0, UPRIGHT_AT], [1, ZOOM]);
+  const glowScale = useTransform(scrollYProgress, [0, UPRIGHT_AT], [GLOW_START_SCALE, GLOW_START_SCALE * ZOOM]);
 
   return (
     <div ref={stageRef} className="relative aspect-[1440/1301] w-full">
       <motion.div
         aria-hidden
-        style={{ scale: glowScale }}
-        className="absolute left-[51.2%] top-[16.9%] aspect-[600.683/972.798] w-[41.7%] rotate-[25.59deg]"
+        style={{ scale: glowScale, rotate: glowRotate }}
+        className="absolute left-[51.2%] top-[16.9%] aspect-[600.683/972.798] w-[41.7%]"
       >
         <Image
           src="/images/product-showcase/glow.svg"
@@ -139,7 +150,7 @@ export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data })
       </motion.div>
 
       <motion.div
-        style={{ y: bottleY, rotate: bottleRotate }}
+        style={{ y: bottleY, rotate: bottleRotate, scale: bottleScale }}
         className="absolute left-[7.15%] top-[-9.75%] h-auto w-[95.5%] max-w-none"
       >
         <Image
@@ -154,15 +165,15 @@ export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data })
         />
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, x: -30 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: true, amount: 0.3 }}
+      <ScrollReveal
+        direction="right"
+        distance={30}
+        delay={0.2}
+        amount={0.3}
         className="absolute left-[18.8%] top-[30.1%]"
       >
         <SpotlightCard data={data.spotlight} />
-      </motion.div>
+      </ScrollReveal>
     </div>
   );
 };

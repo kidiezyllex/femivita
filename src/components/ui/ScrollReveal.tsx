@@ -16,9 +16,14 @@ export interface ScrollRevealProps {
   className?: string;
 }
 
+// Reverse (element leaves the viewport) is quicker than the entrance and has no delay.
+const REVERT_TRANSITION = { duration: 0.4, ease: [0.22, 1, 0.36, 1] } as const;
+
 /**
  * ScrollReveal component:
  * Kích hoạt hiệu ứng xuất hiện mượt mà (Fade, Slide, Scale) khi phần tử cuộn vào màn hình.
+ * Mặc định `once = false`: cuộn xuống thì phần tử hiện ra, cuộn ngược lên (rời khỏi màn hình) thì
+ * chạy ngược về trạng thái ẩn, và hiện lại khi cuộn vào lần nữa. Truyền `once` để chỉ chạy một lần.
  * Hoàn toàn tương thích và đồng bộ với đà lướt (inertia delay) của Lenis.
  */
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
@@ -27,7 +32,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   delay = 0,
   duration = 0.8,
   distance = 36,
-  once = true,
+  once = false,
   amount = 0.15,
   className = "",
 }) => {
@@ -65,6 +70,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
           ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier: khởi động êm, đáp đất mượt
         },
       }}
+      transition={REVERT_TRANSITION}
       viewport={{ once, amount }}
       className={className}
     >
@@ -94,7 +100,7 @@ const staggerContainerVariants: Variants = {
 };
 
 export const staggerItemVariants: Variants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 32, transition: REVERT_TRANSITION },
   visible: {
     opacity: 1,
     y: 0,
@@ -108,12 +114,13 @@ export const staggerItemVariants: Variants = {
 /**
  * ScrollStagger:
  * Container kích hoạt hiệu ứng xuất hiện so le (staggered cascade) cho danh sách card/element con.
+ * Giống ScrollReveal, mặc định `once = false` nên cuộn ngược lên sẽ chạy ngược về trạng thái ẩn.
  */
 export const ScrollStagger: React.FC<ScrollStaggerProps> = ({
   children,
   staggerDelay = 0.12,
   delayChildren = 0.1,
-  once = true,
+  once = false,
   amount = 0.15,
   className = "",
 }) => {
