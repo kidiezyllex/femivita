@@ -6,9 +6,10 @@ import React from "react";
 interface HeaderLogoProps {
   onClick?: () => void;
   className?: string;
+  imageClassName?: string;
 }
 
-export const HeaderLogo: React.FC<HeaderLogoProps> = ({ onClick, className }) => (
+export const HeaderLogo: React.FC<HeaderLogoProps> = ({ onClick, className, imageClassName }) => (
   <Link
     href="/"
     onClick={onClick}
@@ -20,7 +21,7 @@ export const HeaderLogo: React.FC<HeaderLogoProps> = ({ onClick, className }) =>
       alt="Femivita"
       width={137}
       height={30}
-      className="h-auto w-[136px]"
+      className={cn("h-auto w-[136px]", imageClassName)}
       quality={100}
       draggable={false}
       priority

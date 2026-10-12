@@ -1,6 +1,5 @@
+import { SITE_NAME, SITE_URL } from "@/constants/site";
 import { ProductPageData } from "@/types/productPage";
-
-const SITE_URL = "https://www.musase.vn";
 
 function parsePrice(price: string): string {
   const digits = price.replace(/[^\d]/g, "");
@@ -21,7 +20,7 @@ export function buildProductJsonLd(data: ProductPageData) {
     image: data.galleryImages,
     brand: {
       "@type": "Brand",
-      name: "Musase",
+      name: SITE_NAME,
     },
     offers: {
       "@type": "Offer",

@@ -66,8 +66,19 @@ const config: Config = {
 				brand: {
 					DEFAULT: "#77519F",
 					light: "#957FCD",
+					text: "#A05DB1", // Figma: Color/Text/Brand
+					border: "#E3DDE4",
+					surface: "#FAF9FF",
+					lavender: "#C3B2E8",
+					pink: "#F4EEF6",
 				},
-				ink: "#1E1E1E",
+				ink: {
+					DEFAULT: "#1E1E1E",
+					dark: "#161616", // Figma: Cod Gray
+					muted: "#535353",
+					soft: "#4E4C4C",
+					line: "#E6E6E6", // Figma: Mercury, used for dividers and outlines
+				},
 				foreground: "hsl(var(--foreground))",
 				card: {
 					DEFAULT: "hsl(var(--card))",

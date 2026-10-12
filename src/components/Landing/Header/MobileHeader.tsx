@@ -2,7 +2,7 @@
 
 import { Icon } from "@/components/ui/mdi-icon";
 import { cn } from "@/lib/utils";
-import { mdiChevronRight, mdiClose, mdiMenu } from "@mdi/js";
+import { mdiChevronRight, mdiClose } from "@mdi/js";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,26 +23,24 @@ export const MobileHeader: React.FC = () => {
   };
 
   return (
-    <header className="relative z-50 flex h-[60px] w-full items-center justify-between overflow-x-hidden bg-white px-5">
+    <header className="relative z-50 flex h-[90px] w-full items-center justify-between overflow-x-hidden px-3">
       {/* Logo */}
-      <HeaderLogo onClick={handleClose} className="h-[34px] w-auto justify-start" />
+      <HeaderLogo onClick={handleClose} className="h-[34px] w-28" imageClassName="w-[95px]" />
 
-      {/* Right Controls: Language & Hamburger Button */}
-      <div className="flex items-center gap-3">
-        <span className="px-2 py-1 font-google-sans text-sm text-ink">VN</span>
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "Đóng menu" : "Mở menu"}
-          className="-mr-1.5 cursor-pointer rounded p-2 text-ink transition-colors hover:text-brand focus:outline-none"
-        >
-          {isOpen ? (
-            <Icon path={mdiClose} className="h-6 w-6" />
-          ) : (
-            <Icon path={mdiMenu} className="h-6 w-6" />
-          )}
-        </button>
-      </div>
+      {/* Hamburger Button */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Đóng menu" : "Mở menu"}
+        aria-expanded={isOpen}
+        className="flex size-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-brand-light transition-colors hover:bg-brand focus:outline-none"
+      >
+        {isOpen ? (
+          <Icon path={mdiClose} className="size-4 text-white" />
+        ) : (
+          <Image src="/logos/menu.svg" alt="" width={16} height={16} quality={100} draggable={false} />
+        )}
+      </button>
 
       {/* Mobile Menu Drawer */}
       <AnimatePresence>
@@ -54,7 +52,7 @@ export const MobileHeader: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={handleClose}
-              className="fixed inset-0 top-[60px] z-40 bg-black/40 backdrop-blur-sm"
+              className="fixed inset-0 top-[90px] z-40 bg-black/40 backdrop-blur-sm"
             />
 
             {/* Slide Down Menu Content */}
@@ -63,7 +61,7 @@ export const MobileHeader: React.FC = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="fixed inset-x-0 bottom-0 top-[60px] z-50 flex flex-col justify-between overflow-y-auto bg-white shadow-2xl"
+              className="fixed inset-x-0 bottom-0 top-[90px] z-50 flex flex-col justify-between overflow-y-auto bg-white shadow-2xl"
             >
               <div className="p-4">
                 {/* Accordion: Sản phẩm */}
@@ -158,8 +156,9 @@ export const MobileHeader: React.FC = () => {
                 })}
               </div>
 
-              {/* CTA inside Menu */}
-              <div className="flex justify-center border-t border-ink/10 p-5">
+              {/* Language & CTA inside Menu */}
+              <div className="flex items-center justify-between border-t border-ink/10 p-5">
+                <span className="font-google-sans text-base text-ink">VN</span>
                 <HeaderCTA onClick={handleClose} />
               </div>
             </motion.div>

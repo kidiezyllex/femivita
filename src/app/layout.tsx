@@ -8,7 +8,7 @@ const inter = Inter({
   subsets: ["latin", "vietnamese"],
   variable: "--font-inter",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const openSans = Open_Sans({
@@ -34,42 +34,37 @@ const cinzel = Cinzel({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Musase Skincare - Làm đẹp từ vỏ chuối, chống lão hóa da tự nhiên',
-    template: '%s | Musase'
+    default: SITE_TITLE,
+    template: `%s | ${SITE_NAME}`
   },
-  description: 'Musase Skincare - Thương hiệu mỹ phẩm làm đẹp từ vỏ chuối, mang đến tinh chất vỏ chuối và kem dưỡng vỏ chuối giúp vỏ chuối chống lão hoá, dưỡng ẩm chuyên sâu và chăm sóc từ vỏ chuối an toàn, lành tính cho mọi loại da.',
-  keywords: [
-    'Musase', 'Musase Skincare', 'làm đẹp từ vỏ chuối', 'vỏ chuối chống lão hoá',
-    'tinh chất vỏ chuối', 'kem dưỡng vỏ chuối', 'chăm sóc từ vỏ chuối',
-    'mỹ phẩm thiên nhiên', 'chống lão hóa da', 'dưỡng ẩm da', 'chiết xuất vỏ chuối',
-    'skincare thiên nhiên', 'serum chống lão hóa', 'mỹ phẩm lành tính', 'trẻ hóa làn da',
-    'mỹ phẩm chiết xuất thiên nhiên Việt Nam', 'chăm sóc da chuyên sâu'
-  ],
-  authors: [{ name: 'Musase' }],
-  creator: 'Musase',
-  publisher: 'CÔNG TY TNHH CERY SKINLAB',
+  description: SITE_DESCRIPTION,
+  keywords: SITE_KEYWORDS,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.musase.vn'),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Musase Skincare - Làm đẹp từ vỏ chuối, chống lão hóa da tự nhiên',
-    description: 'Thương hiệu mỹ phẩm làm đẹp từ vỏ chuối, mang đến tinh chất vỏ chuối và kem dưỡng vỏ chuối giúp vỏ chuối chống lão hoá, dưỡng ẩm chuyên sâu và lành tính cho mọi loại da.',
-    url: 'https://www.musase.vn',
-    siteName: 'Musase',
+    title: SITE_TITLE,
+    description: SITE_SHORT_DESCRIPTION,
+    url: '/',
+    siteName: SITE_NAME,
     locale: 'vi_VN',
     type: 'website',
+    images: [SITE_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Musase Skincare - Làm đẹp từ vỏ chuối, chống lão hóa da tự nhiên',
-    description: 'Thương hiệu mỹ phẩm làm đẹp từ vỏ chuối, mang đến tinh chất vỏ chuối và kem dưỡng vỏ chuối giúp vỏ chuối chống lão hoá, dưỡng ẩm chuyên sâu và lành tính cho mọi loại da.',
-    images: ['https://res.cloudinary.com/dxrmfi8xm/image/upload/v1788096394/og_image_bmek66.png'],
+    title: SITE_TITLE,
+    description: SITE_SHORT_DESCRIPTION,
+    images: [SITE_OG_IMAGE.url],
   },
   robots: {
     index: true,
@@ -100,6 +95,16 @@ export const metadata: Metadata = {
 };
 
 import { LandingLayout } from '@/components/layout/LandingLayout';
+import {
+  SITE_CONTACT,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_OG_IMAGE,
+  SITE_SHORT_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from '@/constants/site';
 import { ReactQueryClientProvider } from '@/provider/ReactQueryClientProvider';
 import { ToastProvider } from '@/provider/ToastProvider';
 import NextTopLoader from 'nextjs-toploader';
@@ -108,12 +113,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const organizationJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Musase',
-    url: 'https://www.musase.vn',
-    logo: 'https://www.musase.vn/images/logo.png',
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/logos/femivita-logo.svg`,
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+84383249898',
+      telephone: SITE_CONTACT.telephone,
+      email: SITE_CONTACT.email,
       contactType: 'customer service',
       areaServed: 'VN',
       availableLanguage: 'Vietnamese',
@@ -123,10 +129,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="vi" className={cn("dark scroll-smooth", openSans.variable, orbitron.variable, cinzel.variable, inter.variable)}>
       <head>
-        <meta property="og:image" content="https://res.cloudinary.com/dxrmfi8xm/image/upload/v1788096394/og_image_bmek66.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Musase - Tinh chất vỏ chuối" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

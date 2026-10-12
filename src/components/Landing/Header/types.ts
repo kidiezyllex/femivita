@@ -15,9 +15,9 @@ export interface NavLinkItem {
 }
 
 export const NAV_LINKS: NavLinkItem[] = [
-  { label: "Về thương hiệu", href: "/story" },
-  { label: "Kiến thức", href: "/knowledge" },
-  { label: "Nhà phân phối", href: "/distributors" },
+  { label: "Về thương hiệu", href: "#" },
+  { label: "Kiến thức", href: "#" },
+  { label: "Nhà phân phối", href: "#" },
 ];
 
 export const HEADER_CTA: NavLinkItem = { label: "Mua chính hãng", href: "/order" };
@@ -28,7 +28,8 @@ export const DROPDOWN_PRODUCTS: DropdownProductItem[] = [
     href: "/products/combo",
     image: "/images/product2.png",
     title: "Bộ đôi ngăn ngừa lão hóa",
-    description: "Giải pháp chăm sóc da toàn diện giúp duy trì độ ẩm, hỗ trợ làn da trẻ hóa theo thời gian.",
+    description:
+      "Giải pháp chăm sóc da toàn diện giúp duy trì độ ẩm, hỗ trợ làn da trẻ hóa theo thời gian.",
     price: "990.000 đ",
     oldPrice: "1.080.000 đ",
     badge: "Đáng mua nhất",
@@ -38,7 +39,8 @@ export const DROPDOWN_PRODUCTS: DropdownProductItem[] = [
     href: "/products/serum",
     image: "/images/product3.png",
     title: "Tinh chất vỏ chuối 30ml",
-    description: "Tinh chất chuyên sâu hỗ trợ chống lão hóa, mờ nếp nhăn, bảo vệ da khỏi các gốc tự do gây hại và làm đều màu da.",
+    description:
+      "Tinh chất chuyên sâu hỗ trợ chống lão hóa, mờ nếp nhăn, bảo vệ da khỏi các gốc tự do gây hại và làm đều màu da.",
     price: "590.000 đ",
   },
   {

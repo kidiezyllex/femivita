@@ -1,15 +1,14 @@
+import { SITE_URL } from '@/constants/site'
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.musase.vn'
+  const baseUrl = SITE_URL
 
   const staticRoutes = [
     '',
     '/story',
     '/contact',
-    '/products/serum',
-    '/products/cream',
-    '/products/combo',
+    '/order',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

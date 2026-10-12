@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { DesktopMegaDropdown } from "./DesktopMegaDropdown";
 import { HeaderCTA } from "./HeaderCTA";
 import { HeaderLogo } from "./HeaderLogo";
 import { NAV_LINKS } from "./types";
@@ -37,7 +36,7 @@ export const DesktopHeader: React.FC = () => {
   }, []);
 
   return (
-    <header className="relative z-50 w-full bg-white">
+    <header className="relative z-50 w-full">
       <div className="p-4 xl:px-5">
         <div className="flex h-[72px] items-center px-4 xl:px-6">
           {/* Logo */}
@@ -53,7 +52,7 @@ export const DesktopHeader: React.FC = () => {
                 type="button"
                 aria-haspopup="true"
                 aria-expanded={isDropdownOpen}
-                onClick={() => setIsDropdownOpen((prev) => !prev)}
+                // onClick={() => setIsDropdownOpen((prev) => !prev)}
                 className={cn(NAV_ITEM_CLASS, isDropdownOpen && "text-brand")}
               >
                 <span>Sản phẩm</span>
@@ -64,7 +63,10 @@ export const DesktopHeader: React.FC = () => {
                   height={18}
                   quality={100}
                   draggable={false}
-                  className={cn("transition-transform duration-200", isDropdownOpen && "rotate-180")}
+                  className={cn(
+                    "transition-transform duration-200",
+                    isDropdownOpen && "rotate-180",
+                  )}
                 />
               </button>
             </div>
@@ -75,7 +77,7 @@ export const DesktopHeader: React.FC = () => {
 
               return (
                 <Link
-                  key={link.href}
+                  key={link.href + link.label}
                   href={link.href}
                   onClick={() => setIsDropdownOpen(false)}
                   className={cn(NAV_ITEM_CLASS, isActive && "text-brand")}
@@ -107,11 +109,11 @@ export const DesktopHeader: React.FC = () => {
       </div>
 
       {/* Mega Dropdown Menu */}
-      <DesktopMegaDropdown
+      {/* <DesktopMegaDropdown
         ref={dropdownRef}
         isOpen={isDropdownOpen}
         onClose={() => setIsDropdownOpen(false)}
-      />
+      /> */}
     </header>
   );
 };

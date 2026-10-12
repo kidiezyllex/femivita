@@ -36,7 +36,7 @@ export const TabletHeader: React.FC = () => {
   }, []);
 
   return (
-    <header className="relative z-50 flex h-[60px] w-full items-center justify-between bg-white px-5 md:px-8">
+    <header className="relative z-50 flex h-[60px] w-full items-center justify-between px-5 md:px-8">
       {/* Logo */}
       <HeaderLogo
         onClick={() => setIsDropdownOpen(false)}

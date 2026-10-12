@@ -1,9 +1,9 @@
 export const SHOP_INFO = {
-  name: "Musase",
-  companyName: "CÔNG TY TNHH CERY SKINLAB",
-  address: "Tầng 9 Tòa Minori, Số 67A Trương Định, Phường Tương Mai, Quận Hoàng Mai, Hà Nội",
-  phone: "0383249898",
-  email: "",
+  name: "Femivita",
+  companyName: "",
+  address: "19 Nguyễn Sơn, Long Biên, thành phố Hà Nội",
+  phone: "0914142464",
+  email: "infor@femivita.vn",
   zalo1: "",
   zalo2: ""
 };

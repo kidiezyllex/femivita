@@ -1,5 +1,6 @@
+import { SITE_URL } from '@/constants/site'
 import { MetadataRoute } from 'next'
- 
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/admin/',
     },
-    sitemap: 'https://www.musase.vn/sitemap.xml',
+    sitemap: `${SITE_URL}/sitemap.xml`,
   }
 }
