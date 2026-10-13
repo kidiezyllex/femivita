@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/story',
     '/knowledge',
+    '/faq',
+    '/distributors',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

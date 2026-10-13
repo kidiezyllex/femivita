@@ -17,7 +17,7 @@ export interface NavLinkItem {
 export const NAV_LINKS: NavLinkItem[] = [
   { label: "Về thương hiệu", href: "/story" },
   { label: "Kiến thức", href: "/knowledge" },
-  { label: "Nhà phân phối", href: "#distributors" },
+  { label: "Nhà phân phối", href: "/distributors" },
 ];
 
 

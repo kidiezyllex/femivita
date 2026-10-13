@@ -74,6 +74,7 @@ const config: Config = {
 					soft: "#F2F1F8", // Figma: Purple bg, used by the header CTA once the page is scrolled
 					panel: "#9F72BA", // Figma: purple panel behind the brand-story slider
 					deep: "#8151B8", // Figma: blurred deep-purple blob on that panel
+					rule: "#5A4E7D", // Figma: Color/Border/disable, FAQ dividers
 				},
 				ink: {
 					DEFAULT: "#1E1E1E",
@@ -81,6 +82,9 @@ const config: Config = {
 					muted: "#535353",
 					soft: "#4E4C4C",
 					line: "#E6E6E6", // Figma: Mercury, used for dividers and outlines
+					placeholder: "#454545", // Figma: Color/Grey/27, form placeholder
+					hint: "#737373", // Figma: Color/Grey/45, form helper and consent text
+					outline: "#A2A2A2", // Figma: checkbox border
 					iron: "#DFDFE0", // Figma: Iron, certificate card border
 					surface: "#F6F6F6", // Figma: light grey section background
 				},

@@ -1,9 +1,9 @@
 "use client";
 
+import { CategoryList } from "@/components/ui/CategoryList";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import React, { useMemo, useState } from "react";
 import { KnowledgeArticleItem } from "./KnowledgeArticleItem";
-import { KnowledgeCategoryList } from "./KnowledgeCategoryList";
 import { KnowledgePagination } from "./KnowledgePagination";
 import { ALL_CATEGORY_ID, DEFAULT_KNOWLEDGE_LIST_DATA, KnowledgeListData } from "./types";
 
@@ -42,7 +42,7 @@ export const KnowledgeList: React.FC<KnowledgeListSectionProps> = ({
     >
       <div className="pb-6 lg:col-span-2 lg:pb-0">
         <div className="lg:sticky lg:top-[104px] lg:py-10">
-          <KnowledgeCategoryList
+          <CategoryList
             label={data.categoryLabel}
             categories={data.categories}
             activeId={categoryId}

@@ -1,16 +1,20 @@
 import { cn } from "@/lib/utils";
 import React from "react";
-import { KnowledgeCategory } from "./types";
 
-interface KnowledgeCategoryListProps {
+export interface CategoryItem {
+  id: string;
   label: string;
-  categories: KnowledgeCategory[];
+}
+
+interface CategoryListProps {
+  label: string;
+  categories: CategoryItem[];
   activeId: string;
   onSelect: (id: string) => void;
 }
 
 /** Category filter: a vertical list with a left rule from lg up, a scrollable row with a bottom rule below. */
-export const KnowledgeCategoryList: React.FC<KnowledgeCategoryListProps> = ({
+export const CategoryList: React.FC<CategoryListProps> = ({
   label,
   categories,
   activeId,

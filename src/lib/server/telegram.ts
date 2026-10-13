@@ -76,3 +76,24 @@ export function formatLeadTelegramMessage(lead: {
   ];
   return lines.join("\n");
 }
+
+export function formatDistributorTelegramMessage(request: {
+  applicantType: string;
+  name?: string;
+  business?: string;
+  phone?: string;
+  email: string;
+  message?: string;
+}) {
+  const lines = [
+    "<b>Đăng ký nhà phân phối mới</b>",
+    `Thời gian: ${escapeHtml(formatVietnamTime(new Date()))}`,
+    `Bạn là: ${escapeHtml(request.applicantType)}`,
+    `Họ và tên: ${escapeHtml(request.name || "Không cung cấp")}`,
+    `Doanh nghiệp: ${escapeHtml(request.business || "Không cung cấp")}`,
+    `Số điện thoại: ${escapeHtml(request.phone || "Không cung cấp")}`,
+    `Email: ${escapeHtml(request.email)}`,
+    `Nội dung: ${escapeHtml(request.message || "Không có")}`,
+  ];
+  return lines.join("\n");
+}
