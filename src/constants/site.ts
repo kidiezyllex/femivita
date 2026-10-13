@@ -1,5 +1,8 @@
 // SITE_URL falls back to the domain in the footer email (infor@femivita.vn); set NEXT_PUBLIC_SITE_URL to override it.
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://femivita.vn").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://femivita.vn").replace(
+  /\/$/,
+  "",
+);
 
 export const SITE_NAME = "Femivita";
 
@@ -26,7 +29,7 @@ export const SITE_KEYWORDS = [
 ];
 
 export const SITE_OG_IMAGE = {
-  url: "/images/og-image.jpg",
+  url: "/images/og-image.webp",
   width: 1200,
   height: 630,
   alt: "Femivita - Gel Venus Y Passion chăm sóc vùng Y",

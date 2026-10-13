@@ -72,6 +72,8 @@ const config: Config = {
 					lavender: "#C3B2E8",
 					pink: "#F4EEF6",
 					soft: "#F2F1F8", // Figma: Purple bg, used by the header CTA once the page is scrolled
+					panel: "#9F72BA", // Figma: purple panel behind the brand-story slider
+					deep: "#8151B8", // Figma: blurred deep-purple blob on that panel
 				},
 				ink: {
 					DEFAULT: "#1E1E1E",
@@ -79,6 +81,8 @@ const config: Config = {
 					muted: "#535353",
 					soft: "#4E4C4C",
 					line: "#E6E6E6", // Figma: Mercury, used for dividers and outlines
+					iron: "#DFDFE0", // Figma: Iron, certificate card border
+					surface: "#F6F6F6", // Figma: light grey section background
 				},
 				foreground: "hsl(var(--foreground))",
 				card: {
