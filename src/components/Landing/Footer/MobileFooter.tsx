@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 import {
   FooterBackground,
@@ -8,10 +9,14 @@ import {
   FooterPolicyList,
   FooterPurchaseInfo,
   FooterSlogan,
+  useFooterTone,
 } from "./FooterParts";
 import { FooterProps } from "./types";
 
-export const MobileFooter: React.FC<FooterProps> = ({ data }) => (
+export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
+  const { border } = useFooterTone();
+
+  return (
   <div className="relative px-5 pb-8 pt-16">
     <FooterBackground />
 
@@ -23,17 +28,17 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => (
       </div>
 
       {/* Contact, purchase and policy groups */}
-      <div className="flex flex-col gap-2 border-t border-white pt-6">
+      <div className={cn("flex flex-col gap-2 border-t pt-6", border)}>
         <FooterLabel>{data.contactLabel}</FooterLabel>
         <FooterContactList data={data} />
       </div>
 
-      <div className="flex flex-col gap-4 border-t border-white py-6">
+      <div className={cn("flex flex-col gap-4 border-t py-6", border)}>
         <FooterLabel>{data.purchaseLabel}</FooterLabel>
         <FooterPurchaseInfo data={data} />
       </div>
 
-      <div className="flex flex-col gap-4 border-y border-white py-6">
+      <div className={cn("flex flex-col gap-4 border-y py-6", border)}>
         <FooterLabel>{data.policyLabel}</FooterLabel>
         <FooterPolicyList links={data.policyLinks} />
       </div>
@@ -41,4 +46,5 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => (
       <FooterCopyright text={data.copyright} className="pt-6" />
     </div>
   </div>
-);
+  );
+};

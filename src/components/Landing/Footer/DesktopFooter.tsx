@@ -12,13 +12,17 @@ import {
   FooterPolicyList,
   FooterPurchaseInfo,
   FooterSlogan,
+  useFooterTone,
 } from "./FooterParts";
 import { FooterProps } from "./types";
 
 const LABEL_WIDTH_CLASS = "w-[140px] shrink-0 min-[1440px]:w-[200px]";
 const LIST_WIDTH_CLASS = "w-full max-w-[324px] min-[1440px]:w-[324px]";
 
-export const DesktopFooter: React.FC<FooterProps> = ({ data }) => (
+export const DesktopFooter: React.FC<FooterProps> = ({ data }) => {
+  const { border, borderBottom } = useFooterTone();
+
+  return (
   <div className="relative min-h-[1440px] px-12 pb-12">
     <FooterBackground />
 
@@ -36,7 +40,7 @@ export const DesktopFooter: React.FC<FooterProps> = ({ data }) => (
       {/* Contact, purchase and policy groups */}
       <div className="col-span-7 col-start-6 flex min-h-[1333px] flex-col xl:col-span-5 xl:col-start-7">
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex min-h-[433px] items-start justify-between border-y border-b-white border-t-white/10 pb-12 pt-[200px]">
+          <div className={cn("flex min-h-[433px] items-start justify-between border-y border-t-white/10 pb-12 pt-[200px]", borderBottom)}>
             <FooterLabel className={cn(LABEL_WIDTH_CLASS, "py-8")}>{data.contactLabel}</FooterLabel>
             <div className={LIST_WIDTH_CLASS}>
               <FooterContactList data={data} />
@@ -45,7 +49,7 @@ export const DesktopFooter: React.FC<FooterProps> = ({ data }) => (
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={0.15}>
-          <div className="flex items-start justify-between border-b border-white py-12">
+          <div className={cn("flex items-start justify-between border-b py-12", border)}>
             <FooterLabel className={LABEL_WIDTH_CLASS}>{data.purchaseLabel}</FooterLabel>
             <div className={LIST_WIDTH_CLASS}>
               <FooterPurchaseInfo data={data} />
@@ -54,7 +58,7 @@ export const DesktopFooter: React.FC<FooterProps> = ({ data }) => (
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={0.2}>
-          <div className="flex flex-1 items-start justify-between border-b border-white py-12">
+          <div className={cn("flex flex-1 items-start justify-between border-b py-12", border)}>
             <FooterLabel className={LABEL_WIDTH_CLASS}>{data.policyLabel}</FooterLabel>
             <div className={LIST_WIDTH_CLASS}>
               <FooterPolicyList links={data.policyLinks} />
@@ -68,5 +72,5 @@ export const DesktopFooter: React.FC<FooterProps> = ({ data }) => (
       </div>
     </div>
   </div>
-);
-
+  );
+};

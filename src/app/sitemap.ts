@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/faq',
     '/distributors',
     '/products',
+    '/products/gel-venus-y-passion',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

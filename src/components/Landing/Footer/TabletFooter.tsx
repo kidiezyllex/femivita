@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 import {
   FooterBackground,
@@ -8,10 +9,14 @@ import {
   FooterPolicyList,
   FooterPurchaseInfo,
   FooterSlogan,
+  useFooterTone,
 } from "./FooterParts";
 import { FooterProps } from "./types";
 
-export const TabletFooter: React.FC<FooterProps> = ({ data }) => (
+export const TabletFooter: React.FC<FooterProps> = ({ data }) => {
+  const { border } = useFooterTone();
+
+  return (
   <div className="relative px-8 pb-10 pt-20">
     <FooterBackground />
 
@@ -23,17 +28,17 @@ export const TabletFooter: React.FC<FooterProps> = ({ data }) => (
       </div>
 
       {/* Contact, purchase and policy groups */}
-      <div className="grid grid-cols-[160px_1fr] items-start border-t border-white py-8">
+      <div className={cn("grid grid-cols-[160px_1fr] items-start border-t py-8", border)}>
         <FooterLabel className="py-8">{data.contactLabel}</FooterLabel>
         <FooterContactList data={data} />
       </div>
 
-      <div className="grid grid-cols-[160px_1fr] items-start border-t border-white py-8">
+      <div className={cn("grid grid-cols-[160px_1fr] items-start border-t py-8", border)}>
         <FooterLabel>{data.purchaseLabel}</FooterLabel>
         <FooterPurchaseInfo data={data} />
       </div>
 
-      <div className="grid grid-cols-[160px_1fr] items-start border-y border-white py-8">
+      <div className={cn("grid grid-cols-[160px_1fr] items-start border-y py-8", border)}>
         <FooterLabel>{data.policyLabel}</FooterLabel>
         <FooterPolicyList links={data.policyLinks} />
       </div>
@@ -41,4 +46,5 @@ export const TabletFooter: React.FC<FooterProps> = ({ data }) => (
       <FooterCopyright text={data.copyright} className="pt-8" />
     </div>
   </div>
-);
+  );
+};

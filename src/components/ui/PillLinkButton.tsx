@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type PillLinkButtonVariant = "solid" | "soft";
+type PillLinkButtonVariant = "solid" | "soft" | "brand";
 
 interface PillLinkButtonProps {
   href: string;
   label: string;
   onClick?: () => void;
   className?: string;
-  /** "solid": purple pill with a white arrow circle. "soft": light lavender pill with a purple arrow circle. */
+  /** "solid": light purple pill with a white arrow circle. "soft": light lavender pill with a purple arrow circle. "brand": deep purple pill with a white arrow circle. */
   variant?: PillLinkButtonVariant;
 }
 
@@ -24,6 +24,11 @@ const VARIANT_STYLES: Record<PillLinkButtonVariant, { button: string; circle: st
     button: "bg-brand-soft text-black hover:bg-brand-lavender/40",
     circle: "bg-brand",
     arrow: "/logos/arrow-right-white.svg",
+  },
+  brand: {
+    button: "bg-brand text-white hover:bg-brand-light",
+    circle: "bg-white",
+    arrow: "/logos/arrow-right.svg",
   },
 };
 

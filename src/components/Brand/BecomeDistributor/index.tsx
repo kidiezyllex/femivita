@@ -55,7 +55,7 @@ export const BecomeDistributor: React.FC<BecomeDistributorSectionProps> = ({
                 <span className="text-brand-text">{data.headlineHighlight}</span>
               </h2>
             </div>
-            <p className="font-google-sans text-base leading-[1.6] text-[#171717]/60">
+            <p className="whitespace-pre-line font-google-sans text-base leading-[1.6] text-[#171717]/60">
               {data.description}
             </p>
             <div>
