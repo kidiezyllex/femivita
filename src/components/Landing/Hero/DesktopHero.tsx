@@ -18,7 +18,7 @@ export const DesktopHero: React.FC = () => {
   const textY = useTransform(scrollYProgress, [0, 0.65], [0, 35]);
 
   return (
-    <section ref={containerRef} className="relative h-[600px] w-full overflow-hidden">
+    <section ref={containerRef} className="relative h-screen w-full overflow-hidden xl:h-[90vh]">
       <motion.div style={{ y: imageY, scale: imageScale }} className="absolute inset-0">
         <Image
           src="/images/hero/femivita-hero-desktop.webp"

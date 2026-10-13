@@ -15,8 +15,8 @@ export default function NotFound() {
           className="relative block h-[76px] max-h-[76px] cursor-pointer transition-transform"
         >
           <Image
-            src="/images/large_logo.png"
-            alt="Musase"
+            src="/logos/femivita-logo-white.svg"
+            alt="Femivita"
             height={301}
             width={1205}
             className="h-full w-auto object-contain"

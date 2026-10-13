@@ -6,9 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     '',
-    '/story',
-    '/contact',
-    '/order',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
