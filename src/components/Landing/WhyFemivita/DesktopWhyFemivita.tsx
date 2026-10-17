@@ -11,7 +11,7 @@ export const DesktopWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
     {/* Title */}
     <div className="col-span-12 flex flex-col items-start gap-2">
       <ScrollReveal direction="up" delay={0.05} className="w-full">
-        <p className="font-google-sans text-lg italic leading-[1.6] text-ink-muted">
+        <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">
           {data.eyebrow}
         </p>
         <div className="flex w-full items-end justify-between">
@@ -53,7 +53,6 @@ export const DesktopWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
     <div className="col-span-6 flex h-[680px] flex-col gap-4">
       <ScrollReveal direction="left" delay={0.2} className="relative flex-1">
         <div className="relative h-full overflow-hidden rounded-2xl max-xl:bg-[linear-gradient(180deg,#FFFFFF_0%,#F3EBFA_100%)]">
-          {/* Below 1280px the card is too narrow for text beside the building, so the image sits in the lower half */}
           <div className="absolute inset-x-0 bottom-0 top-1/2 xl:top-0">
             <Image
               src={data.research.image}

@@ -12,14 +12,14 @@ export const RatingSummary: React.FC<{
   className?: string;
 }> = ({ score, count, className }) => (
   <div className={cn("flex shrink-0 flex-col gap-2", className)}>
-    <div className="flex h-3 gap-1" aria-hidden>
+    <div className="flex h-4 gap-1" aria-hidden>
       {Array.from({ length: FULL_STARS }).map((_, index) => (
         <Image
           key={index}
           src="/logos/star.svg"
           alt=""
-          width={12}
-          height={12}
+          width={16}
+          height={16}
           quality={100}
           draggable={false}
         />
@@ -27,13 +27,13 @@ export const RatingSummary: React.FC<{
       <Image
         src="/logos/star-half.svg"
         alt=""
-        width={12}
-        height={12}
+        width={16}
+        height={16}
         quality={100}
         draggable={false}
       />
     </div>
-    <p className="whitespace-nowrap font-google-sans text-base font-medium leading-[1.2] text-secondaryV1">
+    <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">
       {score} ({count} đánh giá)
     </p>
   </div>
@@ -50,10 +50,10 @@ export const ResearchCopy: React.FC<{
         {data.organizationPrefix} {data.organization}
       </p>
     </div>
-    <p className="w-[220px] max-w-full font-google-sans text-xs font-medium leading-[1.6] text-black/80">
+    <p className="w-[220px] max-w-full font-google-sans text-sm font-medium leading-[1.6] text-gray-700">
       {data.highlight}
     </p>
-    <p className="w-[220px] max-w-full font-google-sans text-xs leading-[1.6] text-black/60">
+    <p className="w-[220px] max-w-full font-google-sans text-sm leading-[1.6] text-ink-muted">
       {data.description}
     </p>
   </div>
@@ -69,7 +69,7 @@ export const BrandStoryGlassCard: React.FC<{
       className,
     )}
   >
-    <p className="font-google-sans text-xl font-medium leading-[1.6] text-ink-dark">{data.title}</p>
+    <p className="font-google-sans text-lg font-medium leading-[1.6] text-ink-dark">{data.title}</p>
     <ArrowLink href={data.linkHref} label={data.linkLabel} />
   </div>
 );

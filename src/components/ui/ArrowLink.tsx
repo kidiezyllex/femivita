@@ -11,7 +11,7 @@ interface ArrowLinkProps {
 
 export const ArrowLink: React.FC<ArrowLinkProps> = ({ href, label, className }) => (
   <Link href={href} className={cn("group flex items-center gap-4 pb-1", className)}>
-    <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-ink-line transition-colors group-hover:border-brand">
+    <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-ink-line transition-colors duration-200 ease-out group-hover:border-brand">
       <Image
         src="/logos/arrow-right-dark.svg"
         alt=""
@@ -21,7 +21,7 @@ export const ArrowLink: React.FC<ArrowLinkProps> = ({ href, label, className }) 
         draggable={false}
       />
     </span>
-    <span className="font-[Arial,Helvetica,sans-serif] text-base leading-[14.4px] text-ink-dark transition-colors group-hover:text-brand">
+    <span className="font-[Arial,Helvetica,sans-serif] text-base leading-[14.4px] text-ink-dark transition-colors duration-200 ease-out group-hover:text-brand">
       {label}
     </span>
   </Link>

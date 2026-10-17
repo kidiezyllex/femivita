@@ -12,7 +12,6 @@ const HEADING_CLASS =
 
 export const DesktopProductShowcase: React.FC<ProductShowcaseProps> = ({ data }) => (
   <div className="relative overflow-hidden bg-brand-lavender">
-    {/* Background: shifted up 6.73% as in Figma, the bottom edge shows the section color */}
     <div className="absolute inset-x-0 top-[-6.73%] h-full">
       <Image
         src="/images/product-showcase/background.jpg"
@@ -28,8 +27,8 @@ export const DesktopProductShowcase: React.FC<ProductShowcaseProps> = ({ data })
     <div className="relative">
       {/* Title */}
       <ScrollReveal direction="up" delay={0.05}>
-        <div className="flex flex-col items-center gap-2 px-8 pt-20 xl:px-[161px]">
-          <p className="whitespace-nowrap font-google-sans text-lg italic leading-[1.6] text-ink-muted">
+        <div className="flex flex-col items-center pt-20">
+        <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">
             {data.eyebrow}
           </p>
           <h2 className={HEADING_CLASS}>
