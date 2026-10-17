@@ -2,9 +2,9 @@
 
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import type { Swiper as SwiperType } from "swiper";
-import { FreeMode, Mousewheel } from "swiper/modules";
+import { Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -61,20 +61,24 @@ interface BrandCertificatesSectionProps {
   data?: BrandCertificatesData;
 }
 
-const TRANSITION_MS = 400;
+const TRANSITION_MS = 500;
+
+// Swiper's loop mode needs clearly more slides than fit on screen (slidesPerView is "auto" and the strip is
+// centred, so ~5-6 cards are visible on desktop). The certificates are repeated this many times to give it enough.
+const LOOP_REPEAT = 4;
 
 export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
   data = DEFAULT_BRAND_CERTIFICATES_DATA,
 }) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
-  const wrapToStart = (swiper: SwiperType) => {
-    // After reaching the end, instantly jump back to the first slide with no transition.
-    // This gives an "infinite" feel while keeping FreeMode calm (no internal auto-drift).
-    requestAnimationFrame(() => {
-      swiper.slideTo(0, 0);
-    });
-  };
+  const slides = useMemo(
+    () =>
+      Array.from({ length: LOOP_REPEAT }, (_, round) =>
+        data.certificates.map((certificate) => ({ certificate, key: `${certificate.id}-${round}` })),
+      ).flat(),
+    [data.certificates],
+  );
 
   return (
     <section id="certificates" className="relative w-full bg-ink-surface">
@@ -90,35 +94,28 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
 
       <ScrollReveal direction="up" delay={0.15} amount={0.4} once>
         <div className="relative">
+          {/* loop gives the endless strip. freeMode is left out on purpose: combined with loop, Swiper keeps
+              drifting after a drag, so the strip snaps card by card instead. */}
           <Swiper
-            modules={[FreeMode, Mousewheel]}
+            modules={[Mousewheel]}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
-            onReachEnd={(swiper) => {
-              // Wait for the user-driven momentum to fully settle, then wrap to the start.
-              setTimeout(() => wrapToStart(swiper), 350);
-            }}
+            loop
+            loopAdditionalSlides={data.certificates.length}
             slidesPerView="auto"
             centeredSlides
             spaceBetween={20}
-            freeMode={{
-              enabled: true,
-              sticky: false,
-              momentumRatio: 0.8,
-              momentumVelocityRatio: 0.8,
-            }}
+            speed={TRANSITION_MS}
+            slideToClickedSlide
+            grabCursor
             mousewheel={{
               forceToAxis: true,
               sensitivity: 0.8,
             }}
-            allowTouchMove={true}
           >
-            {data.certificates.map((certificate) => (
-              <SwiperSlide
-                key={certificate.id}
-                className="!w-[220px] !h-auto md:!w-[280px] cursor-grab active:cursor-grabbing select-none"
-              >
+            {slides.map(({ certificate, key }) => (
+              <SwiperSlide key={key} className="!h-auto !w-[220px] select-none md:!w-[280px]">
                 <CertificateCard certificate={certificate} />
               </SwiperSlide>
             ))}
@@ -142,30 +139,12 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
         <CarouselArrow
           label={data.prevLabel}
           direction="prev"
-          onClick={() => {
-            const swiper = swiperRef.current;
-            if (!swiper) return;
-            // If we're at the very start, wrap to the end so prev feels infinite.
-            if (swiper.isBeginning) {
-              swiper.slideTo(data.certificates.length - 1, TRANSITION_MS);
-              return;
-            }
-            swiper.slidePrev(TRANSITION_MS);
-          }}
+          onClick={() => swiperRef.current?.slidePrev(TRANSITION_MS)}
         />
         <CarouselArrow
           label={data.nextLabel}
           direction="next"
-          onClick={() => {
-            const swiper = swiperRef.current;
-            if (!swiper) return;
-            // If we're at the very end, wrap to the start so next feels infinite.
-            if (swiper.isEnd) {
-              swiper.slideTo(0, TRANSITION_MS);
-              return;
-            }
-            swiper.slideNext(TRANSITION_MS);
-          }}
+          onClick={() => swiperRef.current?.slideNext(TRANSITION_MS)}
         />
       </div>
     </section>

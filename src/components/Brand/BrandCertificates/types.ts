@@ -19,9 +19,9 @@ export interface BrandCertificatesProps {
   data: BrandCertificatesData;
 }
 
-// We render the four certificates once. If we ever need loop behaviour, see the comment in
-// the data builder below — Swiper's `loop: true` combined with `freeMode` produces a subtle
-// auto-drift effect that looks like the carousel is moving on its own, so we keep it disabled.
+// The four certificates are listed once here; the carousel repeats them (LOOP_REPEAT in index.tsx) so Swiper's
+// `loop` mode has enough slides to scroll endlessly. `loop` is used without `freeMode`, because the two combined
+// made the strip keep drifting by itself after a drag.
 const BASE_CERTIFICATES: Omit<BrandCertificate, "id">[] = [
   {
     title: "Tiêu chuẩn FDA",
