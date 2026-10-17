@@ -49,7 +49,7 @@ export const BecomeDistributor: React.FC<BecomeDistributorSectionProps> = ({
               <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">
                 {data.eyebrow}
               </p>
-              <h2 className="font-sans font-semibold leading-[1.3] text-black [font-size:clamp(32px,3.34vw,48px)]">
+              <h2 className="font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)]">
                 {data.headlineStart}
                 <br />
                 <span className="text-brand-text">{data.headlineHighlight}</span>

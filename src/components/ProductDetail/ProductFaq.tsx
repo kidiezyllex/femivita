@@ -19,7 +19,7 @@ export const ProductFaq: React.FC<{ faq: ProductDetailFaq }> = ({ faq }) => {
         <ScrollReveal direction="up" delay={0.05} className="lg:col-span-4 lg:col-start-2">
           <div className="flex max-w-[324px] flex-col gap-2">
             <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{faq.eyebrow}</p>
-            <h2 className="font-sans font-semibold leading-[1.3] text-black [font-size:clamp(32px,3.34vw,48px)]">
+            <h2 className="font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)]">
               {faq.titleStart}
               <br />
               <span className="text-brand-text">{faq.titleHighlight}</span>

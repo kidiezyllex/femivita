@@ -26,7 +26,7 @@ export const ProductsHero: React.FC<ProductsHeroProps> = ({
     </div>
 
     <div className="relative flex h-full items-end px-4 pb-10 md:px-8 lg:px-12">
-      <h1 className="font-sans font-semibold leading-[1.3] text-black [font-size:clamp(32px,3.34vw,48px)] lg:h-[300px]">
+      <h1 className="font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)] lg:h-[300px]">
         <span className="block">
           {heroLineOneStart}
           <span className="text-brand-text">{heroLineOneHighlight}</span>

@@ -25,7 +25,7 @@ export const PageHero: React.FC<PageHeroProps> = ({ title, titleClassName }) => 
     <div className="relative flex h-full items-end px-4 pb-8 md:px-8 lg:px-12 lg:pb-10">
       <h1
         className={cn(
-          "font-sans font-semibold leading-[1.3] text-black [font-size:clamp(32px,3.34vw,48px)]",
+          "font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)]",
           titleClassName,
         )}
       >

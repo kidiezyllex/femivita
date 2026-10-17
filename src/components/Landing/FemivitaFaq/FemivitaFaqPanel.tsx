@@ -72,10 +72,7 @@ export const FemivitaFaqPanel: React.FC<FemivitaFaqPanelProps> = ({
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${item.id}`}
                     onClick={() => setOpenItemId(isOpen ? null : item.id)}
-                    className={cn(
-                      "flex w-full cursor-pointer items-center justify-between gap-8 text-left",
-                      isOpen ? "pb-4 pt-8" : "min-h-[96px] py-4",
-                    )}
+                    className="flex w-full cursor-pointer items-center justify-between gap-8 pt-8 pb-4 text-left"
                   >
                     <span className="font-google-sans text-lg leading-[1.6] text-black xl:text-xl">
                       {item.question}

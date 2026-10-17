@@ -131,11 +131,11 @@ export const SlideText: React.FC<{ slide: BrandIntroSlide; className?: string }>
   className,
 }) => (
   <motion.div
-    key={slide.id}
     initial={{ opacity: 0, y: 12 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-    className={cn("flex w-full max-w-[437px] flex-col", className)}
+    exit={{ opacity: 0, y: -8 }}
+    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+    className={cn("absolute inset-x-0 top-0 flex w-full max-w-[437px] flex-col", className)}
   >
     <h3 className="font-sans text-xl font-medium leading-[1.4] text-white lg:text-2xl">{slide.title}</h3>
     <div className="flex flex-col gap-6 pt-6">

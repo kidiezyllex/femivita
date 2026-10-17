@@ -1,6 +1,7 @@
 "use client";
 
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { AnimatePresence } from "framer-motion";
 import React from "react";
 import {
   BrandIntroDecor,
@@ -18,7 +19,7 @@ export const DesktopBrandIntro: React.FC<BrandIntroProps> = ({ data }) => {
 
   return (
     <div className="px-12 py-20">
-      <ScrollReveal direction="up" delay={0.05}>
+      <ScrollReveal direction="up" delay={0.05} amount={0.4} once>
         <div className="flex flex-col gap-2">
           <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{data.eyebrow}</p>
           <h2 className="max-w-[1031px] font-sans text-[32px] font-medium leading-[1.4] text-black">
@@ -27,7 +28,7 @@ export const DesktopBrandIntro: React.FC<BrandIntroProps> = ({ data }) => {
         </div>
       </ScrollReveal>
 
-      <ScrollReveal direction="up" delay={0.15} className="pt-16">
+      <ScrollReveal direction="up" delay={0.15} amount={0.4} once className="pt-16">
         <div className="relative grid h-[600px] grid-cols-12 gap-x-4 overflow-hidden rounded-2xl bg-brand-panel p-8">
           <BrandIntroDecor textureImage={data.textureImage} />
 
@@ -43,7 +44,11 @@ export const DesktopBrandIntro: React.FC<BrandIntroProps> = ({ data }) => {
                 onNext={next}
               />
             </div>
-            <SlideText slide={data.slides[index]} />
+            <div className="relative flex-1 overflow-hidden">
+              <AnimatePresence mode="wait" initial={false}>
+                <SlideText key={data.slides[index].id} slide={data.slides[index]} />
+              </AnimatePresence>
+            </div>
           </div>
 
           <IntroPicture
