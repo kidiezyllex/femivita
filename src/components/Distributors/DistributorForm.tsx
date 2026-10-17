@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { CheckboxField, Field, PhoneInput, SelectInput, TextArea, TextInput } from "./FormFields";
@@ -182,9 +183,9 @@ export const DistributorForm: React.FC<{ labels: DistributorFormLabels }> = ({ l
           >
             {labels.privacyConsent.map((segment, index) =>
               segment.href ? (
-                <a key={index} href={segment.href} className="text-brand-text hover:underline">
+                <Link key={index} href={segment.href} className="text-brand-text hover:underline">
                   {segment.text}
-                </a>
+                </Link>
               ) : (
                 <span key={index}>{segment.text}</span>
               ),

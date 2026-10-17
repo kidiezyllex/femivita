@@ -16,8 +16,8 @@ const SCROLL_LOCK_ATTRIBUTE = "data-scroll-locked";
  */
 export const LENIS_CONFIG: LenisOptions = {
 	// Độ trễ vật lý: lerp càng nhỏ trang càng trôi lâu, càng "nặng tay".
-	// 0.1 = mặc định, êm nhưng phản hồi nhanh (quakerschool.org); 0.05 ≈ chậm gấp đôi.
-	lerp: 0.05,
+	// 0.1 = mặc định, êm nhưng phản hồi nhanh (quakerschool.org); 0.07 ≈ gần mặc định nhưng bớt trôi.
+	lerp: 0.1,
 
 	// Hệ số lực cuộn của con lăn chuột (1 = đúng quãng đường con lăn gửi lên)
 	wheelMultiplier: 1,

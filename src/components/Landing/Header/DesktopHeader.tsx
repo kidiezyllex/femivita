@@ -13,7 +13,6 @@ const NAV_ITEM_CLASS =
   "flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap px-3 py-1 font-google-sans text-base leading-[1.6] text-ink transition-colors hover:text-brand xl:px-4";
 
 interface DesktopHeaderProps {
-  /** Once solid (page scrolled, or a page without a hero) the bar becomes a floating white card. */
   isSolid?: boolean;
 }
 
@@ -67,7 +66,7 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isSolid = true }) 
               >
                 <span>Sản phẩm</span>
                 <Image
-                  src="/logos/caret-down.svg"
+                  src="/logos/caret-down-dark.svg"
                   alt=""
                   width={18}
                   height={18}

@@ -46,7 +46,7 @@ export const PillLinkButton: React.FC<PillLinkButtonProps> = ({
       href={href}
       onClick={onClick}
       className={cn(
-        "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full py-2 pl-4 pr-2 font-inter text-sm font-medium leading-normal transition-colors",
+        "group inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full py-2 pl-4 pr-2 font-inter text-sm font-medium leading-normal transition-colors",
         styles.button,
         className,
       )}
@@ -58,7 +58,15 @@ export const PillLinkButton: React.FC<PillLinkButtonProps> = ({
           styles.circle,
         )}
       >
-        <Image src={styles.arrow} alt="" width={18} height={18} quality={100} draggable={false} />
+        <Image
+          src={styles.arrow}
+          alt=""
+          width={18}
+          height={18}
+          quality={100}
+          draggable={false}
+          className="transition-transform duration-300 group-hover:-rotate-45"
+        />
       </span>
     </Link>
   );
