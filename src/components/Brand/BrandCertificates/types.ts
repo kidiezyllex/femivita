@@ -19,7 +19,9 @@ export interface BrandCertificatesProps {
   data: BrandCertificatesData;
 }
 
-// Swiper handles infinite looping via `loop: true`; we only need the four unique certificates.
+// We render the four certificates once. If we ever need loop behaviour, see the comment in
+// the data builder below — Swiper's `loop: true` combined with `freeMode` produces a subtle
+// auto-drift effect that looks like the carousel is moving on its own, so we keep it disabled.
 const BASE_CERTIFICATES: Omit<BrandCertificate, "id">[] = [
   {
     title: "Tiêu chuẩn FDA",

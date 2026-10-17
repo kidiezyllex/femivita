@@ -4,7 +4,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import Image from "next/image";
 import React, { useRef } from "react";
 import type { Swiper as SwiperType } from "swiper";
-import { Autoplay, FreeMode, Keyboard, Mousewheel } from "swiper/modules";
+import { FreeMode, Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -61,15 +61,23 @@ interface BrandCertificatesSectionProps {
   data?: BrandCertificatesData;
 }
 
-const AUTOPLAY_MS = 3500;
+const TRANSITION_MS = 400;
 
 export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
   data = DEFAULT_BRAND_CERTIFICATES_DATA,
 }) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
+  const wrapToStart = (swiper: SwiperType) => {
+    // After reaching the end, instantly jump back to the first slide with no transition.
+    // This gives an "infinite" feel while keeping FreeMode calm (no internal auto-drift).
+    requestAnimationFrame(() => {
+      swiper.slideTo(0, 0);
+    });
+  };
+
   return (
-    <section id="certificates" className="relative w-full overflow-hidden bg-ink-surface">
+    <section id="certificates" className="relative w-full bg-ink-surface">
       <ScrollReveal direction="up" delay={0.05} amount={0.4} once>
         <div className="flex flex-col items-center px-4 py-12 md:px-12 md:py-16 lg:px-[161px] lg:py-20">
           <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{data.eyebrow}</p>
@@ -83,17 +91,20 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
       <ScrollReveal direction="up" delay={0.15} amount={0.4} once>
         <div className="relative">
           <Swiper
-            modules={[Autoplay, FreeMode, Keyboard, Mousewheel]}
+            modules={[FreeMode, Mousewheel]}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
+            }}
+            onReachEnd={(swiper) => {
+              // Wait for the user-driven momentum to fully settle, then wrap to the start.
+              setTimeout(() => wrapToStart(swiper), 350);
             }}
             slidesPerView="auto"
             centeredSlides
             spaceBetween={20}
-            rewind={true}
             freeMode={{
               enabled: true,
-              sticky: true,
+              sticky: false,
               momentumRatio: 0.8,
               momentumVelocityRatio: 0.8,
             }}
@@ -101,15 +112,7 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
               forceToAxis: true,
               sensitivity: 0.8,
             }}
-            keyboard={{ enabled: true }}
-            autoplay={{
-              delay: AUTOPLAY_MS,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            speed={500}
-            className="!overflow-visible"
-            wrapperClass="!ease-[cubic-bezier(0.4,0,0.2,1)]"
+            allowTouchMove={true}
           >
             {data.certificates.map((certificate) => (
               <SwiperSlide
@@ -121,14 +124,16 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
             ))}
           </Swiper>
 
-          {/* Fade the strip out at both edges */}
+          {/* Fade the strip out at both edges so the partial cards read as "peeking"
+              through, not as broken content. Keep the fade short so the title/subtitle
+              of the edge cards is still legible. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-ink-surface to-transparent md:w-40 lg:w-[300px]"
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-ink-surface to-transparent md:w-24 lg:w-32"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-ink-surface to-transparent md:w-40 lg:w-[300px]"
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-ink-surface to-transparent md:w-24 lg:w-32"
           />
         </div>
       </ScrollReveal>
@@ -137,12 +142,30 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
         <CarouselArrow
           label={data.prevLabel}
           direction="prev"
-          onClick={() => swiperRef.current?.slidePrev()}
+          onClick={() => {
+            const swiper = swiperRef.current;
+            if (!swiper) return;
+            // If we're at the very start, wrap to the end so prev feels infinite.
+            if (swiper.isBeginning) {
+              swiper.slideTo(data.certificates.length - 1, TRANSITION_MS);
+              return;
+            }
+            swiper.slidePrev(TRANSITION_MS);
+          }}
         />
         <CarouselArrow
           label={data.nextLabel}
           direction="next"
-          onClick={() => swiperRef.current?.slideNext()}
+          onClick={() => {
+            const swiper = swiperRef.current;
+            if (!swiper) return;
+            // If we're at the very end, wrap to the start so next feels infinite.
+            if (swiper.isEnd) {
+              swiper.slideTo(0, TRANSITION_MS);
+              return;
+            }
+            swiper.slideNext(TRANSITION_MS);
+          }}
         />
       </div>
     </section>
