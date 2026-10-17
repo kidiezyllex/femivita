@@ -14,7 +14,7 @@ export const KnowledgeArticleItem: React.FC<KnowledgeArticleItemProps> = ({
   readMoreLabel,
 }) => (
   <article className="flex flex-col gap-[17px] py-6 md:p-6 lg:p-10">
-    <div className="flex flex-wrap items-center gap-2 font-google-sans text-base leading-[1.6] text-ink-dark/60">
+    <div className="flex flex-wrap items-center gap-2 font-google-sans text-base leading-[1.6] text-ink-muted">
       <span>{article.category}</span>
       <Image src="/logos/dot.svg" alt="" width={3} height={4} draggable={false} />
       <span>{article.date}</span>

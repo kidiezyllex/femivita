@@ -35,7 +35,6 @@ export const DesktopWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
             width={1200}
             height={1400}
             quality={100}
-            sizes="(min-width: 992px) 50vw, 100vw"
             draggable={false}
             className="absolute left-[-4.01%] top-[-26.05%] h-[126.12%] w-[108.1%] max-w-none transition-transform duration-700 ease-out hover:scale-105"
           />

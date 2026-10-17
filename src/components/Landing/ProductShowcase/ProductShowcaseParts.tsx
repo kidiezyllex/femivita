@@ -105,19 +105,20 @@ export const ProductCard: React.FC<{ product: ShowcaseProduct; className?: strin
   </Link>
 );
 
-// Tilt in degrees from Figma, and the scroll progress of the stage (0 = entering at the bottom, 0.5 = centred) at which it is upright.
-const BOTTLE_TILT = 24.5;
-const GLOW_TILT = 25.59;
-const UPRIGHT_AT = 0.5;
-// How much bigger the bottle and glow get by UPRIGHT_AT (1.2 = +20%); the glow starts slightly smaller than its Figma size.
-const ZOOM = 1.2;
-const GLOW_START_SCALE = 0.94;
-
 /**
  * Decorative stage with the rotated hero bottle, glow and spotlight card.
  * Everything is positioned in percentages of the stage so it scales with the viewport (Figma: 1440 x 1301).
- * Enhanced with scroll-linked floating parallax synced to Lenis inertia.
+ *
+ * The hero bottle and glow start a bit higher and slightly smaller, then ease
+ * into their final Figma position as the user scrolls down. Because the
+ * animation is driven by `scrollYProgress`, scrolling back up reverts it.
  */
+const ENTRANCE_AT = 0.4;
+// How far above the final position the bottle and glow start, in % of the stage height.
+const START_Y_PERCENT = 14;
+// How much smaller the bottle and glow start, relative to their Figma size (0.92 = 92%).
+const START_SCALE = 0.92;
+
 export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data }) => {
   const stageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -125,44 +126,61 @@ export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data })
     offset: ["start end", "end start"],
   });
 
-  // Parallax trôi nổi theo đà cuộn Lenis
-  const bottleY = useTransform(scrollYProgress, [0, 1], [-25, 25]);
-  // Bottle and glow start at their Figma tilt and size, then ease back to upright (0deg) and zoom in by UPRIGHT_AT, and stay there.
-  const bottleRotate = useTransform(scrollYProgress, [0, UPRIGHT_AT], [BOTTLE_TILT, 0]);
-  const glowRotate = useTransform(scrollYProgress, [0, UPRIGHT_AT], [GLOW_TILT, 0]);
-  const bottleScale = useTransform(scrollYProgress, [0, UPRIGHT_AT], [1, ZOOM]);
-  const glowScale = useTransform(scrollYProgress, [0, UPRIGHT_AT], [GLOW_START_SCALE, GLOW_START_SCALE * ZOOM]);
+  // y starts at -START_Y_PERCENT of the stage height, returns to 0 by ENTRANCE_AT, then stays.
+  const bottleY = useTransform(
+    scrollYProgress,
+    [0, ENTRANCE_AT],
+    [`-${START_Y_PERCENT}%`, "0%"],
+  );
+  const glowY = useTransform(
+    scrollYProgress,
+    [0, ENTRANCE_AT],
+    [`-${START_Y_PERCENT * 0.6}%`, "0%"],
+  );
+  // Scale from START_SCALE up to 1 (its rendered size) by ENTRANCE_AT, then stays.
+  const bottleScale = useTransform(scrollYProgress, [0, ENTRANCE_AT], [START_SCALE, 1]);
+  const glowScale = useTransform(scrollYProgress, [0, ENTRANCE_AT], [START_SCALE, 1]);
 
   return (
     <div ref={stageRef} className="relative aspect-[1440/1301] w-full">
       <motion.div
         aria-hidden
-        style={{ scale: glowScale, rotate: glowRotate }}
+        style={{ y: glowY, scale: glowScale, transformOrigin: "50% 50%" }}
         className="absolute left-[51.2%] top-[16.9%] aspect-[600.683/972.798] w-[41.7%]"
       >
-        <Image
-          src="/images/product-showcase/glow.svg"
-          alt=""
-          fill
-          draggable={false}
-          className="max-w-none"
-        />
+        <div
+          style={{ transform: "rotate(25.59deg)", transformOrigin: "50% 50%" }}
+          className="size-full"
+        >
+          <Image
+            src="/images/product-showcase/glow.svg"
+            alt=""
+            fill
+            draggable={false}
+            className="max-w-none"
+          />
+        </div>
       </motion.div>
 
       <motion.div
-        style={{ y: bottleY, rotate: bottleRotate, scale: bottleScale }}
+        style={{ y: bottleY, scale: bottleScale, transformOrigin: "50% 50%" }}
         className="absolute left-[7.15%] top-[-9.75%] h-auto w-[95.5%] max-w-none"
       >
-        <Image
-          src="/images/product-showcase/gel-venus-thumbnail.png"
-          alt={data.heroImageAlt}
-          width={1024}
-          height={1024}
-          quality={100}
-          sizes="100vw"
-          draggable={false}
-          className="h-auto w-full max-w-none"
-        />
+        <div
+          style={{ transform: "rotate(24.5deg)", transformOrigin: "50% 50%" }}
+          className="h-auto w-full"
+        >
+          <Image
+            src="/images/product-showcase/gel-venus-thumbnail.png"
+            alt={data.heroImageAlt}
+            width={1024}
+            height={1024}
+            quality={100}
+            sizes="100vw"
+            draggable={false}
+            className="h-auto w-full max-w-none"
+          />
+        </div>
       </motion.div>
 
       <ScrollReveal

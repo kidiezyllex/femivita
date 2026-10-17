@@ -23,7 +23,7 @@ const PagerText: React.FC<{ label: string; disabled: boolean; onClick: () => voi
     onClick={onClick}
     className={cn(
       PAGER_TEXT,
-      "border-b border-ink-dark/60 pb-1 text-ink-dark/60 transition-colors",
+      "border-b border-ink-dark/60 pb-1 text-ink-muted transition-colors",
       disabled ? "cursor-default" : "cursor-pointer hover:border-brand hover:text-brand",
     )}
   >

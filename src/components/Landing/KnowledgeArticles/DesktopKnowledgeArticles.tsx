@@ -7,14 +7,14 @@ import { KnowledgeArticleCard } from "./KnowledgeArticleCard";
 import { KnowledgeArticlesProps } from "./types";
 
 export const DesktopKnowledgeArticles: React.FC<KnowledgeArticlesProps> = ({ data }) => (
-  <div className="bg-brand-lavender px-12 pt-20">
-    <div className="overflow-hidden rounded-2xl bg-white">
+  <div className="bg-brand-lavender w-full px-12 pt-20">
+    <div className="overflow-hidden w-full rounded-2xl bg-white">
       {/* Title */}
-      <ScrollReveal direction="up" delay={0.05}>
-        <div className="grid grid-cols-12 gap-x-4 pt-20">
-          <div className="col-span-7 col-start-2 flex flex-col items-start gap-2">
-            <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{data.eyebrow}</p>
-            <h2 className="whitespace-nowrap font-sans font-semibold leading-[1.3] text-black [font-size:clamp(32px,3.34vw,48px)]">
+      <ScrollReveal direction="up" delay={0.05} amount={0.4} once>
+        <div className="grid grid-cols-12 w-full gap-x-4 pt-20">
+          <div className="col-span-7 col-start-2 flex flex-col items-start">
+          <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{data.eyebrow}</p>
+          <h2 className="font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)]">
               {data.headlineStart} <span className="text-brand-text">{data.headlineHighlight}</span>
             </h2>
           </div>

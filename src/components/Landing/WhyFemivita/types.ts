@@ -39,14 +39,14 @@ export const DEFAULT_WHY_FEMIVITA_DATA: WhyFemivitaData = {
   ratingScore: "4.9",
   ratingCount: "1.202",
   brandStory: {
-    image: "/images/why-femivita/products-bathroom.png",
+    image: "/images/why-femivita/products-bathroom.webp",
     imageAlt: "Sản phẩm Femivita Zone Fresh Mousse và Venus Y Passion trên bàn đá cẩm thạch",
     title: "Femivita - Chăm sóc vùng Y cho mọi giai đoạn của cuộc sống",
     linkLabel: "Câu chuyện thương hiệu",
     linkHref: "/story",
   },
   research: {
-    image: "/images/why-femivita/enbioscience-research.png",
+    image: "/images/why-femivita/enbioscience-research.webp",
     imageAlt: "Trụ sở ENBIOSCIENCE cùng các chứng nhận Vegan, GMP Hàn Quốc và FDA Hoa Kỳ",
     lead: "Nghiên cứu, phát triển bởi",
     organizationPrefix: "Tập đoàn",
@@ -56,7 +56,7 @@ export const DEFAULT_WHY_FEMIVITA_DATA: WhyFemivitaData = {
       "Được kiểm nghiệm độ an toàn, dịu nhẹ tối đa cho những vùng da nhạy cảm nhất, không gây mẩn đỏ hay khó chịu.",
   },
   photo: {
-    image: "/images/why-femivita/product-in-hands.jpg",
+    image: "/images/why-femivita/product-in-hands.webp",
     imageAlt: "Bàn tay cầm sản phẩm Femivita Venus Y Passion",
   },
 };

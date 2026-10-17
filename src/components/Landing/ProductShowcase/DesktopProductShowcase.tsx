@@ -53,7 +53,7 @@ export const DesktopProductShowcase: React.FC<ProductShowcaseProps> = ({ data })
       <ShowcaseStage data={data} />
 
       {/* Product lineup */}
-      <div className="mx-auto w-full max-w-[1344px] px-8 pb-8 pt-20 min-[1440px]:px-0">
+      <div className="w-full pb-8 pt-20 px-12">
         <ScrollReveal direction="up" delay={0.05}>
           <div className="grid grid-cols-12 gap-x-4 pb-10">
             <h3 className={`col-span-7 col-start-2 flex items-end ${HEADING_CLASS}`}>
