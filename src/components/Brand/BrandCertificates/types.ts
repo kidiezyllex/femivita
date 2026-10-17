@@ -19,8 +19,7 @@ export interface BrandCertificatesProps {
   data: BrandCertificatesData;
 }
 
-// Figma repeats these four certificates nine times (A B C D A B C D A) so the strip looks endless.
-// Titles and images are copied as designed, so some labels do not match the scan shown (e.g. the "FDA" cards).
+// Swiper handles infinite looping via `loop: true`; we only need the four unique certificates.
 const BASE_CERTIFICATES: Omit<BrandCertificate, "id">[] = [
   {
     title: "Tiêu chuẩn FDA",
@@ -48,7 +47,7 @@ const BASE_CERTIFICATES: Omit<BrandCertificate, "id">[] = [
   },
 ];
 
-export const CERTIFICATE_COUNT = 9;
+export const CERTIFICATE_COUNT = BASE_CERTIFICATES.length;
 
 export const DEFAULT_BRAND_CERTIFICATES_DATA: BrandCertificatesData = {
   eyebrow: "Chứng nhận của chúng tôi",
@@ -56,8 +55,8 @@ export const DEFAULT_BRAND_CERTIFICATES_DATA: BrandCertificatesData = {
   headlineRest: " trên hành trình chăm sóc bản thân.",
   prevLabel: "Chứng nhận trước",
   nextLabel: "Chứng nhận tiếp theo",
-  certificates: Array.from({ length: CERTIFICATE_COUNT }, (_, i) => ({
-    ...BASE_CERTIFICATES[i % BASE_CERTIFICATES.length],
+  certificates: BASE_CERTIFICATES.map((cert, i) => ({
+    ...cert,
     id: `certificate-${i + 1}`,
   })),
 };

@@ -62,6 +62,7 @@ export const IntroPicture: React.FC<{ src: string; alt: string; className?: stri
       alt={alt}
       fill
       sizes="(min-width: 1024px) 660px, (min-width: 768px) 50vw, 100vw"
+      quality={100}
       draggable={false}
       className="object-cover"
     />
