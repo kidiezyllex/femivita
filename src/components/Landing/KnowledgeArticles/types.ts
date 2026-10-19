@@ -1,3 +1,5 @@
+import { KNOWLEDGE_ARTICLES } from "@/components/Knowledge/articles";
+
 export interface KnowledgeArticle {
   id: string;
   category: string;
@@ -23,15 +25,23 @@ export interface KnowledgeArticlesProps {
   data: KnowledgeArticlesData;
 }
 
-const SAMPLE_ARTICLE = {
-  date: "07 Tháng 9, 2026",
-  image: "/images/knowledge/gel-venus-exosome-nmn.webp",
-  imageAlt: "Gel Venus Y Passion với công nghệ NMN và Exosome",
-  title: "Gel Venus Femivita – Khác biệt để thăng hoa",
-  excerpt:
-    "Khi nói về chăm sóc vùng kín, nhiều phụ nữ chỉ quen thuộc với gel bôi trơn thông thường, giúp giảm ma sát nhưng không thật sự mang lại cảm xúc trọn vẹn.",
-  href: "/knowledge/gel-venus-femivita-khac-biet-de-thang-hoa",
-};
+const HOME_ARTICLE_COUNT = 3;
+
+// The home section shows the newest posts that belong to a topic (announcements and promotions are skipped),
+// taken from the same data as the /knowledge page.
+const HOME_ARTICLES: KnowledgeArticle[] = KNOWLEDGE_ARTICLES.filter((article) => article.categoryIds.length > 0)
+  .flatMap(({ image, ...article }) => (image ? [{ ...article, image }] : []))
+  .slice(0, HOME_ARTICLE_COUNT)
+  .map(({ id, category, date, image, imageAlt, title, excerpt, href }) => ({
+    id,
+    category,
+    date,
+    image,
+    imageAlt,
+    title,
+    excerpt,
+    href,
+  }));
 
 export const DEFAULT_KNOWLEDGE_ARTICLES_DATA: KnowledgeArticlesData = {
   eyebrow: "Kiến thức",
@@ -40,10 +50,5 @@ export const DEFAULT_KNOWLEDGE_ARTICLES_DATA: KnowledgeArticlesData = {
   ctaLabel: "Xem thêm",
   ctaHref: "/knowledge",
   readMoreLabel: "Đọc thêm",
-  // Figma repeats the same sample article three times (placeholder)
-  articles: [
-    { id: "article-1", category: "Sức khỏe sinh sản", ...SAMPLE_ARTICLE },
-    { id: "article-2", category: "Sức khỏe sinh sản", ...SAMPLE_ARTICLE },
-    { id: "article-3", category: "Sức khỏe tình dục", ...SAMPLE_ARTICLE },
-  ],
+  articles: HOME_ARTICLES,
 };

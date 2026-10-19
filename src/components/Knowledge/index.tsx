@@ -24,9 +24,15 @@ export const KnowledgeList: React.FC<KnowledgeListSectionProps> = ({
     () =>
       categoryId === ALL_CATEGORY_ID
         ? data.articles
-        : data.articles.filter((article) => article.categoryId === categoryId),
+        : data.articles.filter((article) => article.categoryIds.includes(categoryId)),
     [data.articles, categoryId],
   );
+  // An article can belong to several categories. Inside a category tab its card shows that tab's label;
+  // under "Tất cả" each card shows the article's own first category.
+  const activeCategoryLabel =
+    categoryId === ALL_CATEGORY_ID
+      ? undefined
+      : data.categories.find((category) => category.id === categoryId)?.label;
   const pageCount = Math.max(1, Math.ceil(filtered.length / data.pageSize));
   const visible = filtered.slice((page - 1) * data.pageSize, page * data.pageSize);
 
@@ -57,7 +63,11 @@ export const KnowledgeList: React.FC<KnowledgeListSectionProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2">
               {visible.map((article, index) => (
                 <ScrollReveal key={article.id} direction="up" delay={(index % 2) * 0.1}>
-                  <KnowledgeArticleItem article={article} readMoreLabel={data.readMoreLabel} />
+                  <KnowledgeArticleItem
+                    article={article}
+                    readMoreLabel={data.readMoreLabel}
+                    categoryLabel={activeCategoryLabel}
+                  />
                 </ScrollReveal>
               ))}
             </div>

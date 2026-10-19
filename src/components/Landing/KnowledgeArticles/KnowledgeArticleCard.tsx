@@ -42,7 +42,7 @@ export const KnowledgeArticleCard: React.FC<KnowledgeArticleCardProps> = ({
         quality={100}
         sizes="(min-width: 1280px) 292px, (min-width: 768px) 33vw, 100vw"
         draggable={false}
-        className="object-cover object-[50%_71%]"
+        className="object-cover"
       />
     </Link>
 

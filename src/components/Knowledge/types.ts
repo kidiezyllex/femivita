@@ -1,3 +1,5 @@
+import { KNOWLEDGE_ARTICLES } from "./articles";
+
 export interface KnowledgeCategory {
   id: string;
   label: string;
@@ -5,10 +7,13 @@ export interface KnowledgeCategory {
 
 export interface KnowledgeListArticle {
   id: string;
-  categoryId: string;
+  /** Categories the article is listed under. Empty means it only shows under "Tất cả". */
+  categoryIds: string[];
+  /** Label shown on the card (the article's first category, or "Tin tức"). */
   category: string;
   date: string;
-  image: string;
+  /** Cover image; articles without one get a branded placeholder. */
+  image?: string;
   imageAlt: string;
   title: string;
   excerpt: string;
@@ -29,28 +34,19 @@ export interface KnowledgeListData {
 
 export const ALL_CATEGORY_ID = "all";
 
-// Figma repeats one sample article five times, all in "Sức khỏe tình dục" (placeholder content).
-const SAMPLE_ARTICLE = {
-  categoryId: "sexual-health",
-  category: "Sức khỏe tình dục",
-  date: "07 Tháng 9, 2026",
-  image: "/images/knowledge/gel-venus-exosome-nmn.webp",
-  imageAlt: "Gel Venus Y Passion với công nghệ NMN và Exosome",
-  title: "Gel Venus Femivita –Khác biệt để thăng hoa",
-  excerpt:
-    "Khi nói về chăm sóc vùng kín, nhiều phụ nữ chỉ quen thuộc với gel bôi trơn thông thường, giúp giảm ma sát nhưng không thật sự mang lại cảm xúc trọn vẹn.",
-  href: "/knowledge/gel-venus-femivita-khac-biet-de-thang-hoa",
-};
+// Labels and ids follow the categories of https://www.femivita.vn/tintuc (the Figma frame only shows the first four).
+export const KNOWLEDGE_CATEGORIES: KnowledgeCategory[] = [
+  { id: ALL_CATEGORY_ID, label: "Tất cả" },
+  { id: "sexual-health", label: "Sức khoẻ tình dục" },
+  { id: "reproductive-health", label: "Sức khoẻ sinh sản" },
+  { id: "gynecological-health", label: "Sức khoẻ phụ khoa" },
+  { id: "married-life", label: "Đời sống vợ chồng" },
+];
 
 export const DEFAULT_KNOWLEDGE_LIST_DATA: KnowledgeListData = {
   categoryLabel: "Danh mục bài viết",
-  categories: [
-    { id: ALL_CATEGORY_ID, label: "Tất cả" },
-    { id: "sexual-health", label: "Sức khỏe tình dục" },
-    { id: "reproductive-health", label: "Sức khỏe sinh sản" },
-    { id: "gynecological-health", label: "Sức khỏe phụ khoa" },
-  ],
-  articles: Array.from({ length: 5 }, (_, i) => ({ ...SAMPLE_ARTICLE, id: `article-${i + 1}` })),
+  categories: KNOWLEDGE_CATEGORIES,
+  articles: KNOWLEDGE_ARTICLES,
   pageSize: 6,
   readMoreLabel: "Đọc thêm",
   emptyMessage: "Chưa có bài viết trong danh mục này.",
