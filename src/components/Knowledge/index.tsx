@@ -2,7 +2,8 @@
 
 import { CategoryList } from "@/components/ui/CategoryList";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import React, { useMemo, useState } from "react";
+import { useLenis } from "lenis/react";
+import React, { useMemo, useRef, useState } from "react";
 import { KnowledgeArticleItem } from "./KnowledgeArticleItem";
 import { KnowledgePagination } from "./KnowledgePagination";
 import { ALL_CATEGORY_ID, DEFAULT_KNOWLEDGE_LIST_DATA, KnowledgeListData } from "./types";
@@ -19,6 +20,8 @@ export const KnowledgeList: React.FC<KnowledgeListSectionProps> = ({
 }) => {
   const [categoryId, setCategoryId] = useState(ALL_CATEGORY_ID);
   const [page, setPage] = useState(1);
+  const sectionRef = useRef<HTMLElement>(null);
+  const lenis = useLenis();
 
   const filtered = useMemo(
     () =>
@@ -36,13 +39,33 @@ export const KnowledgeList: React.FC<KnowledgeListSectionProps> = ({
   const pageCount = Math.max(1, Math.ceil(filtered.length / data.pageSize));
   const visible = filtered.slice((page - 1) * data.pageSize, page * data.pageSize);
 
+  // Header card is 104px tall; keep the top of the list just below it.
+  const HEADER_OFFSET = 104;
+
+  // After switching category, bring the top of the list back into view if the visitor had scrolled past it.
+  const scrollToListTop = () => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const top = section.getBoundingClientRect().top;
+    if (top >= HEADER_OFFSET) return;
+
+    if (lenis) {
+      lenis.scrollTo(section, { offset: -HEADER_OFFSET });
+    } else {
+      window.scrollTo({ top: window.scrollY + top - HEADER_OFFSET, behavior: "smooth" });
+    }
+  };
+
   const selectCategory = (id: string) => {
     setCategoryId(id);
     setPage(1);
+    scrollToListTop();
   };
 
   return (
     <section
+      ref={sectionRef}
       id="knowledge-list"
       className="mx-auto w-full max-w-[1440px] bg-white px-4 py-10 md:px-8 md:py-16 lg:grid lg:grid-cols-12 lg:gap-x-4 lg:py-20"
     >

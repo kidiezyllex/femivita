@@ -43,7 +43,9 @@ export const FaqAccordionItem: React.FC<FaqAccordionItemProps> = ({ item, isOpen
       )}
     >
       <div className="overflow-hidden">
-        <p className="pb-8 font-google-sans text-base leading-[1.6] text-[#141414]/60">{item.answer}</p>
+        <p className="whitespace-pre-line pb-8 font-google-sans text-base leading-[1.6] text-[#141414]/60">
+          {item.answer}
+        </p>
       </div>
     </div>
   </div>

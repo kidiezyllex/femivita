@@ -1,6 +1,9 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const LABEL_TEXT = "font-[Arial,Helvetica,sans-serif] text-base leading-[25.6px] tracking-[0.16px] text-ink-dark";
 const FIELD_BASE =
@@ -55,51 +58,169 @@ export const TextInput: React.FC<InputProps> = ({ hasError = false, className, .
   />
 );
 
-interface SelectInputProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectInputProps {
+  id: string;
+  value: string;
   placeholder: string;
   options: { value: string; label: string }[];
   hasError?: boolean;
+  className?: string;
+  onChange: (value: string) => void;
 }
 
+/** Custom listbox instead of a native <select>, whose popup cannot be styled. */
 export const SelectInput: React.FC<SelectInputProps> = ({
+  id,
+  value,
   placeholder,
   options,
   hasError = false,
   className,
-  ...props
-}) => (
-  <div className="relative">
-    <select
-      {...props}
-      aria-invalid={hasError || undefined}
-      aria-describedby={hasError ? `${props.id}-error` : undefined}
-      className={cn(
-        FIELD_BASE,
-        fieldBorder(hasError),
-        "cursor-pointer appearance-none pr-14",
-        props.value === "" && "text-ink-placeholder",
-        className,
-      )}
-    >
-      <option value="" disabled>
-        {placeholder}
-      </option>
-      {options.map((option) => (
-        <option key={option.value} value={option.value} className="text-ink-dark">
-          {option.label}
-        </option>
-      ))}
-    </select>
-    <Image
-      src="/logos/select-chevron.svg"
-      alt=""
-      width={24}
-      height={24}
-      draggable={false}
-      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
-    />
-  </div>
-);
+  onChange,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  const selectedIndex = options.findIndex((option) => option.value === value);
+  const selected = options[selectedIndex];
+  const listId = `${id}-listbox`;
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const closeOnOutsidePress = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setIsOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    return () => document.removeEventListener("pointerdown", closeOnOutsidePress);
+  }, [isOpen]);
+
+  const openList = () => {
+    setActiveIndex(Math.max(selectedIndex, 0));
+    setIsOpen(true);
+  };
+
+  const choose = (index: number) => {
+    const option = options[index];
+    if (option) onChange(option.value);
+    setIsOpen(false);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    switch (event.key) {
+      case "ArrowDown":
+      case "ArrowUp": {
+        event.preventDefault();
+        if (!isOpen) return openList();
+        const step = event.key === "ArrowDown" ? 1 : -1;
+        return setActiveIndex((current) => (current + step + options.length) % options.length);
+      }
+      case "Home":
+      case "End":
+        if (!isOpen) return;
+        event.preventDefault();
+        return setActiveIndex(event.key === "Home" ? 0 : options.length - 1);
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        return isOpen ? choose(activeIndex) : openList();
+      case "Escape":
+        if (!isOpen) return;
+        event.preventDefault();
+        return setIsOpen(false);
+      case "Tab":
+        return setIsOpen(false);
+    }
+  };
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        id={id}
+        type="button"
+        role="combobox"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={listId}
+        aria-activedescendant={isOpen ? `${id}-option-${activeIndex}` : undefined}
+        aria-invalid={hasError || undefined}
+        aria-describedby={hasError ? `${id}-error` : undefined}
+        onKeyDown={handleKeyDown}
+        // Keyboard activation (detail 0) is handled in onKeyDown.
+        onClick={(event) => {
+          if (event.detail === 0) return;
+          if (isOpen) setIsOpen(false);
+          else openList();
+        }}
+        className={cn(
+          FIELD_BASE,
+          fieldBorder(hasError),
+          "block cursor-pointer truncate pr-14 text-left",
+          isOpen && !hasError && "border-brand",
+          !selected && "text-ink-placeholder",
+          className,
+        )}
+      >
+        {selected?.label ?? placeholder}
+      </button>
+      <Image
+        src="/logos/select-chevron.svg"
+        alt=""
+        width={24}
+        height={24}
+        draggable={false}
+        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
+      />
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.ul
+            id={listId}
+            role="listbox"
+            data-lenis-prevent
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            className="absolute inset-x-0 top-full z-30 mt-2 max-h-[280px] overflow-y-auto rounded-xl border border-ink-line bg-white p-2 shadow-[0_16px_40px_rgba(119,81,159,0.16)]"
+          >
+            {options.map((option, index) => {
+              const isSelected = index === selectedIndex;
+              return (
+                <li
+                  key={option.value}
+                  id={`${id}-option-${index}`}
+                  role="option"
+                  aria-selected={isSelected}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onClick={() => choose(index)}
+                  className={cn(
+                    "flex cursor-pointer items-center justify-between gap-4 rounded-lg px-4 py-3 font-[Arial,Helvetica,sans-serif] text-base tracking-[0.16px] transition-colors",
+                    index === activeIndex ? "bg-brand-soft" : "bg-transparent",
+                    isSelected ? "font-bold text-brand" : "text-ink-dark",
+                  )}
+                >
+                  <span className="truncate">{option.label}</span>
+                  {isSelected && (
+                    <svg aria-hidden viewBox="0 0 24 24" fill="none" className="size-5 shrink-0">
+                      <path
+                        d="M5 12.5l4.2 4.2L19 7.2"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 export const PhoneInput: React.FC<InputProps & { prefix: string }> = ({
   prefix,

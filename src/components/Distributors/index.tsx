@@ -23,14 +23,17 @@ export const Distributors: React.FC<DistributorsProps> = ({ data = DEFAULT_DISTR
       <ScrollReveal direction="up" delay={0.05} className="lg:col-span-8 lg:col-start-3">
         <div className="flex flex-col items-center text-center lg:px-[120px]">
           <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{data.eyebrow}</p>
-          <h1 className="pt-2 font-sans text-[40px] font-semibold leading-[1.2] text-black md:text-[52px] lg:text-[64px]">
+          <h1 className="pt-2 font-sans text-[40px] font-bold leading-[1.2] text-black md:text-[52px] lg:text-[64px]">
             {data.headlineStart}
             <br />
             <span className="text-brand-text">{data.headlineHighlight}</span>
           </h1>
           <div className="flex flex-col gap-6 pt-6">
             {data.paragraphs.map((paragraph) => (
-              <p key={paragraph} className="font-google-sans text-base leading-[1.6] text-[#171717]/60">
+              <p
+                key={paragraph}
+                className="font-google-sans text-base leading-[1.6] text-[#171717]/60"
+              >
                 {paragraph}
               </p>
             ))}
@@ -38,7 +41,11 @@ export const Distributors: React.FC<DistributorsProps> = ({ data = DEFAULT_DISTR
         </div>
       </ScrollReveal>
 
-      <ScrollReveal direction="up" delay={0.15} className="pt-12 lg:col-span-8 lg:col-start-3 lg:pt-[112px]">
+      <ScrollReveal
+        direction="up"
+        delay={0.15}
+        className="pt-12 lg:col-span-8 lg:col-start-3 lg:pt-[112px]"
+      >
         <DistributorForm labels={data.form} />
       </ScrollReveal>
     </div>

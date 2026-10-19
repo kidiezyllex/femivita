@@ -109,7 +109,7 @@ export const DistributorForm: React.FC<{ labels: DistributorFormLabels }> = ({ l
             placeholder={labels.typePlaceholder}
             options={labels.typeOptions}
             hasError={Boolean(errors.applicantType)}
-            onChange={(event) => setField("applicantType", event.target.value)}
+            onChange={(value) => setField("applicantType", value)}
           />
         </Field>
 

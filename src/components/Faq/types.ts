@@ -1,5 +1,10 @@
-import { DEFAULT_FEMIVITA_FAQ_DATA } from "@/components/Landing/FemivitaFaq/types";
 import { SITE_CONTACT } from "@/constants/site";
+import {
+  ABOUT_QUESTIONS,
+  FOAM_QUESTIONS,
+  GEL_VENUS_QUESTIONS,
+  INTIMATE_HEALTH_QUESTIONS,
+} from "./questions";
 
 export interface FaqRichSegment {
   text: string;
@@ -40,21 +45,6 @@ export interface FaqPageData {
 const ASK_LINK = { text: "đặt câu hỏi cho Femivita", href: `mailto:${SITE_CONTACT.email}` };
 const PHONE_LINK = { text: "0914 14 2464", href: `tel:${SITE_CONTACT.telephone}` };
 
-const PENDING_ANSWER = "Nội dung đang được cập nhật.";
-// Figma repeats this one question six times in each group (placeholder). Only its answer exists, taken from the home FAQ.
-const PLACEHOLDER_QUESTION = "Femivita có nguồn gốc, xuất xứ từ đâu?";
-const KNOWN_ANSWER =
-  DEFAULT_FEMIVITA_FAQ_DATA.tabs[0]?.items.find((item) => item.id === "femivita-origin")?.answer ??
-  PENDING_ANSWER;
-
-const placeholderQuestions = (groupId: string, categoryId?: string): FaqQuestion[] =>
-  Array.from({ length: 6 }, (_, i) => ({
-    id: `${groupId}-${i + 1}`,
-    question: PLACEHOLDER_QUESTION,
-    answer: groupId === "about" && i === 0 ? KNOWN_ANSWER : PENDING_ANSWER,
-    categoryId,
-  }));
-
 export const DEFAULT_FAQ_PAGE_DATA: FaqPageData = {
   supportEyebrow: "HỖ TRỢ VÀ CÂU HỎI THƯỜNG GẶP",
   supportIntro: [
@@ -81,16 +71,15 @@ export const DEFAULT_FAQ_PAGE_DATA: FaqPageData = {
       title: "Về Femivita",
       categories: [
         { id: "about", label: "Về Femivita" },
-        // Figma spells this "Gen Venus"; the product is Gel Venus.
         { id: "gel-venus", label: "Gel Venus" },
         { id: "foam", label: "Bọt vệ sinh" },
       ],
-      questions: placeholderQuestions("about", "about"),
+      questions: [...ABOUT_QUESTIONS, ...GEL_VENUS_QUESTIONS, ...FOAM_QUESTIONS],
     },
     {
       id: "intimate-health",
       title: "Sức khoẻ thân mật",
-      questions: placeholderQuestions("intimate-health"),
+      questions: INTIMATE_HEALTH_QUESTIONS,
     },
   ],
 };
