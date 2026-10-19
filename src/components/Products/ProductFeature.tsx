@@ -16,7 +16,7 @@ interface ProductFeatureProps {
 
 /** One product row: a text panel with the packshot and a lifestyle photo, 720px high at 1440 (Figma "sec1"). */
 export const ProductFeature: React.FC<ProductFeatureProps> = ({ product, ctaLabel, reverse = false }) => (
-  <section className="grid grid-cols-1 bg-white md:grid-cols-2 lg:h-[720px]">
+  <section className="grid grid-cols-1 bg-white md:grid-cols-2 lg:h-[720px] lg:max-h-screen">
     <div
       className={cn(
         "relative order-1 aspect-[4/3] w-full overflow-hidden md:aspect-auto md:min-h-[420px]",
@@ -42,7 +42,8 @@ export const ProductFeature: React.FC<ProductFeatureProps> = ({ product, ctaLabe
     >
       <ScrollReveal direction="up" delay={0.1}>
         <div className="flex flex-col items-center gap-5">
-          <div className="relative size-[260px] overflow-hidden rounded-[25px] md:size-[300px] lg:size-[400px]">
+          {/* The row is capped at 100vh, so on short screens the packshot shrinks to keep the name and button visible */}
+          <div className="relative size-[260px] overflow-hidden rounded-[25px] md:size-[300px] lg:size-[min(400px,calc(100vh_-_300px))]">
             <Image
               src={product.image}
               alt={product.imageAlt}

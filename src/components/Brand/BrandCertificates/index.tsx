@@ -61,7 +61,8 @@ interface BrandCertificatesSectionProps {
   data?: BrandCertificatesData;
 }
 
-const TRANSITION_MS = 500;
+// Shorter slide transition: the quicker it settles, the less likely a second click lands mid-animation.
+const TRANSITION_MS = 400;
 
 // Swiper's loop mode needs clearly more slides than fit on screen (slidesPerView is "auto" and the strip is
 // centred, so ~5-6 cards are visible on desktop). The certificates are repeated this many times to give it enough.
@@ -102,6 +103,9 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
               swiperRef.current = swiper;
             }}
             loop
+            // By default Swiper ignores slideNext/slidePrev while a loop transition is still running, so a click
+            // made during the animation did nothing. That is why the arrows only worked "sometimes".
+            loopPreventsSliding={false}
             loopAdditionalSlides={data.certificates.length}
             slidesPerView="auto"
             centeredSlides
