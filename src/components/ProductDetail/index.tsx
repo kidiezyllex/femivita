@@ -36,7 +36,7 @@ export const ProductDetailContent: React.FC<{ product: ProductDetailData }> = ({
         <ScrollReveal key={infographic.src} direction="up" delay={index * 0.1}>
           <div
             className={cn(
-              "relative h-[360px] overflow-hidden rounded-2xl md:h-[480px] lg:h-[664px]",
+              "relative aspect-square w-full overflow-hidden rounded-2xl",
               infographic.backgroundClassName,
             )}
           >
