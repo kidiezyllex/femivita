@@ -36,20 +36,29 @@ const DetailItem: React.FC<{ item: ProductDetailItem }> = ({ item }) => (
 );
 
 /** Name, summary, buy button and the collapsible detail sections (Figma "service-box"). */
-export const ProductInfo: React.FC<{ product: ProductDetailData }> = ({ product }) => {
+export const ProductInfo: React.FC<{ product: ProductDetailData; titleClassName?: string }> = ({
+  product,
+  titleClassName = "text-[32px]",
+}) => {
   // Figma shows every section expanded.
-  const [openIds, setOpenIds] = useState<string[]>(() => product.sections.map((section) => section.id));
+  const [openIds, setOpenIds] = useState<string[]>(() =>
+    product.sections.map((section) => section.id),
+  );
   const toggle = (id: string) =>
-    setOpenIds((current) => (current.includes(id) ? current.filter((openId) => openId !== id) : [...current, id]));
+    setOpenIds((current) =>
+      current.includes(id) ? current.filter((openId) => openId !== id) : [...current, id],
+    );
 
   return (
-    <div className="flex flex-col gap-2 pb-5">
+    <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-4 border-b border-brand-rule pb-10">
         <div className="flex flex-col">
-          <h1 className="font-sans text-[28px] font-semibold leading-[1.4] text-black md:text-[32px]">
+          <h1 className={cn("font-sans font-semibold leading-[1.4] text-black", titleClassName)}>
             {product.name}
           </h1>
-          <p className="font-google-sans text-lg font-semibold leading-[1.6] text-[#6A6A6A]">{product.size}</p>
+          <p className="font-google-sans text-lg font-semibold leading-[1.6] text-[#6A6A6A]">
+            {product.size}
+          </p>
         </div>
 
         <div className="flex flex-col font-google-sans text-lg leading-[1.6] text-[#5E634D]">
@@ -57,7 +66,7 @@ export const ProductInfo: React.FC<{ product: ProductDetailData }> = ({ product 
           <p>{product.summary}</p>
         </div>
 
-        <div className="flex h-[72px] items-center">
+        <div className="flex items-center">
           <PillLinkButton href={product.ctaHref} label={product.ctaLabel} variant="brand" />
         </div>
       </div>
@@ -74,9 +83,11 @@ export const ProductInfo: React.FC<{ product: ProductDetailData }> = ({ product 
                   aria-expanded={isOpen}
                   aria-controls={`product-section-${section.id}`}
                   onClick={() => toggle(section.id)}
-                  className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left"
+                  className="flex w-full cursor-pointer items-center justify-between gap-4 py-4 text-left"
                 >
-                  <span className="font-google-sans text-xl leading-[1.6] text-[#5E634D]">{section.title}</span>
+                  <span className="font-google-sans text-xl leading-[1.6] text-[#5E634D]">
+                    {section.title}
+                  </span>
                   <Image
                     src={isOpen ? "/logos/faq-minus.svg" : "/logos/faq-plus.svg"}
                     alt=""
@@ -97,7 +108,7 @@ export const ProductInfo: React.FC<{ product: ProductDetailData }> = ({ product 
                 )}
               >
                 <div className="overflow-hidden">
-                  <div className="flex flex-col gap-[10px] pb-5">
+                  <div className="flex flex-col gap-[10px] pb-4">
                     {section.items.map((item) => (
                       <DetailItem key={item.heading ?? item.text} item={item} />
                     ))}

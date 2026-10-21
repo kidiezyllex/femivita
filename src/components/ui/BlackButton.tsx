@@ -38,7 +38,7 @@ const BlackButton: React.FC<BlackButtonProps> = ({
   );
 
   const sharedClassName = cn(
-    "group bg-eerieBlackV1 text-white p-5 flex items-center justify-between gap-[68px]",
+    "group bg-eerieBlackV1 text-white p-4 flex items-center justify-between gap-[68px]",
     "text-lg xl:text-xl font-medium leading-none tracking-normal text-center align-middle",
     "hover:bg-eerieBlackV1/90 transition-colors",
     className,

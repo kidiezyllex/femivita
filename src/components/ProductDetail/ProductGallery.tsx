@@ -7,7 +7,9 @@ import { ProductGalleryImage } from "./types";
 
 interface ProductGalleryProps {
   images: ProductGalleryImage[];
+  /** Height (and any other size) of the frame, set by the layout of each breakpoint. */
   className?: string;
+  sizes?: string;
 }
 
 const ArrowButton: React.FC<{ label: string; direction: "prev" | "next"; onClick: () => void }> = ({
@@ -35,19 +37,14 @@ const ArrowButton: React.FC<{ label: string; direction: "prev" | "next"; onClick
   </button>
 );
 
-/** Image slider with arrows and a dot indicator (Figma "product-img", 550px high). */
-export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, className }) => {
+/** Image slider with arrows and a dot indicator (Figma "product-img", 550px high on desktop). */
+export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, className, sizes = "100vw" }) => {
   const [index, setIndex] = useState(0);
   const count = images.length;
   const go = (step: number) => setIndex((current) => (current + step + count) % count);
 
   return (
-    <div
-      className={cn(
-        "relative h-[360px] overflow-hidden rounded-[20px] bg-white md:h-[450px] lg:h-[550px]",
-        className,
-      )}
-    >
+    <div className={cn("relative overflow-hidden rounded-[20px] bg-white", className)}>
       {images.map((image, i) => (
         <Image
           key={image.src}
@@ -56,7 +53,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, classNam
           fill
           priority={i === 0}
           quality={100}
-          sizes="(min-width: 1024px) 560px, 100vw"
+          sizes={sizes}
           draggable={false}
           aria-hidden={i !== index}
           className={cn(

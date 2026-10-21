@@ -11,9 +11,7 @@ export const DesktopWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
     {/* Title */}
     <div className="col-span-12 flex flex-col items-start gap-2">
       <ScrollReveal direction="up" delay={0.05} className="w-full">
-        <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">
-          {data.eyebrow}
-        </p>
+        <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{data.eyebrow}</p>
         <div className="flex w-full items-end justify-between">
           <h2 className="font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)]">
             {data.headlineStart} <span className="text-brand-text">{data.headlineHighlight}</span>
@@ -39,7 +37,7 @@ export const DesktopWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
             className="absolute left-[-4.01%] top-[-26.05%] h-[126.12%] w-[108.1%] max-w-none transition-transform duration-700 ease-out hover:scale-105"
           />
           <div className="absolute inset-0 bg-[linear-gradient(228.08deg,#DCD5CD_4.115%,rgba(200,193,185,0)_23.414%)]" />
-          <div className="absolute bottom-0 left-0 p-5">
+          <div className="absolute bottom-0 left-0 p-4">
             <ScrollReveal direction="up" delay={0.3}>
               <BrandStoryGlassCard data={data.brandStory} className="w-[378px]" />
             </ScrollReveal>

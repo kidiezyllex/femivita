@@ -50,7 +50,7 @@ export const DesktopMegaDropdown: React.FC<DesktopMegaDropdownProps> = ({ id, me
                     href={link.href}
                     onClick={onClose}
                     className={cn(
-                      "group flex items-center border-b border-brand-rule/30 py-5 font-google-sans text-base leading-[1.6] transition-colors hover:text-brand-text",
+                      "group flex items-center border-b border-brand-rule/30 py-4 font-google-sans text-base leading-[1.6] transition-colors hover:text-brand-text",
                       isActive ? "text-brand-text" : "text-black",
                     )}
                   >

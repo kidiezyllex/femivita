@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/distributors',
     '/products',
     '/products/gel-venus-y-passion',
+    '/products/zone-fresh-mousse',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

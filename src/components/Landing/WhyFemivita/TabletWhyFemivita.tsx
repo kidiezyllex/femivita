@@ -1,8 +1,8 @@
 "use client";
 
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import Image from "next/image";
 import React from "react";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { BrandStoryGlassCard, RatingSummary, ResearchCopy } from "./WhyFemivitaParts";
 import { WhyFemivitaProps } from "./types";
 
@@ -36,7 +36,7 @@ export const TabletWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
             className="object-cover object-[50%_85%]"
           />
           <div className="absolute inset-0 bg-[linear-gradient(228.08deg,#DCD5CD_4.115%,rgba(200,193,185,0)_23.414%)]" />
-          <div className="absolute bottom-0 left-0 p-5">
+          <div className="absolute bottom-0 left-0 p-4">
             <BrandStoryGlassCard data={data.brandStory} className="w-[378px]" />
           </div>
         </div>
@@ -55,7 +55,10 @@ export const TabletWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
             className="object-cover object-[86%_center]"
           />
           <div className="absolute inset-0 bg-[linear-gradient(40.6deg,#E5D3F5_6.67%,rgba(229,211,245,0)_39.6%)]" />
-          <ResearchCopy data={data.research} className="absolute left-[34px] top-[67px] w-[249px]" />
+          <ResearchCopy
+            data={data.research}
+            className="absolute left-[34px] top-[67px] w-[249px]"
+          />
         </div>
       </ScrollReveal>
 
@@ -76,4 +79,3 @@ export const TabletWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
     </div>
   </div>
 );
-

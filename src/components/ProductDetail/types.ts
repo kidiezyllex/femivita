@@ -53,3 +53,10 @@ export interface ProductDetailData {
   faq: ProductDetailFaq;
   banner: BecomeDistributorData;
 }
+
+/** Which breakpoint layout a shared part is drawn for. */
+export type ProductDetailVariant = "mobile" | "tablet" | "desktop";
+
+export interface ProductDetailLayoutProps {
+  product: ProductDetailData;
+}

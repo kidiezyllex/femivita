@@ -19,6 +19,8 @@ interface FooterToneStyles {
   policyLink: string;
   copyright: string;
   background: string;
+  /** Tall picture made for the mobile footer. */
+  mobileBackground: string;
   logoSrc?: string;
 }
 
@@ -34,17 +36,20 @@ const TONE_STYLES: Record<FooterTone, FooterToneStyles> = {
       "font-inter font-light leading-7 tracking-[0.2px] text-white underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-white",
     copyright: "text-white",
     background: "/images/footer/background.webp",
+    mobileBackground: "/images/footer/footer-mobile.webp",
   },
   light: {
     label: "text-brand-text",
-    slogan: "text-black",
-    value: "text-black",
+    slogan: "text-gray-700",
+    value: "text-gray-700",
     valueMuted: "text-brand-text",
     border: "border-brand",
     borderBottom: "border-b-brand",
-    policyLink: "font-google-sans leading-[1.6] text-black transition-colors hover:text-brand-text",
+    policyLink:
+      "font-google-sans leading-[1.6] text-gray-700 transition-colors hover:text-brand-text",
     copyright: "text-brand-text",
     background: "/images/footer/background-light.webp",
+    mobileBackground: "/images/footer/footer-product-mobile.webp",
     logoSrc: "/logos/femivita-logo.svg",
   },
 };
@@ -63,26 +68,29 @@ const LABEL_CLASS = "font-google-sans text-base leading-[1.6]";
 const VALUE_CLASS = "font-google-sans text-lg leading-[1.6]";
 
 interface FooterBackgroundProps {
-  /** Replaces the tone's default background. The dark gradient overlay is then skipped: the picture already carries its own gradient. */
-  src?: string;
+  /** Uses the tone's tall mobile picture, which already carries its own gradient, so the dark overlay is skipped. */
+  mobile?: boolean;
   className?: string;
 }
 
-export const FooterBackground: React.FC<FooterBackgroundProps> = ({ src, className }) => {
-  const { tone, background } = useFooterTone();
+export const FooterBackground: React.FC<FooterBackgroundProps> = ({
+  mobile = false,
+  className,
+}) => {
+  const { tone, background, mobileBackground } = useFooterTone();
 
   return (
     <>
       <Image
-        src={src ?? background}
+        src={mobile ? mobileBackground : background}
         alt=""
         fill
         quality={100}
         sizes="100vw"
         draggable={false}
-        className={cn("object-cover", className)}
+        className={cn("object-cover", mobile && "object-top", className)}
       />
-      {tone === "dark" && !src && (
+      {tone === "dark" && !mobile && (
         <div
           aria-hidden
           className="absolute inset-x-0 top-0 h-[1255px] bg-[linear-gradient(180deg,#967AD3_78px,rgba(189,172,219,0.5)_666px,rgba(228,222,228,0)_1255px)]"
@@ -119,7 +127,9 @@ export const FooterSlogan: React.FC<{ text: string; className?: string }> = ({
 }) => {
   const { slogan } = useFooterTone();
 
-  return <p className={cn("font-google-sans font-medium leading-[1.4]", slogan, className)}>{text}</p>;
+  return (
+    <p className={cn("font-google-sans font-medium leading-[1.4]", slogan, className)}>{text}</p>
+  );
 };
 
 export const FooterLabel: React.FC<{ children: React.ReactNode; className?: string }> = ({
@@ -181,7 +191,14 @@ export const FooterPurchaseInfo: React.FC<{ data: FooterContent }> = ({ data }) 
               className="flex size-10 items-center justify-center rounded-lg border border-black/[0.02] bg-brand-pink transition-opacity hover:opacity-80"
             >
               {social.fullColor ? (
-                <Image src={social.icon} alt="" width={28} height={28} draggable={false} className="size-7" />
+                <Image
+                  src={social.icon}
+                  alt=""
+                  width={28}
+                  height={28}
+                  draggable={false}
+                  className="size-7"
+                />
               ) : (
                 <span
                   aria-hidden

@@ -103,7 +103,7 @@ export const DistributorForm: React.FC<{ labels: DistributorFormLabels }> = ({ l
       onSubmit={handleSubmit}
       className={`flex scroll-mt-28 flex-col gap-8 rounded-2xl bg-white px-4 py-10 md:px-12 md:py-14 lg:px-[116px] lg:py-20 ${SHADOW}`}
     >
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4">
         <Field id="applicant-type" label={labels.typeLabel} required error={errors.applicantType}>
           <SelectInput
             id="applicant-type"
@@ -115,7 +115,7 @@ export const DistributorForm: React.FC<{ labels: DistributorFormLabels }> = ({ l
           />
         </Field>
 
-        <div className="grid gap-5 md:grid-cols-2 md:gap-4">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-4">
           <Field id="distributor-name" label={labels.nameLabel}>
             <TextInput
               id="distributor-name"
@@ -136,7 +136,7 @@ export const DistributorForm: React.FC<{ labels: DistributorFormLabels }> = ({ l
           </Field>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 md:gap-4">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-4">
           <Field
             id="distributor-phone"
             label={labels.phoneLabel}
@@ -180,7 +180,7 @@ export const DistributorForm: React.FC<{ labels: DistributorFormLabels }> = ({ l
           />
         </Field>
 
-        <div className="flex flex-col gap-5 pt-5">
+        <div className="flex flex-col gap-4 pt-4">
           <CheckboxField
             id="distributor-privacy"
             checked={values.privacyConsent}

@@ -48,7 +48,7 @@ export const TabletMegaDropdown = React.forwardRef<HTMLDivElement, TabletMegaDro
               </div>
 
               {/* Right Column: Featured Products List */}
-              <div className="flex w-full flex-col gap-5 overflow-y-auto p-5 pr-8">
+              <div className="flex w-full flex-col gap-4 overflow-y-auto p-4 pr-8">
                 {dropdownProducts.map((product) => (
                   <Link
                     key={product.id}

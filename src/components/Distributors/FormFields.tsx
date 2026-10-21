@@ -5,9 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
-const LABEL_TEXT = "font-[Arial,Helvetica,sans-serif] text-base leading-[25.6px] tracking-[0.16px] text-ink-dark";
+const LABEL_TEXT =
+  "font-[Arial,Helvetica,sans-serif] text-base leading-[25.6px] tracking-[0.16px] text-ink-dark";
 const FIELD_BASE =
-  "w-full rounded-lg border bg-white px-6 py-5 font-[Arial,Helvetica,sans-serif] text-base tracking-[0.16px] text-ink-dark outline-none transition-colors placeholder:text-ink-placeholder focus:border-brand";
+  "w-full rounded-lg border bg-white px-6 py-4 font-[Arial,Helvetica,sans-serif] text-base tracking-[0.16px] text-ink-dark outline-none transition-colors placeholder:text-ink-placeholder focus:border-brand";
 
 const fieldBorder = (hasError: boolean) => (hasError ? "border-[#E72222]" : "border-ink-line");
 
@@ -36,11 +37,17 @@ export const Field: React.FC<FieldProps> = ({
         {label}
         {required && <span className="text-[#E72222]"> *</span>}
       </span>
-      {optionalNote && <span className="text-[13.6px] leading-[22.4px] text-ink-hint">{optionalNote}</span>}
+      {optionalNote && (
+        <span className="text-[13.6px] leading-[22.4px] text-ink-hint">{optionalNote}</span>
+      )}
     </label>
     {children}
     {error && (
-      <p id={`${id}-error`} role="alert" className="pt-1 font-google-sans text-sm leading-[1.6] text-[#E72222]">
+      <p
+        id={`${id}-error`}
+        role="alert"
+        className="pt-1 font-google-sans text-sm leading-[1.6] text-[#E72222]"
+      >
         {error}
       </p>
     )}
@@ -284,7 +291,13 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
         fill="none"
         className="pointer-events-none absolute left-0 top-[2px] size-6 text-white opacity-0 transition-opacity peer-checked:opacity-100"
       >
-        <path d="M7 12.5l3.2 3.2L17 8.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M7 12.5l3.2 3.2L17 8.8"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
       <label
         htmlFor={id}
