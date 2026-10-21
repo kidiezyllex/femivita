@@ -2,7 +2,7 @@
 
 import { Icon } from "@/components/ui/mdi-icon";
 import { cn } from "@/lib/utils";
-import { mdiClose, mdiMapMarkerOutline, mdiPhoneOutline } from "@mdi/js";
+import { mdiChevronLeft, mdiChevronRight, mdiClose, mdiMapMarkerOutline, mdiPhoneOutline } from "@mdi/js";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,76 +15,112 @@ import { HEADER_MENUS, NAV_LINKS } from "./types";
 
 const SITE_PHONE_DISPLAY = "0914 14 2464";
 
-interface MenuAccordionProps {
-  menuId: string;
-  label: string;
-  isOpen: boolean;
-  isActive?: boolean;
-  onToggle: (menuId: string) => void;
+const ROW_CLASS =
+  "flex w-full items-center justify-between gap-4 border-b border-ink/10 py-4 text-left font-google-sans text-lg transition-colors hover:text-brand";
+
+// Panels slide sideways: deeper (direction 1) enters from the right, back (-1) from the left.
+const PANEL_VARIANTS = {
+  enter: (direction: number) => ({ x: direction > 0 ? "100%" : "-100%" }),
+  center: { x: 0 },
+  exit: (direction: number) => ({ x: direction > 0 ? "-100%" : "100%" }),
+};
+
+interface MobileMenuNavProps {
+  /** null shows the main list; otherwise the sub-list of that HEADER_MENUS entry. */
+  activeMenuId: string | null;
+  direction: number;
+  onOpenMenu: (menuId: string) => void;
+  onBack: () => void;
   onNavigate: () => void;
 }
 
-/** Accordion for one HEADER_MENUS entry: the same links as the desktop panel, without its picture. */
-const MenuAccordion: React.FC<MenuAccordionProps> = ({
-  menuId,
-  label,
-  isOpen,
-  isActive,
-  onToggle,
+/** Main list with a right arrow on items that have a menu; the arrow slides to a page with that menu's links. */
+const MobileMenuNav: React.FC<MobileMenuNavProps> = ({
+  activeMenuId,
+  direction,
+  onOpenMenu,
+  onBack,
   onNavigate,
 }) => {
-  const menu = HEADER_MENUS[menuId];
-  if (!menu) return null;
+  const pathname = usePathname();
+  const menu = activeMenuId ? HEADER_MENUS[activeMenuId] : null;
 
-  return (
-    <div className="border-b border-ink/10">
+  const menuRow = (menuId: string, label: string, isActive?: boolean) => (
+    <li key={menuId}>
       <button
         type="button"
-        onClick={() => onToggle(menuId)}
-        aria-expanded={isOpen}
-        aria-controls={`mobile-menu-${menuId}`}
-        className={cn(
-          "flex w-full cursor-pointer items-center justify-between py-4 font-google-sans text-lg transition-colors",
-          isOpen ? "text-brand-text" : isActive ? "text-brand" : "text-ink",
-        )}
+        onClick={() => onOpenMenu(menuId)}
+        aria-haspopup="true"
+        className={cn(ROW_CLASS, "cursor-pointer", isActive ? "text-brand" : "text-ink")}
       >
         <span>{label}</span>
-        <Image
-          src={isOpen ? "/logos/caret-down-brand.svg" : "/logos/caret-down-dark.svg"}
-          alt=""
-          width={18}
-          height={18}
-          quality={100}
-          draggable={false}
-          className={cn("transition-transform duration-200", isOpen && "rotate-180")}
-        />
+        <Icon path={mdiChevronRight} className="size-6 shrink-0" />
       </button>
+    </li>
+  );
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            id={`mobile-menu-${menuId}`}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="overflow-hidden"
-          >
-            <ul className="pb-2 pl-4">
-              {menu.links.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={onNavigate}
-                    className="block border-t border-brand-rule/30 py-3 font-google-sans text-base text-black transition-colors hover:text-brand-text"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+  return (
+    <div className="relative min-h-[300px] flex-1 overflow-hidden">
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.div
+          key={menu ? menu.id : "main"}
+          custom={direction}
+          variants={PANEL_VARIANTS}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0 overflow-y-auto overscroll-contain bg-white p-4 pt-0"
+        >
+          {menu ? (
+            <>
+              <button
+                type="button"
+                onClick={onBack}
+                aria-label="Quay lại"
+                className="flex w-full cursor-pointer items-center gap-2 border-b border-ink/10 py-4 text-left font-google-sans text-lg text-ink transition-colors hover:text-brand"
+              >
+                <Icon path={mdiChevronLeft} className="size-6 shrink-0" />
+                <span>{menu.label}</span>
+              </button>
+              <ul>
+                {menu.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={onNavigate}
+                      className={cn(ROW_CLASS, pathname === link.href ? "text-brand" : "text-ink")}
+                    >
+                      <span>{link.label}</span>
+                      <Icon path={mdiChevronRight} className="size-6 shrink-0" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <ul>
+              {menuRow("products", "Sản phẩm")}
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href || pathname?.startsWith(`${link.href}/`);
+
+                if (link.menuId) return menuRow(link.menuId, link.label, isActive);
+
+                return (
+                  <li key={link.href + link.label}>
+                    <Link
+                      href={link.href}
+                      onClick={onNavigate}
+                      className={cn(ROW_CLASS, isActive ? "text-brand" : "text-ink")}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
-          </motion.div>
-        )}
+          )}
+        </motion.div>
       </AnimatePresence>
     </div>
   );
@@ -94,15 +130,22 @@ export const MobileHeader: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   // The bar stays white until the drawer has finished folding away.
   const [isClosing, setIsClosing] = useState(false);
-  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
-  const pathname = usePathname();
+  const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+  const [direction, setDirection] = useState(1);
 
   const handleClose = () => {
     if (isOpen) setIsClosing(true);
     setIsOpen(false);
-    setOpenMenuId(null);
+    setActiveMenuId(null);
   };
-  const toggleMenu = (id: string) => setOpenMenuId((current) => (current === id ? null : id));
+  const openMenu = (id: string) => {
+    setDirection(1);
+    setActiveMenuId(id);
+  };
+  const backToMain = () => {
+    setDirection(-1);
+    setActiveMenuId(null);
+  };
 
   return (
     <header
@@ -158,48 +201,13 @@ export const MobileHeader: React.FC = () => {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-x-0 bottom-0 top-[90px] z-50 flex flex-col justify-between overflow-y-auto overscroll-contain bg-white"
           >
-            <div className="p-4">
-              <MenuAccordion
-                menuId="products"
-                label="Sản phẩm"
-                isOpen={openMenuId === "products"}
-                onToggle={toggleMenu}
-                onNavigate={handleClose}
-              />
-
-              {/* Other links; items with a menuId are accordions like on desktop */}
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href || pathname?.startsWith(`${link.href}/`);
-
-                if (link.menuId) {
-                  return (
-                    <MenuAccordion
-                      key={link.href + link.label}
-                      menuId={link.menuId}
-                      label={link.label}
-                      isOpen={openMenuId === link.menuId}
-                      isActive={isActive}
-                      onToggle={toggleMenu}
-                      onNavigate={handleClose}
-                    />
-                  );
-                }
-
-                return (
-                  <Link
-                    key={link.href + link.label}
-                    href={link.href}
-                    onClick={handleClose}
-                    className={cn(
-                      "block border-b border-ink/10 py-4 font-google-sans text-lg transition-colors hover:text-brand",
-                      isActive ? "text-brand" : "text-ink",
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </div>
+            <MobileMenuNav
+              activeMenuId={activeMenuId}
+              direction={direction}
+              onOpenMenu={openMenu}
+              onBack={backToMain}
+              onNavigate={handleClose}
+            />
 
             {/* Contact info and CTA at the bottom of the menu */}
             <div className="flex flex-col gap-4 border-t border-ink/10 p-4">
@@ -223,8 +231,8 @@ export const MobileHeader: React.FC = () => {
                 ))}
               </ul>
 
-              <div className="flex justify-center border-t border-ink/10 pt-4">
-                <HeaderCTA onClick={handleClose} />
+              <div className="border-t border-ink/10 pt-4">
+                <HeaderCTA onClick={handleClose} className="w-full justify-between" />
               </div>
             </div>
           </motion.div>
