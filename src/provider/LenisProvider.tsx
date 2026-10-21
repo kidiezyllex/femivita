@@ -3,7 +3,7 @@
 import "lenis/dist/lenis.css";
 import { ReactLenis, useLenis } from "lenis/react";
 import type { LenisOptions } from "lenis";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 // Thuộc tính mà các thư viện như Radix (Dialog, Sheet, Drawer) gắn vào <body> khi khóa cuộn
@@ -110,10 +110,34 @@ const RouteChangeScrollReset = () => {
 	return null;
 };
 
-export const LenisProvider = ({ children }: { children: React.ReactNode }) => (
-	<ReactLenis root options={LENIS_CONFIG}>
-		<ScrollLockSync />
-		<RouteChangeScrollReset />
-		{children}
-	</ReactLenis>
-);
+// Từ breakpoint này trở lên mới bật Lenis; dưới đó dùng scroll gốc của trình duyệt (khớp MOBILE_BREAKPOINT trong use-mobile.ts)
+const DESKTOP_MEDIA_QUERY = "(min-width: 768px)";
+
+export const LenisProvider = ({ children }: { children: React.ReactNode }) => {
+	// Mặc định tắt để khớp SSR; bật sau khi mount nếu không phải mobile.
+	// Lenis được render như sibling (root) nên children không bị remount khi bật/tắt;
+	// useLenis ở các component con vẫn lấy được instance qua root store.
+	const [enabled, setEnabled] = useState(false);
+
+	useEffect(() => {
+		const mql = window.matchMedia(DESKTOP_MEDIA_QUERY);
+		const update = () => setEnabled(mql.matches);
+
+		update();
+		mql.addEventListener("change", update);
+		return () => mql.removeEventListener("change", update);
+	}, []);
+
+	return (
+		<>
+			{enabled && (
+				<>
+					<ReactLenis root options={LENIS_CONFIG} />
+					<ScrollLockSync />
+					<RouteChangeScrollReset />
+				</>
+			)}
+			{children}
+		</>
+	);
+};

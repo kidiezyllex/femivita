@@ -12,14 +12,53 @@ export interface DropdownProductItem {
 export interface NavLinkItem {
   label: string;
   href: string;
+  /** Desktop only: id of the HEADER_MENUS panel this item opens instead of navigating. */
+  menuId?: string;
 }
 
 export const NAV_LINKS: NavLinkItem[] = [
   { label: "Về thương hiệu", href: "/story" },
   { label: "Kiến thức", href: "/knowledge" },
-  { label: "Nhà phân phối", href: "/distributors" },
+  { label: "Nhà phân phối", href: "/distributors", menuId: "distributors" },
 ];
 
+
+export interface HeaderMenu {
+  id: string;
+  /** Accessible name of the menu panel. */
+  label: string;
+  links: NavLinkItem[];
+  image: { src: string; alt: string };
+}
+
+// Desktop menus that unfold inside the header card (Figma "Header" frames with the panel open).
+export const HEADER_MENUS: Record<string, HeaderMenu> = {
+  products: {
+    id: "products",
+    label: "Sản phẩm",
+    links: [
+      { label: "Tất cả sản phẩm", href: "/products" },
+      { label: "Gel tăng cảm hứng Gel venus", href: "/products/gel-venus-y-passion" },
+      { label: "Bọt vệ sinh Zone Y Fresh", href: "/products/zone-fresh-mousse" },
+    ],
+    image: {
+      src: "/images/header/header-products.webp",
+      alt: "Bọt vệ sinh Zone Y Fresh và Gel Venus Y Passion",
+    },
+  },
+  distributors: {
+    id: "distributors",
+    label: "Nhà phân phối",
+    links: [
+      { label: "Nhà phân phối chính thức Femivita", href: "/distributors" },
+      { label: "Trở thành nhà phân phối", href: "/distributors#distributor-form" },
+    ],
+    image: {
+      src: "/images/header/header-distributors.webp",
+      alt: "Trụ sở Enbioscience cùng các chứng nhận thuần chay, GMP Hàn Quốc và FDA Hoa Kỳ",
+    },
+  },
+};
 
 export const HEADER_CTA: NavLinkItem = { label: "Mua chính hãng", href: "/order" };
 

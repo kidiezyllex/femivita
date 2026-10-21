@@ -21,7 +21,7 @@ export const MobileHero: React.FC = () => (
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute left-1/2 top-[23.7%] w-[83%] -translate-x-1/2 text-center font-sans font-semibold leading-[1.3] [font-size:clamp(20px,6vw,28px)]"
+      className="absolute inset-x-0 mx-auto top-[23.7%] w-[83%] text-center font-sans font-semibold leading-[1.3] [font-size:clamp(20px,6vw,28px)]"
     >
       <span className="block text-black">Rũ bỏ mọi lo âu</span>
       <span className="block text-brand-text">Tự tin đón nhận yêu thương</span>
