@@ -103,7 +103,7 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isSolid = true }) 
               <HeaderLogo onClick={closeMenu} />
             </div>
 
-            {/* Navigation Bar */}
+            {/* Navigation Bar 123*/}
             <nav className="flex h-full min-w-0 flex-1 items-center justify-center gap-2 xl:gap-8">
               {/* Product menu trigger */}
               <MenuTrigger
