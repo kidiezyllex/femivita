@@ -18,7 +18,8 @@ interface ProductShowcaseSectionProps {
 export const ProductShowcase: React.FC<ProductShowcaseSectionProps> = ({
   data = DEFAULT_PRODUCT_SHOWCASE_DATA,
 }) => (
-  <section id="product-showcase" className="relative w-full overflow-hidden">
+  // overflow-clip (not hidden) so the mobile background can stay sticky while the content scrolls
+  <section id="product-showcase" className="relative w-full overflow-clip">
     {/* Mobile View: < 768px (<360px Edge Case, 360px-480px Standard, 481px-767px Landscape/Phablet) */}
     <div className="block md:hidden">
       <MobileProductShowcase data={data} />

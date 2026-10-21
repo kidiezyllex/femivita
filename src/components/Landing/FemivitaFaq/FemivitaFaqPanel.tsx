@@ -55,7 +55,11 @@ export const FemivitaFaqPanel: React.FC<FemivitaFaqPanelProps> = ({
       </div>
 
       {/* Questions */}
-      <div role="tabpanel" id={`faq-panel-${activeTab.id}`} aria-labelledby={`faq-tab-${activeTab.id}`}>
+      <div
+        role="tabpanel"
+        id={`faq-panel-${activeTab.id}`}
+        aria-labelledby={`faq-tab-${activeTab.id}`}
+      >
         {activeTab.items.length === 0 ? (
           <p className="border-b border-[#5A4E7D]/80 py-8 font-google-sans text-base leading-[1.6] text-[#141414]/60">
             {emptyMessage}
@@ -72,7 +76,7 @@ export const FemivitaFaqPanel: React.FC<FemivitaFaqPanelProps> = ({
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${item.id}`}
                     onClick={() => setOpenItemId(isOpen ? null : item.id)}
-                    className="flex w-full cursor-pointer items-center justify-between gap-8 pt-8 pb-4 text-left"
+                    className="flex w-full cursor-pointer items-center justify-between gap-8 pb-4 pt-8 text-left"
                   >
                     <span className="font-google-sans text-lg leading-[1.6] text-black xl:text-xl">
                       {item.question}

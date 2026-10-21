@@ -62,21 +62,27 @@ export const useFooterTone = () => {
 const LABEL_CLASS = "font-google-sans text-base leading-[1.6]";
 const VALUE_CLASS = "font-google-sans text-lg leading-[1.6]";
 
-export const FooterBackground: React.FC = () => {
+interface FooterBackgroundProps {
+  /** Replaces the tone's default background. The dark gradient overlay is then skipped: the picture already carries its own gradient. */
+  src?: string;
+  className?: string;
+}
+
+export const FooterBackground: React.FC<FooterBackgroundProps> = ({ src, className }) => {
   const { tone, background } = useFooterTone();
 
   return (
     <>
       <Image
-        src={background}
+        src={src ?? background}
         alt=""
         fill
         quality={100}
         sizes="100vw"
         draggable={false}
-        className="object-cover"
+        className={cn("object-cover", className)}
       />
-      {tone === "dark" && (
+      {tone === "dark" && !src && (
         <div
           aria-hidden
           className="absolute inset-x-0 top-0 h-[1255px] bg-[linear-gradient(180deg,#967AD3_78px,rgba(189,172,219,0.5)_666px,rgba(228,222,228,0)_1255px)]"
@@ -174,18 +180,22 @@ export const FooterPurchaseInfo: React.FC<{ data: FooterContent }> = ({ data }) 
               rel="noopener noreferrer"
               className="flex size-10 items-center justify-center rounded-lg border border-black/[0.02] bg-brand-pink transition-opacity hover:opacity-80"
             >
-              <span
-                aria-hidden
-                className="size-7 bg-brand"
-                style={{
-                  maskImage: `url(${social.icon})`,
-                  WebkitMaskImage: `url(${social.icon})`,
-                  maskSize: "28px 28px",
-                  WebkitMaskSize: "28px 28px",
-                  maskRepeat: "no-repeat",
-                  WebkitMaskRepeat: "no-repeat",
-                }}
-              />
+              {social.fullColor ? (
+                <Image src={social.icon} alt="" width={28} height={28} draggable={false} className="size-7" />
+              ) : (
+                <span
+                  aria-hidden
+                  className="size-7 bg-brand"
+                  style={{
+                    maskImage: `url(${social.icon})`,
+                    WebkitMaskImage: `url(${social.icon})`,
+                    maskSize: "28px 28px",
+                    WebkitMaskSize: "28px 28px",
+                    maskRepeat: "no-repeat",
+                    WebkitMaskRepeat: "no-repeat",
+                  }}
+                />
+              )}
             </a>
           ))}
         </div>

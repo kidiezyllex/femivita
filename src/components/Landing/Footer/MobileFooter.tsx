@@ -18,7 +18,7 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
 
   return (
     <div className="relative px-4 pb-8 pt-16">
-      <FooterBackground />
+      <FooterBackground src="/images/footer/footer-mobile.webp" className="object-top" />
 
       <div className="relative flex flex-col">
         {/* Logo and slogan */}

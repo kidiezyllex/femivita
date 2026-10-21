@@ -4,8 +4,10 @@ export interface FooterLink {
 }
 
 export interface FooterSocialLink extends FooterLink {
-  id: "facebook" | "instagram" | "tiktok";
+  id: "facebook" | "shopee" | "zalo";
   icon: string;
+  /** The icon carries its own colours (Shopee, Zalo); otherwise it is a one-colour glyph painted in the brand colour. */
+  fullColor?: boolean;
 }
 
 export interface FooterOffice {
@@ -61,8 +63,8 @@ export const DEFAULT_FOOTER_CONTENT: FooterContent = {
   socialLabel: "Kênh trực tiếp",
   socialLinks: [
     { id: "facebook", label: "Facebook", href: "https://facebook.com", icon: "/logos/social-facebook.svg" },
-    { id: "instagram", label: "Instagram", href: "https://instagram.com", icon: "/logos/social-instagram.svg" },
-    { id: "tiktok", label: "TikTok", href: "https://tiktok.com", icon: "/logos/social-tiktok.svg" },
+    { id: "shopee", label: "Shopee", href: "https://shopee.vn", icon: "/logos/social-shopee.svg", fullColor: true },
+    { id: "zalo", label: "Zalo", href: "https://zalo.me/0838098866", icon: "/logos/social-zalo.svg", fullColor: true },
   ],
   distributorLabel: "Nhà phân phối:",
   distributors: [
