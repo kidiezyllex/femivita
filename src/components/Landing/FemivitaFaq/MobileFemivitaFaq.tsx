@@ -4,7 +4,7 @@ import { FemivitaFaqPanel } from "./FemivitaFaqPanel";
 import { FemivitaFaqProps } from "./types";
 
 export const MobileFemivitaFaq: React.FC<FemivitaFaqProps> = ({ data }) => (
-  <div className="relative overflow-hidden bg-white px-4 pb-12 pt-16">
+  <div className="relative overflow-hidden bg-white px-4 py-12">
     {/* Top gradient that continues the lavender of the previous section */}
     <div
       aria-hidden
@@ -21,7 +21,7 @@ export const MobileFemivitaFaq: React.FC<FemivitaFaqProps> = ({ data }) => (
         <p className="font-google-sans text-base leading-[1.6] text-secondaryV1">
           {data.description}
         </p>
-        <PillLinkButton href={data.ctaHref} label={data.ctaLabel} className="mt-4" />
+        <PillLinkButton href={data.ctaHref} label={data.ctaLabel} className="mt-2" />
       </div>
 
       {/* Tabs and questions */}

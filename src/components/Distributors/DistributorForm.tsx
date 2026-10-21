@@ -38,7 +38,8 @@ const validate = (values: FormValues, labels: DistributorFormLabels): FormErrors
   const errors: FormErrors = {};
   if (!values.applicantType) errors.applicantType = labels.typeRequiredError;
   if (!EMAIL_PATTERN.test(values.email.trim())) errors.email = labels.emailInvalidError;
-  if (values.phone.trim() && !PHONE_PATTERN.test(values.phone.trim())) errors.phone = labels.phoneInvalidError;
+  if (values.phone.trim() && !PHONE_PATTERN.test(values.phone.trim()))
+    errors.phone = labels.phoneInvalidError;
   if (!values.privacyConsent) errors.privacyConsent = labels.consentRequiredError;
   return errors;
 };
@@ -100,7 +101,7 @@ export const DistributorForm: React.FC<{ labels: DistributorFormLabels }> = ({ l
       id="distributor-form"
       noValidate
       onSubmit={handleSubmit}
-      className={`flex scroll-mt-28 flex-col gap-8 rounded-2xl bg-white px-5 py-10 md:px-12 md:py-14 lg:px-[116px] lg:py-20 ${SHADOW}`}
+      className={`flex scroll-mt-28 flex-col gap-8 rounded-2xl bg-white px-4 py-10 md:px-12 md:py-14 lg:px-[116px] lg:py-20 ${SHADOW}`}
     >
       <div className="flex flex-col gap-5">
         <Field id="applicant-type" label={labels.typeLabel} required error={errors.applicantType}>
@@ -165,7 +166,11 @@ export const DistributorForm: React.FC<{ labels: DistributorFormLabels }> = ({ l
           </Field>
         </div>
 
-        <Field id="distributor-message" label={labels.messageLabel} optionalNote={labels.optionalNote}>
+        <Field
+          id="distributor-message"
+          label={labels.messageLabel}
+          optionalNote={labels.optionalNote}
+        >
           <TextArea
             id="distributor-message"
             rows={4}

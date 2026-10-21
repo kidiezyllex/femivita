@@ -78,41 +78,51 @@ export const SpotlightCard: React.FC<{
   </Link>
 );
 
+/** Lineup card (Figma "SP"): white rounded card, picture on the left (on top when narrow), name, size and a "Xem sản phẩm" link. */
 export const ProductCard: React.FC<{ product: ShowcaseProduct; className?: string }> = ({
   product,
   className,
 }) => (
-  <Link href={product.href} className={cn("group flex flex-col gap-5", className)}>
-    <div className="relative aspect-square w-full overflow-hidden rounded-[20px] bg-brand-surface">
+  <Link
+    href={product.href}
+    className={cn("group flex flex-col gap-4 rounded-[20px] bg-white p-4 md:flex-row", className)}
+  >
+    <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-[18px] bg-[#FAF9FF] md:w-[51%] md:max-w-[320px]">
       <Image
         src={product.image}
         alt={product.imageAlt}
         fill
         quality={100}
-        sizes="(min-width: 1440px) 324px, (min-width: 768px) 25vw, 50vw"
+        sizes="(min-width: 1440px) 320px, (min-width: 768px) 30vw, 100vw"
         draggable={false}
         className="object-cover transition-transform duration-300 group-hover:scale-105"
       />
     </div>
-    <div className="flex flex-col items-center md:px-4 xl:px-10">
-      <p className="max-w-[250px] text-center font-google-sans text-base font-medium leading-[1.6] text-ink-dark md:text-xl">
+
+    <div className="flex min-w-0 flex-1 flex-col justify-center">
+      <p className="font-sans text-2xl font-medium leading-[1.4] text-ink-dark xl:text-[32px]">
         {product.name}
       </p>
-      <p className="font-google-sans text-sm leading-[1.6] text-ink-soft md:text-base">
+      <p className="font-inter text-[15px] font-light leading-[25.6px] tracking-[0.16px] text-ink-dark/60">
         {product.size}
       </p>
+      <span className="flex items-center gap-4 pt-4 font-[Arial,Helvetica,sans-serif] text-base text-ink-dark">
+        <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-[#E6E6E6] transition-colors group-hover:border-brand">
+          <Image
+            src="/logos/arrow-right-small-dark.svg"
+            alt=""
+            width={12}
+            height={12}
+            draggable={false}
+            className="transition-transform duration-200 group-hover:translate-x-0.5"
+          />
+        </span>
+        Xem sản phẩm
+      </span>
     </div>
   </Link>
 );
 
-/**
- * Decorative stage with the rotated hero bottle, glow and spotlight card.
- * Everything is positioned in percentages of the stage so it scales with the viewport (Figma: 1440 x 1301).
- *
- * The hero bottle and glow start a bit higher and slightly smaller, then ease
- * into their final Figma position as the user scrolls down. Because the
- * animation is driven by `scrollYProgress`, scrolling back up reverts it.
- */
 const ENTRANCE_AT = 0.4;
 // How far above the final position the bottle and glow start, in % of the stage height.
 const START_Y_PERCENT = 14;
@@ -127,11 +137,7 @@ export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data })
   });
 
   // y starts at -START_Y_PERCENT of the stage height, returns to 0 by ENTRANCE_AT, then stays.
-  const bottleY = useTransform(
-    scrollYProgress,
-    [0, ENTRANCE_AT],
-    [`-${START_Y_PERCENT}%`, "0%"],
-  );
+  const bottleY = useTransform(scrollYProgress, [0, ENTRANCE_AT], [`-${START_Y_PERCENT}%`, "0%"]);
   const glowY = useTransform(
     scrollYProgress,
     [0, ENTRANCE_AT],

@@ -68,7 +68,7 @@ export const DesktopMegaDropdown: React.FC<DesktopMegaDropdownProps> = ({ id, me
               })}
             </nav>
 
-            <div className="col-span-5 col-start-8 px-5 xl:col-span-4 xl:col-start-9">
+            <div className="col-span-5 col-start-8 px-4 xl:col-span-4 xl:col-start-9">
               <div className="relative h-full overflow-hidden rounded-[20px] bg-[#FAF9FF]">
                 <Image
                   src={menu.image.src}

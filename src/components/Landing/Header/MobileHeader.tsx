@@ -123,13 +123,13 @@ export const MobileHeader: React.FC = () => {
         className="flex size-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-brand-light transition-colors hover:bg-brand focus:outline-none"
       >
         {isOpen ? (
-          <Icon path={mdiClose} className="size-4 text-white" />
+          <Icon path={mdiClose} className="size-5 text-white" />
         ) : (
           <Image
             src="/logos/menu.svg"
             alt=""
-            width={16}
-            height={16}
+            width={20}
+            height={20}
             quality={100}
             draggable={false}
           />
@@ -202,7 +202,7 @@ export const MobileHeader: React.FC = () => {
             </div>
 
             {/* Contact info and CTA at the bottom of the menu */}
-            <div className="flex flex-col gap-6 border-t border-ink/10 p-5">
+            <div className="flex flex-col gap-4 border-t border-ink/10 p-4">
               <ul className="flex flex-col gap-4 font-google-sans text-base leading-[1.5] text-ink-muted">
                 <li>
                   <a
@@ -223,7 +223,7 @@ export const MobileHeader: React.FC = () => {
                 ))}
               </ul>
 
-              <div className="flex justify-center border-t border-ink/10 pt-6">
+              <div className="flex justify-center border-t border-ink/10 pt-4">
                 <HeaderCTA onClick={handleClose} />
               </div>
             </div>

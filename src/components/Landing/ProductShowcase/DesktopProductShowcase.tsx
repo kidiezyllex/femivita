@@ -70,7 +70,7 @@ export const DesktopProductShowcase: React.FC<ProductShowcaseProps> = ({ data })
 
         <ScrollStagger className="grid grid-cols-12 gap-x-4 gap-y-10" staggerDelay={0.1}>
           {data.products.map((product) => (
-            <ScrollStaggerItem key={product.id} className="col-span-3">
+            <ScrollStaggerItem key={product.id} className="col-span-6">
               <ProductCard product={product} />
             </ScrollStaggerItem>
           ))}

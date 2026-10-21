@@ -32,7 +32,7 @@ export const TabletMegaDropdown = React.forwardRef<HTMLDivElement, TabletMegaDro
           >
             <div className="grid h-full w-full grid-cols-2 items-stretch">
               {/* Left Column: Slogan Title & Philosophy */}
-              <div className="flex flex-col justify-center overflow-y-auto border-r border-primaryV1 px-5">
+              <div className="flex flex-col justify-center overflow-y-auto border-r border-primaryV1 px-4">
                 <h2 className="mb-3 text-4xl font-semibold leading-[120%] tracking-normal text-primaryV1">
                   <span className="block pb-1">TRẺ HÓA,</span>
                   <span className="block pb-1">TÁI TẠO,</span>

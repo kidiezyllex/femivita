@@ -42,7 +42,7 @@ export const TabletProductShowcase: React.FC<ProductShowcaseProps> = ({ data }) 
         </div>
       </ScrollReveal>
 
-      <ScrollStagger className="grid grid-cols-2 gap-x-6 gap-y-8" staggerDelay={0.1}>
+      <ScrollStagger className="grid grid-cols-1 gap-y-6" staggerDelay={0.1}>
         {data.products.map((product) => (
           <ScrollStaggerItem key={product.id}>
             <ProductCard product={product} />

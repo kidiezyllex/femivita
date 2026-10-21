@@ -53,7 +53,7 @@ export const ResearchCopy: React.FC<{
     <p className="w-[220px] max-w-full font-google-sans text-sm font-medium leading-[1.6] text-gray-700">
       {data.highlight}
     </p>
-    <p className="w-[220px] max-w-full font-google-sans text-sm leading-[1.6] text-ink-muted">
+    <p className="max-w-full font-google-sans text-sm leading-[1.6] text-ink-muted">
       {data.description}
     </p>
   </div>

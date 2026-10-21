@@ -1,8 +1,8 @@
 "use client";
 
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import Image from "next/image";
 import React from "react";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { BrandStoryGlassCard, RatingSummary, ResearchCopy } from "./WhyFemivitaParts";
 import { WhyFemivitaProps } from "./types";
 
@@ -43,7 +43,7 @@ export const MobileWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
       {/* Research card */}
       <ScrollReveal direction="up" delay={0.2}>
         <div className="relative flex flex-col overflow-hidden rounded-2xl bg-[linear-gradient(180deg,#FFFFFF_0%,#F3EBFA_100%)]">
-          <ResearchCopy data={data.research} className="relative z-10 p-6 pb-2" />
+          <ResearchCopy data={data.research} className="relative z-10 px-4 pt-4" />
           <div className="relative h-[220px] w-full">
             <Image
               src={data.research.image}
@@ -75,4 +75,3 @@ export const MobileWhyFemivita: React.FC<WhyFemivitaProps> = ({ data }) => (
     </div>
   </div>
 );
-

@@ -84,6 +84,7 @@ export const DEFAULT_PRODUCT_SHOWCASE_DATA: ProductShowcaseData = {
   lineupCtaLabel: "Xem toàn bộ sản phẩm",
   lineupCtaHref: "/products",
   products: [
+    { id: "zone-fresh-mousse", ...FOAM_PRODUCT },
     {
       id: "gel-venus-y-passion",
       name: "Gel Venus Y Passion",
@@ -92,9 +93,5 @@ export const DEFAULT_PRODUCT_SHOWCASE_DATA: ProductShowcaseData = {
       imageAlt: "Gel Venus Y Passion và hộp sản phẩm",
       href: "/products/gel-venus-y-passion",
     },
-    // Figma reuses the same foam product for the last three cards (placeholder)
-    { id: "zone-fresh-mousse-1", ...FOAM_PRODUCT },
-    { id: "zone-fresh-mousse-2", ...FOAM_PRODUCT },
-    { id: "zone-fresh-mousse-3", ...FOAM_PRODUCT },
   ],
 };

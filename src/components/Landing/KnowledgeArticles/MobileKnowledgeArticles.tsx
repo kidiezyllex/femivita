@@ -11,9 +11,11 @@ export const MobileKnowledgeArticles: React.FC<KnowledgeArticlesProps> = ({ data
     <div className="overflow-hidden rounded-2xl bg-white">
       {/* Title */}
       <ScrollReveal direction="up" delay={0.05}>
-        <div className="flex flex-col items-start gap-4 px-5 pt-10">
+        <div className="flex flex-col items-start gap-4 px-4 pt-10">
           <div className="flex flex-col items-start gap-2">
-            <p className="font-google-sans text-base leading-[1.6] text-ink-muted">{data.eyebrow}</p>
+            <p className="font-google-sans text-base leading-[1.6] text-ink-muted">
+              {data.eyebrow}
+            </p>
             <h2 className="font-sans text-[32px] font-semibold leading-[1.3] text-black">
               {data.headlineStart} <span className="text-brand-text">{data.headlineHighlight}</span>
             </h2>
@@ -31,7 +33,7 @@ export const MobileKnowledgeArticles: React.FC<KnowledgeArticlesProps> = ({ data
             <KnowledgeArticleCard
               article={article}
               readMoreLabel={data.readMoreLabel}
-              className="px-5 py-8"
+              className="px-4 py-8"
             />
           </ScrollStaggerItem>
         ))}
@@ -39,4 +41,3 @@ export const MobileKnowledgeArticles: React.FC<KnowledgeArticlesProps> = ({ data
     </div>
   </div>
 );
-

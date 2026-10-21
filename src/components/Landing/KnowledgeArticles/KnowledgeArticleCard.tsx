@@ -21,7 +21,7 @@ export const KnowledgeArticleCard: React.FC<KnowledgeArticleCardProps> = ({
   className,
   imageClassName,
 }) => (
-  <article className={cn("relative flex flex-col gap-[17px]", className)}>
+  <article className={cn("relative flex flex-col gap-4", className)}>
     <div className="flex flex-wrap items-center gap-2 font-google-sans text-sm leading-[1.6] text-ink-muted xl:text-base">
       <span>{article.category}</span>
       <Image src="/logos/dot.svg" alt="" width={3} height={4} draggable={false} />

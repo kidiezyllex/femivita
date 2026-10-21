@@ -84,12 +84,14 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isSolid = true }) 
 
   return (
     <header className="relative z-50 w-full">
-      <div className="p-4 xl:px-5">
+      <div className="p-4 xl:px-4">
         <div
           ref={cardRef}
           className={cn(
             "rounded-[8px] transition-[background-color,box-shadow] duration-300",
-            showCard ? "bg-white shadow-[0_4px_24px_rgba(30,30,30,0.08)]" : "bg-transparent shadow-none",
+            showCard
+              ? "bg-white shadow-[0_4px_24px_rgba(30,30,30,0.08)]"
+              : "bg-transparent shadow-none",
           )}
         >
           <div
@@ -158,10 +160,7 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isSolid = true }) 
 
             {/* CTA */}
             <div className="flex h-full shrink-0 items-center justify-end xl:w-[200px]">
-              <HeaderCTA
-                variant={showCard ? "soft" : "solid"}
-                onClick={closeMenu}
-              />
+              <HeaderCTA variant={showCard ? "soft" : "solid"} onClick={closeMenu} />
             </div>
           </div>
 
