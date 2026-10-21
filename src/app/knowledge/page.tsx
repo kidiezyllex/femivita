@@ -4,6 +4,9 @@ import { KnowledgeList } from '@/components/Knowledge';
 import { PageHero } from '@/components/ui/PageHero';
 import { buildPageMetadata } from '@/lib/seo';
 
+// The header menu links to /knowledge?category=<id>, so the list is rendered per request with the right tab.
+export const dynamic = 'force-dynamic';
+
 export const metadata = buildPageMetadata({
   title: 'Kiến thức',
   description:

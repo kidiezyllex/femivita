@@ -18,7 +18,7 @@ export interface NavLinkItem {
 
 export const NAV_LINKS: NavLinkItem[] = [
   { label: "Về thương hiệu", href: "/story" },
-  { label: "Kiến thức", href: "/knowledge" },
+  { label: "Kiến thức", href: "/knowledge", menuId: "knowledge" },
   { label: "Nhà phân phối", href: "/distributors", menuId: "distributors" },
 ];
 
@@ -44,6 +44,20 @@ export const HEADER_MENUS: Record<string, HeaderMenu> = {
     image: {
       src: "/images/header/header-products.webp",
       alt: "Bọt vệ sinh Zone Y Fresh và Gel Venus Y Passion",
+    },
+  },
+  knowledge: {
+    id: "knowledge",
+    label: "Kiến thức",
+    links: [
+      { label: "Tất cả", href: "/knowledge" },
+      { label: "Sức khỏe sinh sản", href: "/knowledge?category=reproductive-health" },
+      { label: "Sức khỏe tình dục", href: "/knowledge?category=sexual-health" },
+      { label: "Sức khỏe phụ khoa", href: "/knowledge?category=gynecological-health" },
+    ],
+    image: {
+      src: "/images/header/header-knowledge.webp",
+      alt: "Bọt vệ sinh Zone Y Fresh và Gel Venus Y Passion bên bình thí nghiệm",
     },
   },
   distributors: {

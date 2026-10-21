@@ -3,7 +3,8 @@
 import { CategoryList } from "@/components/ui/CategoryList";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { useLenis } from "lenis/react";
-import React, { useMemo, useRef, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { KnowledgeArticleItem } from "./KnowledgeArticleItem";
 import { KnowledgePagination } from "./KnowledgePagination";
 import { ALL_CATEGORY_ID, DEFAULT_KNOWLEDGE_LIST_DATA, KnowledgeListData } from "./types";
@@ -18,9 +19,18 @@ interface KnowledgeListSectionProps {
 export const KnowledgeList: React.FC<KnowledgeListSectionProps> = ({
   data = DEFAULT_KNOWLEDGE_LIST_DATA,
 }) => {
-  const [categoryId, setCategoryId] = useState(ALL_CATEGORY_ID);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const requestedCategory = searchParams.get("category");
+  // "?category=<id>" (used by the header menu) picks the tab; unknown ids fall back to "Tất cả".
+  const resolveCategory = (id: string | null) =>
+    id && data.categories.some((category) => category.id === id) ? id : ALL_CATEGORY_ID;
+
+  const [categoryId, setCategoryId] = useState(() => resolveCategory(requestedCategory));
   const [page, setPage] = useState(1);
   const sectionRef = useRef<HTMLElement>(null);
+  const categoryIdRef = useRef(categoryId);
+  categoryIdRef.current = categoryId;
   const lenis = useLenis();
 
   const filtered = useMemo(
@@ -61,7 +71,19 @@ export const KnowledgeList: React.FC<KnowledgeListSectionProps> = ({
     setCategoryId(id);
     setPage(1);
     scrollToListTop();
+    // Keep the URL in step with the tab, so a header link to the current tab or to "Tất cả" still registers as a change.
+    window.history.replaceState(null, "", id === ALL_CATEGORY_ID ? pathname : `${pathname}?category=${id}`);
   };
+
+  // The URL changed from outside (header menu while already on this page): follow it.
+  useEffect(() => {
+    const next = resolveCategory(requestedCategory);
+    if (next === categoryIdRef.current) return;
+    setCategoryId(next);
+    setPage(1);
+    scrollToListTop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [requestedCategory]);
 
   return (
     <section
