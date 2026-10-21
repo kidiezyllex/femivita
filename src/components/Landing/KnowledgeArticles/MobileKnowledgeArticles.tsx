@@ -11,7 +11,7 @@ export const MobileKnowledgeArticles: React.FC<KnowledgeArticlesProps> = ({ data
     <div className="overflow-hidden rounded-2xl bg-white">
       {/* Title */}
       <ScrollReveal direction="up" delay={0.05}>
-        <div className="flex flex-col items-start gap-4 px-4 pt-10">
+        <div className="flex flex-col items-start gap-4 px-4 pt-8">
           <div className="flex flex-col items-start gap-2">
             <p className="font-google-sans text-base leading-[1.6] text-ink-muted">
               {data.eyebrow}
