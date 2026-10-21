@@ -8,8 +8,8 @@ import { BenefitItem, ProductCard, SpotlightCard } from "./ProductShowcaseParts"
 import { ProductShowcaseProps } from "./types";
 
 export const MobileProductShowcase: React.FC<ProductShowcaseProps> = ({ data }) => (
-  <div className="relative overflow-hidden bg-brand-lavender">
-    {/* Full width, height follows the image ratio; pinned to the top; below it the section continues in the lavender of the image bottom */}
+  <div className="relative overflow-hidden bg-[linear-gradient(to_bottom,#FFFFFF_100px,#C3B2E8_100px)]">
+    {/* Full width, height follows the image ratio; offset 100px from the top (white above it, like the image top); below it the section continues in the lavender of the image bottom */}
     <Image
       src="/images/product-showcase/background.jpg"
       alt=""
@@ -18,7 +18,7 @@ export const MobileProductShowcase: React.FC<ProductShowcaseProps> = ({ data }) 
       quality={100}
       sizes="100vw"
       draggable={false}
-      className="absolute left-0 top-0 h-auto w-full"
+      className="absolute left-0 top-[100px] h-auto w-full"
     />
 
     {/* Content sits in its own relative layer so it paints above the background image */}
