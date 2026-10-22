@@ -6,9 +6,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { DesktopMegaDropdown } from "./DesktopMegaDropdown";
-import { HeaderCTA } from "./HeaderCTA";
+import { HeaderBuyButton } from "./HeaderBuyButton";
 import { HeaderLogo } from "./HeaderLogo";
-import { HEADER_MENUS, NAV_LINKS } from "./types";
+import { BUY_MENU, HEADER_MENUS, NAV_LINKS } from "./types";
 
 const NAV_ITEM_CLASS =
   "flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap px-3 py-1 font-google-sans text-base leading-[1.6] text-ink transition-colors hover:text-brand xl:px-4";
@@ -160,13 +160,18 @@ export const DesktopHeader: React.FC<DesktopHeaderProps> = ({ isSolid = true }) 
 
             {/* CTA */}
             <div className="flex h-full shrink-0 items-center justify-end xl:w-[200px]">
-              <HeaderCTA variant={showCard ? "soft" : "solid"} onClick={closeMenu} />
+              <HeaderBuyButton
+                isOpen={openMenuId === BUY_MENU.id}
+                onCard={showCard}
+                controls={MENU_PANEL_ID}
+                onClick={() => toggleMenu(BUY_MENU.id)}
+              />
             </div>
           </div>
 
           <DesktopMegaDropdown
             id={MENU_PANEL_ID}
-            menu={openMenuId ? (HEADER_MENUS[openMenuId] ?? null) : null}
+            menu={openMenuId === BUY_MENU.id ? BUY_MENU : openMenuId ? (HEADER_MENUS[openMenuId] ?? null) : null}
             onClose={closeMenu}
           />
         </div>

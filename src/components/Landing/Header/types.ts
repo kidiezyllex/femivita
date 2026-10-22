@@ -1,3 +1,5 @@
+import { DEFAULT_FOOTER_CONTENT } from "../Footer/types";
+
 export interface DropdownProductItem {
   id: string;
   href: string;
@@ -106,3 +108,98 @@ export const DROPDOWN_PRODUCTS: DropdownProductItem[] = [
     price: "490.000 đ",
   },
 ];
+
+export interface BuyMenuImage {
+  src: string;
+  alt: string;
+  /** Natural size; when set the picture is placed with `className` (an oversized crop) instead of filling the frame. */
+  width?: number;
+  height?: number;
+  className?: string;
+  /** Draws the thin border Figma gives the screenshot. */
+  bordered?: boolean;
+}
+
+export interface BuyMenuChild {
+  id: string;
+  label: string;
+  href: string;
+  external?: boolean;
+  /** Square icon tile in front of the label. */
+  icon?: { src: string; fullColor?: boolean };
+}
+
+export interface BuyMenuItem {
+  id: string;
+  label: string;
+  /** Items without children are plain links. */
+  href?: string;
+  children?: BuyMenuChild[];
+  /** Replaces the default picture while this item is active. */
+  image?: BuyMenuImage;
+}
+
+/** "Mua chính hãng" panel: a list on the left, the active item's sub-list in the middle and a picture on the right. */
+export interface HeaderBuyMenu {
+  id: "buy";
+  label: string;
+  items: BuyMenuItem[];
+  image: BuyMenuImage;
+}
+
+const FOOTER_SOCIALS = Object.fromEntries(DEFAULT_FOOTER_CONTENT.socialLinks.map((social) => [social.id, social]));
+
+export const BUY_MENU: HeaderBuyMenu = {
+  id: "buy",
+  label: "Mua chính hãng",
+  image: { src: "/images/header/header-knowledge.webp", alt: "Bọt vệ sinh Zone Y Fresh và Gel Venus Y Passion bên bình thí nghiệm" },
+  items: [
+    {
+      id: "channels",
+      label: "Kênh trực tiếp",
+      children: [
+        {
+          id: "facebook",
+          label: "Femivita Hàn Quốc - Dứt điểm khô hạn - Mất cảm hứng",
+          href: FOOTER_SOCIALS.facebook.href,
+          external: true,
+          icon: { src: FOOTER_SOCIALS.facebook.icon },
+        },
+        {
+          id: "shopee",
+          label: "Femivita Shopee Shop",
+          href: FOOTER_SOCIALS.shopee.href,
+          external: true,
+          icon: { src: FOOTER_SOCIALS.shopee.icon, fullColor: true },
+        },
+        {
+          id: "zalo",
+          label: "Liên hệ: 0838 09 8866",
+          href: FOOTER_SOCIALS.zalo.href,
+          external: true,
+          icon: { src: FOOTER_SOCIALS.zalo.icon, fullColor: true },
+        },
+      ],
+    },
+    {
+      id: "distributors",
+      label: "Nhà phân phối chính thức Femivita",
+      children: DEFAULT_FOOTER_CONTENT.distributors.map((name, index) => ({
+        id: `distributor-${index + 1}`,
+        label: name,
+        href: "/distributors",
+      })),
+      // Figma shows the distributor's Facebook page here.
+      image: {
+        src: "/images/header/header-buy-distributor.webp",
+        alt: "Trang Facebook Gia Đình Yêu Thương, nhà phân phối chính thức của Femivita",
+        width: 662,
+        height: 376,
+        // Crop of the Figma frame, recomputed for the square frame (width : height stays the 1.76 of the screenshot).
+        className: "absolute left-[-24.3%] top-[-5.81%] h-[111.61%] w-[196.4%] max-w-none",
+        bordered: true,
+      },
+    },
+    { id: "all-distributors", label: "Xem toàn bộ Nhà phân phối", href: "/distributors" },
+  ],
+};
