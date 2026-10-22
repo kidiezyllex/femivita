@@ -25,12 +25,20 @@ const GEL_VENUS_Y_PASSION: ProductDetailData = {
     "Gel Venus Y Passion của Femivita: gel chăm sóc vùng kín kết hợp estrogen tự nhiên và L-arginine, giúp cải thiện lưu thông máu và cảm giác, lấy lại cảm hứng để yêu.",
   gallery: [
     {
-      src: "/images/products/gel-venus-in-hand.webp",
+      src: "/images/products/gel-venus-y-passion/sp1.webp",
       alt: "Bàn tay thoa sản phẩm Femivita bên cạnh chai bọt trên nền lụa tím nhạt",
     },
     {
-      src: "/images/products/gel-venus-y-passion.webp",
+      src: "/images/products/gel-venus-y-passion/sp2.webp",
       alt: "Gel Venus Y Passion và hộp sản phẩm",
+    },
+    {
+      src: "/images/products/gel-venus-y-passion/sp3.webp",
+      alt: "Cơ chế hoạt động của Axit Amin L-Arginine trong Gel Venus Y Passion, giúp cải thiện sinh lý nữ qua 5 bước",
+    },
+    {
+      src: "/images/products/gel-venus-y-passion/sp4.webp",
+      alt: "Gel Venus Y Passion với độ pH lý tưởng 4.5: hẹp hơn, ướt hơn, đê mê hơn, trơn mượt khi yêu đến xiêu lòng",
     },
   ],
   tagline: "CHĂM SÓC VÙNG KÍN & TẠO CẢM HỨNG",

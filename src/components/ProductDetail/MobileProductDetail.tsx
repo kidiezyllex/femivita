@@ -7,7 +7,6 @@ import { ProductGallery } from "./ProductGallery";
 import { ProductInfo } from "./ProductInfo";
 import { ProductDetailLayoutProps } from "./types";
 
-/** < 768px: everything in one column. */
 export const MobileProductDetail: React.FC<ProductDetailLayoutProps> = ({ product }) => (
   <>
     <section className="relative w-full overflow-clip bg-white px-4 pb-8 pt-24">

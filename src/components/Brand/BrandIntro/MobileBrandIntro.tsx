@@ -31,7 +31,8 @@ export const MobileBrandIntro: React.FC<BrandIntroProps> = ({ data }) => {
         <div className="relative flex flex-col gap-8 overflow-hidden rounded-2xl bg-brand-panel p-4">
           <BrandIntroDecor textureImage={data.textureImage} />
 
-          <div className="relative flex flex-col gap-4">
+          {/* Counter on the left, arrows on the same row on the right */}
+          <div className="relative flex items-center justify-between gap-4">
             <SlideCounter current={index + 1} total={total} />
             <SliderButtons
               prevLabel={data.prevLabel}
@@ -43,13 +44,13 @@ export const MobileBrandIntro: React.FC<BrandIntroProps> = ({ data }) => {
             />
           </div>
 
-          <SlideText slide={data.slides[index]} className="relative max-w-none" />
-
           <IntroPicture
             src={data.pictureImage}
             alt={data.pictureAlt}
             className="relative aspect-[4/3] w-full"
           />
+
+          <SlideText slide={data.slides[index]} className="relative max-w-none" />
         </div>
       </ScrollReveal>
     </div>
