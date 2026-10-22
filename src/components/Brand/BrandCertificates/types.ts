@@ -30,8 +30,8 @@ const BASE_CERTIFICATES: Omit<BrandCertificate, "id">[] = [
     imageAlt: "Giấy chứng nhận International Industrial Certification của ENBIOSCIENCE",
   },
   {
-    title: "Chứng nhận Thuần Chay",
-    subtitle: "(Vegan)",
+    title: "Chứng nhận Vegan",
+    subtitle: "(Thuần chay)",
     image: "/images/brand/cert-vegan.webp",
     imageAlt: "Vegan Certificate của ENBIOSCIENCE",
   },
