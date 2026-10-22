@@ -15,7 +15,8 @@ export const TabletProductDetail: React.FC<ProductDetailLayoutProps> = ({ produc
 
       <div className="relative mx-auto grid max-w-[1440px] gap-10">
         <ProductGallery images={product.gallery} className="h-[450px]" sizes="100vw" />
-        <ScrollReveal direction="up" delay={0.1}>
+        {/* amount="some": the info is much taller than the screen, so it must reveal as soon as its top edge shows (right under the gallery) */}
+        <ScrollReveal direction="up" delay={0.1} amount="some">
           <ProductInfo product={product} />
         </ScrollReveal>
       </div>
