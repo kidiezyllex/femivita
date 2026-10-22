@@ -188,20 +188,6 @@ const ZONE_FRESH_MOUSSE: ProductDetailData = {
       ],
     },
     {
-      id: "usage",
-      title: "Cách sử dụng",
-      items: [
-        { icon: "none", heading: "Bước 1:", text: "Làm ướt vùng kín bằng nước sạch." },
-        { icon: "none", heading: "Bước 2:", text: "Nhấn vòi xịt lấy khoảng 1–2 lần bơm bọt ra lòng bàn tay." },
-        {
-          icon: "none",
-          heading: "Bước 3:",
-          text: "Thoa rửa nhẹ nhàng lớp bọt mịn vào vùng bên ngoài (môi lớn, môi bé) từ trước ra sau trong khoảng 30–60 giây. Không thụt rửa sâu vào bên trong âm đạo.",
-        },
-        { icon: "none", heading: "Bước 4:", text: "Rửa lại thật sạch bằng nước và dùng khăn mềm lau khô nhẹ nhàng." },
-      ],
-    },
-    {
       id: "ingredients",
       title: "Thành phần chính",
       items: [
@@ -221,7 +207,8 @@ const ZONE_FRESH_MOUSSE: ProductDetailData = {
     description: "Câu trả lời rõ ràng cho những thắc mắc phổ biến nhất về bọt vệ sinh Zone Fresh.",
     ctaLabel: "Các thắc mắc khác",
     ctaHref: "/faq",
-    items: FOAM_QUESTIONS.slice(0, 4),
+    // Same four-question teaser as the Gel Venus page; the third one is how to use it.
+    items: [FOAM_QUESTIONS[0], FOAM_QUESTIONS[1], FOAM_QUESTIONS[6], FOAM_QUESTIONS[2]],
   },
   banner: PRODUCT_BANNER,
 };
