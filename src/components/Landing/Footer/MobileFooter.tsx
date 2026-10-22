@@ -17,12 +17,12 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
   const { border } = useFooterTone();
 
   return (
-    <div className="relative px-4 pb-8 pt-16">
+    <div className="relative px-4 py-8">
       <FooterBackground mobile />
 
       <div className="relative flex flex-col">
         {/* Logo and slogan */}
-        <div className="flex flex-col gap-4 pb-10">
+        <div className="flex flex-col gap-4 pb-8">
           <FooterLogo data={data.logo} className="max-w-[260px]" />
           <FooterSlogan text={data.slogan} className="max-w-[260px] text-xl" />
         </div>

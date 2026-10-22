@@ -134,21 +134,22 @@ const GEL_VENUS_Y_PASSION: ProductDetailData = {
 };
 
 // Zone Fresh Mousse has no Figma page: the copy comes from the /faq answers and the packaging, and the layout reuses the Gel Venus page.
+const IN_HAND = "/images/products/zone-fresh-mousse-in-hand.webp";
+const PACKSHOT = "/images/products/zone-fresh-mousse.webp";
+
 const ZONE_FRESH_MOUSSE: ProductDetailData = {
   slug: "zone-fresh-mousse",
   name: "Bọt vệ sinh Zone Fresh Mousse",
   size: "150ml | 5.07FL.OZ",
   seoDescription:
     "Bọt vệ sinh lợi khuẩn Probiotics Zone Fresh Mousse của Femivita: chuẩn pH 4.5, chiết xuất sen, Prebiotic và Exosome, làm sạch dịu nhẹ vùng kín mỗi ngày, khử mùi và bảo vệ hệ lợi khuẩn.",
+  // PLACEHOLDERS: 4 slots like the Gel Venus page. Swap each src for the final photo
+  // (e.g. /images/products/zone-fresh-mousse/sp1.webp ... sp4.webp) when the images are ready.
   gallery: [
-    {
-      src: "/images/products/zone-fresh-mousse-in-hand.webp",
-      alt: "Bàn tay cầm chai bọt vệ sinh Zone Fresh Mousse trên nền lụa tím nhạt",
-    },
-    {
-      src: "/images/products/zone-fresh-mousse.webp",
-      alt: "Bọt vệ sinh Zone Fresh Mousse và hộp sản phẩm",
-    },
+    { src: IN_HAND, alt: "Bàn tay cầm chai bọt vệ sinh Zone Fresh Mousse trên nền lụa tím nhạt" },
+    { src: PACKSHOT, alt: "Bọt vệ sinh Zone Fresh Mousse và hộp sản phẩm" },
+    { src: IN_HAND, alt: "Bàn tay cầm chai bọt vệ sinh Zone Fresh Mousse trên nền lụa tím nhạt" },
+    { src: PACKSHOT, alt: "Bọt vệ sinh Zone Fresh Mousse và hộp sản phẩm" },
   ],
   tagline: "LÀM SẠCH DỊU NHẸ & BẢO VỆ VÙNG KÍN",
   summary:
@@ -198,8 +199,11 @@ const ZONE_FRESH_MOUSSE: ProductDetailData = {
       ],
     },
   ],
-  // The infographics of the Gel Venus page are specific to that product; this page has none yet.
-  infographics: [],
+  // PLACEHOLDERS: 2 square infographic slots like the Gel Venus page; swap in the final artwork.
+  infographics: [
+    { src: PACKSHOT, alt: "Bọt vệ sinh Zone Fresh Mousse và hộp sản phẩm" },
+    { src: IN_HAND, alt: "Bàn tay cầm chai bọt vệ sinh Zone Fresh Mousse" },
+  ],
   faq: {
     eyebrow: "FAQs",
     titleStart: "Câu hỏi về",
