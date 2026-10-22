@@ -27,6 +27,9 @@ export interface FemivitaFaqProps {
   data: FemivitaFaqData;
 }
 
+/** The home page shows only a teaser of each tab; the full list is on /faq. */
+const HOME_ITEMS_PER_TAB = 4;
+
 const toItems = (questions: { id: string; question: string; answer: string }[]): FemivitaFaqItem[] =>
   questions.map(({ id, question, answer }) => ({ id, question, answer }));
 
@@ -42,14 +45,14 @@ export const DEFAULT_FEMIVITA_FAQ_DATA: FemivitaFaqData = {
     {
       id: "femivita",
       label: "Femivita",
-      // Same copy as the "Về Femivita" group on /faq.
-      items: toItems(ABOUT_QUESTIONS),
+      // The first 4 questions of the "Về Femivita" group on /faq.
+      items: toItems(ABOUT_QUESTIONS.slice(0, HOME_ITEMS_PER_TAB)),
     },
     {
       id: "intimate-health",
       label: "Sức khoẻ thân mật",
-      // Same copy as the "Sức khoẻ thân mật" group on /faq.
-      items: toItems(INTIMATE_HEALTH_QUESTIONS),
+      // The first 4 questions of the "Sức khoẻ thân mật" group on /faq; the rest are on that page.
+      items: toItems(INTIMATE_HEALTH_QUESTIONS.slice(0, HOME_ITEMS_PER_TAB)),
     },
   ],
 };

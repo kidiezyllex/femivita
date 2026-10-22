@@ -44,7 +44,9 @@ const PagerArrow: React.FC<{
     onClick={onClick}
     className={cn(
       "flex size-10 shrink-0 items-center justify-center rounded-full border transition-colors",
-      disabled ? "cursor-default border-[#808080]" : "cursor-pointer border-brand hover:bg-brand-pink",
+      disabled
+        ? "cursor-default border-[#808080]"
+        : "cursor-pointer border-brand hover:bg-brand-pink",
     )}
   >
     <Image
@@ -70,9 +72,13 @@ export const KnowledgePagination: React.FC<KnowledgePaginationProps> = ({
 
   return (
     <div className="flex flex-col gap-6 pt-12 lg:pt-20">
-      <nav aria-label="Phân trang" className="flex items-center justify-center gap-6 md:gap-12">
+      {/* Narrow screens: "Trước" / "Sau" on one row and the page numbers wrapped on their own row below, so many pages never widen the page */}
+      <nav
+        aria-label="Phân trang"
+        className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:flex-nowrap md:gap-12"
+      >
         <PagerText label={prevLabel} disabled={isFirst} onClick={() => onChange(page - 1)} />
-        <ul className="flex items-center gap-1">
+        <ul className="order-last flex w-full flex-wrap items-center justify-center gap-1 md:order-none md:w-auto">
           {Array.from({ length: pageCount }, (_, i) => i + 1).map((number) => (
             <li key={number}>
               <button
@@ -81,8 +87,10 @@ export const KnowledgePagination: React.FC<KnowledgePaginationProps> = ({
                 onClick={() => onChange(number)}
                 className={cn(
                   PAGER_TEXT,
-                  "flex size-[42px] cursor-pointer items-center justify-center rounded transition-colors",
-                  number === page ? "bg-brand-text text-white" : "text-ink-dark hover:bg-brand-pink",
+                  "flex size-9 cursor-pointer items-center justify-center rounded transition-colors md:size-[42px]",
+                  number === page
+                    ? "bg-brand-text text-white"
+                    : "text-ink-dark hover:bg-brand-pink",
                 )}
               >
                 {number}
@@ -92,11 +100,6 @@ export const KnowledgePagination: React.FC<KnowledgePaginationProps> = ({
         </ul>
         <PagerText label={nextLabel} disabled={isLast} onClick={() => onChange(page + 1)} />
       </nav>
-
-      <div className="flex gap-2">
-        <PagerArrow label={prevLabel} direction="prev" disabled={isFirst} onClick={() => onChange(page - 1)} />
-        <PagerArrow label={nextLabel} direction="next" disabled={isLast} onClick={() => onChange(page + 1)} />
-      </div>
     </div>
   );
 };
