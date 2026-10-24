@@ -47,7 +47,8 @@ const MenuPicture: React.FC<{ image: BuyMenuImage }> = ({ image }) => (
         width={image.width}
         height={image.height}
         quality={100}
-        sizes="900px"
+        // Oversized crop (up to ~900px wide on screen), so about twice that for high-DPI screens.
+        sizes="1800px"
         draggable={false}
         className={image.className}
       />
@@ -66,21 +67,27 @@ const MenuPicture: React.FC<{ image: BuyMenuImage }> = ({ image }) => (
   </div>
 );
 
-/** Flat menu: one list of links and a picture. */
+/** Flat menu: one list of links and a picture; a link with its own picture swaps it in while hovered or focused. */
 const FlatMenuBody: React.FC<{ menu: HeaderMenu; onClose?: () => void }> = ({ menu, onClose }) => {
   const pathname = usePathname();
+  const [activeHref, setActiveHref] = useState<string | null>(null);
+  const picture = menu.links.find((link) => link.href === activeHref)?.image ?? menu.image;
 
   return (
     <>
       <nav
         aria-label={menu.label}
         className="col-span-5 flex flex-col border-r border-brand-rule/30 p-10 xl:col-span-4"
+        onMouseLeave={() => setActiveHref(null)}
+        onBlur={() => setActiveHref(null)}
       >
         {menu.links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             onClick={onClose}
+            onMouseEnter={() => setActiveHref(link.href)}
+            onFocus={() => setActiveHref(link.href)}
             className={cn(
               "group flex items-center py-4 font-google-sans text-base leading-[1.6] transition-colors hover:text-brand-text",
               ROW_BORDER,
@@ -94,7 +101,7 @@ const FlatMenuBody: React.FC<{ menu: HeaderMenu; onClose?: () => void }> = ({ me
       </nav>
 
       <div className="col-span-5 col-start-8 px-4 xl:col-span-4 xl:col-start-9">
-        <MenuPicture image={menu.image} />
+        <MenuPicture key={picture.src} image={picture} />
       </div>
     </>
   );

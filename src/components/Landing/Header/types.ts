@@ -16,6 +16,8 @@ export interface NavLinkItem {
   href: string;
   /** Desktop only: id of the HEADER_MENUS panel this item opens instead of navigating. */
   menuId?: string;
+  /** Desktop only: replaces the panel picture while this link is hovered or focused. */
+  image?: BuyMenuImage;
 }
 
 export const NAV_LINKS: NavLinkItem[] = [
@@ -33,6 +35,9 @@ export interface HeaderMenu {
   image: { src: string; alt: string };
 }
 
+// The product shots keep about a quarter of their width as empty margin; this crop (the middle 78% of the square, shifted down because the packs sit low) makes the packs fill the frame.
+const PRODUCT_SHOT_CROP = "absolute left-[-14.1%] top-[-19.2%] h-[128.2%] w-[128.2%] max-w-none";
+
 // Desktop menus that unfold inside the header card (Figma "Header" frames with the panel open).
 export const HEADER_MENUS: Record<string, HeaderMenu> = {
   products: {
@@ -40,8 +45,28 @@ export const HEADER_MENUS: Record<string, HeaderMenu> = {
     label: "Sản phẩm",
     links: [
       { label: "Tất cả sản phẩm", href: "/products" },
-      { label: "Gel tăng cảm hứng Gel venus", href: "/products/gel-venus-y-passion" },
-      { label: "Bọt vệ sinh Zone Y Fresh", href: "/products/zone-fresh-mousse" },
+      {
+        label: "Gel tăng cảm hứng Gel venus",
+        href: "/products/gel-venus-y-passion",
+        image: {
+          src: "/images/products/gel-venus-y-passion/sp2.webp",
+          alt: "Gel tăng cảm hứng Gel Venus Y Passion",
+          width: 1024,
+          height: 1024,
+          className: PRODUCT_SHOT_CROP,
+        },
+      },
+      {
+        label: "Bọt vệ sinh Zone Y Fresh",
+        href: "/products/zone-fresh-mousse",
+        image: {
+          src: "/images/products/zone-fresh-mousse/sp2.webp",
+          alt: "Bọt vệ sinh Zone Y Fresh",
+          width: 2008,
+          height: 2008,
+          className: PRODUCT_SHOT_CROP,
+        },
+      },
     ],
     image: {
       src: "/images/header/header-products.webp",
