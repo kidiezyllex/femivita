@@ -114,8 +114,9 @@ export interface OfficialChannelsData {
   headlineHighlight: string;
   paragraphs: string[];
   channels: OfficialChannel[];
+  /** Cards shown before "Xem thêm" is pressed. */
+  initialCount: number;
   moreLabel: string;
-  moreHref: string;
 }
 
 export interface OfficialChannelsProps {
@@ -187,6 +188,6 @@ export const DEFAULT_OFFICIAL_CHANNELS_DATA: OfficialChannelsData = {
       href: "https://www.facebook.com/femivitavietnam/",
     },
   ],
+  initialCount: 6,
   moreLabel: "Xem thêm",
-  moreHref: "https://facebook.com",
 };

@@ -1,10 +1,9 @@
 "use client";
 
-import { PillLinkButton } from "@/components/ui/PillLinkButton";
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from "@/components/ui/ScrollReveal";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { DEFAULT_OFFICIAL_CHANNELS_DATA, OfficialChannel, OfficialChannelsProps } from "./types";
 
 const ChannelCard: React.FC<{ channel: OfficialChannel }> = ({ channel }) => {
@@ -43,9 +42,16 @@ const ChannelCard: React.FC<{ channel: OfficialChannel }> = ({ channel }) => {
   );
 };
 
+const GRID_CLASS = "grid w-full gap-x-4 gap-y-10 md:grid-cols-2 lg:grid-cols-3";
+
 export const OfficialChannels: React.FC<OfficialChannelsProps> = ({
   data = DEFAULT_OFFICIAL_CHANNELS_DATA,
-}) => (
+}) => {
+  const [showAll, setShowAll] = useState(false);
+  const firstChannels = data.channels.slice(0, data.initialCount);
+  const moreChannels = data.channels.slice(data.initialCount);
+
+  return (
   <section
     id="official-channels"
     className="w-full bg-ink-surface px-4 py-16 md:px-8 md:py-24 lg:py-[120px]"
@@ -67,20 +73,48 @@ export const OfficialChannels: React.FC<OfficialChannelsProps> = ({
         </div>
       </ScrollReveal>
 
-      <ScrollStagger
-        className="grid w-full gap-x-4 gap-y-10 md:grid-cols-2 lg:grid-cols-3"
-        staggerDelay={0.1}
-      >
-        {data.channels.map((channel) => (
+      <ScrollStagger className={GRID_CLASS} staggerDelay={0.1}>
+        {firstChannels.map((channel) => (
           <ScrollStaggerItem key={channel.id}>
             <ChannelCard channel={channel} />
           </ScrollStaggerItem>
         ))}
       </ScrollStagger>
 
-      <PillLinkButton href={data.moreHref} label={data.moreLabel} variant="brand" />
+      {/* A separate grid so the cards revealed by "Xem thêm" get their own entrance animation */}
+      {showAll && moreChannels.length > 0 && (
+        <ScrollStagger className={GRID_CLASS} staggerDelay={0.1}>
+          {moreChannels.map((channel) => (
+            <ScrollStaggerItem key={channel.id}>
+              <ChannelCard channel={channel} />
+            </ScrollStaggerItem>
+          ))}
+        </ScrollStagger>
+      )}
+
+      {moreChannels.length > 0 && !showAll && (
+        <button
+          type="button"
+          onClick={() => setShowAll(true)}
+          className="group inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full bg-brand py-2 pl-4 pr-2 font-inter text-sm font-medium leading-normal text-white transition-colors hover:bg-brand-light"
+        >
+          {data.moreLabel}
+          <span className="flex size-[26px] shrink-0 items-center justify-center rounded-full bg-white">
+            <Image
+              src="/logos/arrow-right.svg"
+              alt=""
+              width={18}
+              height={18}
+              quality={100}
+              draggable={false}
+              className="rotate-90 transition-transform duration-300 group-hover:translate-y-0.5"
+            />
+          </span>
+        </button>
+      )}
     </div>
   </section>
-);
+  );
+};
 
 export default OfficialChannels;
