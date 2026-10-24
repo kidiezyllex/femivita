@@ -12,6 +12,7 @@ export const PRODUCT_DETAIL_GLOW =
 export const ProductInfographics: React.FC<{
   infographics: ProductInfographic[];
   className?: string;
+  /** Deliberately about twice the displayed width: the artwork is full of small text and must stay sharp on high-DPI screens. */
   sizes: string;
 }> = ({ infographics, className, sizes }) => {
   if (infographics.length === 0) return null;

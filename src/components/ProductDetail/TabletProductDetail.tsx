@@ -25,7 +25,7 @@ export const TabletProductDetail: React.FC<ProductDetailLayoutProps> = ({ produc
     <ProductInfographics
       infographics={product.infographics}
       className="grid-cols-2 p-8"
-      sizes="50vw"
+      sizes="100vw"
     />
 
     <ProductFaq faq={product.faq} variant="tablet" />

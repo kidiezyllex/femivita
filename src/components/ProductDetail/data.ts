@@ -132,8 +132,6 @@ const GEL_VENUS_Y_PASSION: ProductDetailData = {
 };
 
 // Zone Fresh Mousse has no Figma page: the copy comes from the /faq answers and the packaging, and the layout reuses the Gel Venus page.
-const IN_HAND = "/images/products/zone-fresh-mousse-in-hand.webp";
-const PACKSHOT = "/images/products/zone-fresh-mousse.webp";
 
 const ZONE_FRESH_MOUSSE: ProductDetailData = {
   slug: "zone-fresh-mousse",
@@ -141,13 +139,39 @@ const ZONE_FRESH_MOUSSE: ProductDetailData = {
   size: "150ml | 5.07FL.OZ",
   seoDescription:
     "Bọt vệ sinh lợi khuẩn Probiotics Zone Fresh Mousse của Femivita: chuẩn pH 4.5, chiết xuất sen, Prebiotic và Exosome, làm sạch dịu nhẹ vùng kín mỗi ngày, khử mùi và bảo vệ hệ lợi khuẩn.",
-  // PLACEHOLDERS: 4 slots like the Gel Venus page. Swap each src for the final photo
-  // (e.g. /images/products/zone-fresh-mousse/sp1.webp ... sp4.webp) when the images are ready.
   gallery: [
-    { src: IN_HAND, alt: "Bàn tay cầm chai bọt vệ sinh Zone Fresh Mousse trên nền lụa tím nhạt" },
-    { src: PACKSHOT, alt: "Bọt vệ sinh Zone Fresh Mousse và hộp sản phẩm" },
-    { src: IN_HAND, alt: "Bàn tay cầm chai bọt vệ sinh Zone Fresh Mousse trên nền lụa tím nhạt" },
-    { src: PACKSHOT, alt: "Bọt vệ sinh Zone Fresh Mousse và hộp sản phẩm" },
+    {
+      src: "/images/products/zone-fresh-mousse/sp1.webp",
+      alt: "Chai bọt vệ sinh Zone Fresh Mousse đặt trên nền gạch kính xanh mint cùng lớp bọt mịn",
+    },
+    {
+      src: "/images/products/zone-fresh-mousse/sp2.webp",
+      alt: "Bọt vệ sinh Zone Fresh Mousse và hộp sản phẩm trên nền trắng",
+    },
+    {
+      src: "/images/products/zone-fresh-mousse/sp3.webp",
+      alt: "Bàn tay cầm chai bọt vệ sinh Zone Fresh Mousse trong phòng tắm sáng",
+    },
+    {
+      src: "/images/products/zone-fresh-mousse/sp4.webp",
+      alt: "Cận cảnh chai Zone Fresh Mousse và bọt mịn trên nền xanh mint",
+    },
+    {
+      src: "/images/products/zone-fresh-mousse/sp5.webp",
+      alt: "Chai bọt vệ sinh Zone Fresh Mousse đặt giữa thảm cỏ và cây xanh",
+    },
+    {
+      src: "/images/products/zone-fresh-mousse/sp6.webp",
+      alt: "Zone Fresh Mousse với 5 công dụng: cân bằng pH, tái tạo làm sáng, dưỡng ẩm mềm mại, kháng khuẩn khử mùi, bảo vệ hệ sinh thái vùng Y",
+    },
+    {
+      src: "/images/products/zone-fresh-mousse/sp7.webp",
+      alt: "Công thức Hàn Quốc độc quyền của Zone Fresh Mousse với Exosome và hoa sen vàng",
+    },
+    {
+      src: "/images/products/zone-fresh-mousse/sp8.webp",
+      alt: "Zone Fresh Mousse nuông chiều mọi làn da: bọt mịn siêu nhỏ, dịu nhẹ, dưỡng ẩm tự nhiên, giảm ngứa, tiết kiệm khi dùng",
+    },
   ],
   tagline: "LÀM SẠCH DỊU NHẸ & BẢO VỆ VÙNG KÍN",
   summary:
