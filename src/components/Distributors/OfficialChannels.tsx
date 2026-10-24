@@ -10,20 +10,18 @@ import { DEFAULT_OFFICIAL_CHANNELS_DATA, OfficialChannel, OfficialChannelsProps 
 const ChannelCard: React.FC<{ channel: OfficialChannel }> = ({ channel }) => {
   const content = (
     <>
-      {/* Crop of the Figma frame: the screenshot is slightly oversized inside a 2:1 window. */}
-      <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl">
+      <div className="relative aspect-[2/1] w-full overflow-hidden rounded-xl bg-white">
         <Image
           src={channel.image.src}
           alt={channel.image.alt}
-          width={662}
-          height={376}
+          fill
           quality={100}
           sizes="900px"
           draggable={false}
-          className="absolute left-[-2.51%] top-[-6.68%] h-[120.23%] w-[105.84%] max-w-none"
+          className="object-cover object-top"
         />
       </div>
-      <h3 className="text-center font-google-sans text-xl font-medium leading-[1.6] text-ink-dark">
+      <h3 className="line-clamp-1 text-center font-google-sans text-xl font-medium leading-[1.6] text-ink-dark">
         {channel.name}
       </h3>
     </>

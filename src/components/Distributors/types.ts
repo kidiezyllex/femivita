@@ -122,12 +122,7 @@ export interface OfficialChannelsProps {
   data?: OfficialChannelsData;
 }
 
-// Figma repeats one placeholder fanpage six times; swap in the real channels (and their links) here.
-const FANPAGE_IMAGE = {
-  src: "/images/header/header-buy-distributor.webp",
-  alt: "Trang Facebook Gia Đình Yêu Thương, nhà phân phối chính thức của Femivita",
-};
-
+// The 9 channels listed on https://www.femivita.vn/kenhbanhang (screenshots saved in public/images/distributors/channels).
 export const DEFAULT_OFFICIAL_CHANNELS_DATA: OfficialChannelsData = {
   eyebrow: "Nhà phân phối chính thức Femivita",
   headlineStart: "Kênh bán hàng",
@@ -136,11 +131,62 @@ export const DEFAULT_OFFICIAL_CHANNELS_DATA: OfficialChannelsData = {
     "Mọi các kênh khác không thuộc danh sách được nêu dưới đây đều là giả mạo, hàng giả hàng nhái.",
     "Chúng tôi liên tục cập nhật các kênh bán mới nhất, liên hệ với chúng tôi để được hỗ trợ.",
   ],
-  channels: Array.from({ length: 6 }, (_, index) => ({
-    id: `fanpage-${index + 1}`,
-    name: "Fanpage Gia đình yêu thương",
-    image: FANPAGE_IMAGE,
-  })),
+  channels: [
+    {
+      id: "femivita-hanquoc",
+      name: "Fanpage: Femivita- Gel cảm hứng số 1 Hàn Quốc",
+      image: { src: "/images/distributors/channels/ch1.webp", alt: "Trang Facebook: Femivita- Gel cảm hứng số 1 Hàn Quốc" },
+      href: "https://www.facebook.com/femivita.hanquoc/",
+    },
+    {
+      id: "gia-dinh-yeu-thuong",
+      name: "Fanpage: Gia Đình Yêu Thương",
+      image: { src: "/images/distributors/channels/ch2.webp", alt: "Trang Facebook: Gia Đình Yêu Thương" },
+      href: "https://www.facebook.com/giadinhyeuthuon/",
+    },
+    {
+      id: "hoi-chi-em-u40-50-60",
+      name: "Hội chị em U40-50-60",
+      image: { src: "/images/distributors/channels/ch3.webp", alt: "Trang Facebook: Hội chị em U40-50-60" },
+      href: "https://www.facebook.com/hoichiemGenS/",
+    },
+    {
+      id: "hoi-chi-em-tham-kin",
+      name: "Hội chị em thầm kín",
+      image: { src: "/images/distributors/channels/ch4.webp", alt: "Trang Facebook: Hội chị em thầm kín" },
+      href: "https://www.facebook.com/hoichiemthamkinGenS/",
+    },
+    {
+      id: "tam-su-dan-ba",
+      name: "Fanpage: Tâm sự đàn bà",
+      image: { src: "/images/distributors/channels/ch5.webp", alt: "Trang Facebook: Tâm sự đàn bà" },
+      href: "https://www.facebook.com/TamsuDanBaGenS/",
+    },
+    {
+      id: "femivita-korea",
+      name: "Fanpage: Femivita-Gel đánh thức khoái cảm Hàn Quốc",
+      image: { src: "/images/distributors/channels/ch6.webp", alt: "Trang Facebook: Femivita-Gel đánh thức khoái cảm Hàn Quốc" },
+      href: "https://www.facebook.com/femivita.korea/",
+    },
+    {
+      id: "shopee-femivita-vn",
+      name: "Shopee: Femivita Việt Nam",
+      image: { src: "/images/distributors/channels/ch7.webp", alt: "Trang Shopee: Femivita Việt Nam" },
+      href: "https://shopee.vn/femivitavn",
+    },
+    {
+      id: "gel-cham-soc-co-be",
+      name: "Fanpage: Gel chăm sóc cô bé số 1 Hàn Quốc",
+      image: { src: "/images/distributors/channels/ch8.webp", alt: "Trang Facebook: Gel chăm sóc cô bé số 1 Hàn Quốc" },
+      href: "https://www.facebook.com/venus.femivita/",
+    },
+    {
+      id: "femivita-vietnam",
+      name: "Fanpage: Femivita Việt Nam",
+      image: { src: "/images/distributors/channels/ch9.webp", alt: "Trang Facebook: Femivita Việt Nam" },
+      href: "https://www.facebook.com/femivitavietnam/",
+    },
+  ],
   moreLabel: "Xem thêm",
   moreHref: "https://facebook.com",
 };
