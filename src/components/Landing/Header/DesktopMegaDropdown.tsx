@@ -46,9 +46,8 @@ const MenuPicture: React.FC<{ image: BuyMenuImage }> = ({ image }) => (
         alt={image.alt}
         width={image.width}
         height={image.height}
-        quality={100}
-        // Oversized crop (up to ~900px wide on screen), so about twice that for high-DPI screens.
-        sizes="1800px"
+        // Crops are small webp files already: served as they are, because the AVIF re-encode (even at q=100) softens the small print.
+        unoptimized
         draggable={false}
         className={image.className}
       />
