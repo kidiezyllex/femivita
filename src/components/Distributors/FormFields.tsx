@@ -6,9 +6,9 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
 const LABEL_TEXT =
-  "font-[Arial,Helvetica,sans-serif] text-base leading-[25.6px] tracking-[0.16px] text-ink-dark";
+  "font-[Arial,Helvetica,sans-serif] text-base leading-[25.6px] tracking-[0.16px] text-gray-700 font-semibold mb-1 select-none";
 const FIELD_BASE =
-  "w-full rounded-lg border bg-white px-6 py-4 font-[Arial,Helvetica,sans-serif] text-base tracking-[0.16px] text-ink-dark outline-none transition-colors placeholder:text-ink-placeholder focus:border-brand";
+  "w-full rounded-lg border bg-white px-6 py-4 font-[Arial,Helvetica,sans-serif] text-base tracking-[0.16px] text-ink-dark outline-none transition-colors placeholder:text-ink-placeholder focus:border-secondary";
 
 const fieldBorder = (hasError: boolean) => (hasError ? "border-[#E72222]" : "border-ink-line");
 

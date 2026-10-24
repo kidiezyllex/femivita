@@ -99,3 +99,48 @@ export const DEFAULT_DISTRIBUTORS_DATA: DistributorsData = {
     consentRequiredError: "Vui lòng đồng ý với chính sách để tiếp tục.",
   },
 };
+
+export interface OfficialChannel {
+  id: string;
+  name: string;
+  image: { src: string; alt: string };
+  /** Page the card opens; cards without one are not links. */
+  href?: string;
+}
+
+export interface OfficialChannelsData {
+  eyebrow: string;
+  headlineStart: string;
+  headlineHighlight: string;
+  paragraphs: string[];
+  channels: OfficialChannel[];
+  moreLabel: string;
+  moreHref: string;
+}
+
+export interface OfficialChannelsProps {
+  data?: OfficialChannelsData;
+}
+
+// Figma repeats one placeholder fanpage six times; swap in the real channels (and their links) here.
+const FANPAGE_IMAGE = {
+  src: "/images/header/header-buy-distributor.webp",
+  alt: "Trang Facebook Gia Đình Yêu Thương, nhà phân phối chính thức của Femivita",
+};
+
+export const DEFAULT_OFFICIAL_CHANNELS_DATA: OfficialChannelsData = {
+  eyebrow: "Nhà phân phối chính thức Femivita",
+  headlineStart: "Kênh bán hàng",
+  headlineHighlight: "chính thức của Femivita",
+  paragraphs: [
+    "Mọi các kênh khác không thuộc danh sách được nêu dưới đây đều là giả mạo, hàng giả hàng nhái.",
+    "Chúng tôi liên tục cập nhật các kênh bán mới nhất, liên hệ với chúng tôi để được hỗ trợ.",
+  ],
+  channels: Array.from({ length: 6 }, (_, index) => ({
+    id: `fanpage-${index + 1}`,
+    name: "Fanpage Gia đình yêu thương",
+    image: FANPAGE_IMAGE,
+  })),
+  moreLabel: "Xem thêm",
+  moreHref: "https://facebook.com",
+};

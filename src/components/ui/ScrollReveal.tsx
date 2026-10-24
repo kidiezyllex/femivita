@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 export type RevealDirection = "up" | "down" | "left" | "right" | "scale" | "fade";
 
@@ -18,6 +18,26 @@ export interface ScrollRevealProps {
 
 // Reverse (element leaves the viewport) is quicker than the entrance and has no delay.
 const REVERT_TRANSITION = { duration: 0.4, ease: [0.22, 1, 0.36, 1] } as const;
+
+/**
+ * Shown/hidden state driven by the viewport. Unlike `whileInView`, an element that leaves through the TOP
+ * of the viewport stays shown: only an element that drops back below the fold (scrolling up) reverts.
+ * Otherwise the tail of a block fades out while it is still sliding under the fixed header.
+ */
+const useRevealState = (once: boolean) => {
+  const [shown, setShown] = useState(false);
+
+  return {
+    shown,
+    onViewportEnter: () => setShown(true),
+    onViewportLeave: (entry: IntersectionObserverEntry | null) => {
+      if (once) return;
+      // top <= 0: it left upwards (scrolled past); keep it visible.
+      if (entry && entry.boundingClientRect.top <= 0) return;
+      setShown(false);
+    },
+  };
+};
 
 /**
  * ScrollReveal component:
@@ -55,23 +75,30 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   };
 
   const initial = getInitialPosition();
+  const { shown, onViewportEnter, onViewportLeave } = useRevealState(once);
 
   return (
     <motion.div
       initial={initial}
-      whileInView={{
-        opacity: 1,
-        x: 0,
-        y: 0,
-        scale: 1,
-        transition: {
-          duration,
-          delay,
-          ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier: khởi động êm, đáp đất mượt
-        },
-      }}
+      animate={
+        shown
+          ? {
+              opacity: 1,
+              x: 0,
+              y: 0,
+              scale: 1,
+              transition: {
+                duration,
+                delay,
+                ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier: khởi động êm, đáp đất mượt
+              },
+            }
+          : initial
+      }
       transition={REVERT_TRANSITION}
       viewport={{ once, amount }}
+      onViewportEnter={onViewportEnter}
+      onViewportLeave={onViewportLeave}
       className={className}
     >
       {children}
@@ -124,12 +151,16 @@ export const ScrollStagger: React.FC<ScrollStaggerProps> = ({
   amount = 0.15,
   className = "",
 }) => {
+  const { shown, onViewportEnter, onViewportLeave } = useRevealState(once);
+
   return (
     <motion.div
       variants={staggerContainerVariants}
       initial="hidden"
-      whileInView="visible"
+      animate={shown ? "visible" : "hidden"}
       viewport={{ once, amount }}
+      onViewportEnter={onViewportEnter}
+      onViewportLeave={onViewportLeave}
       custom={{ staggerDelay, delayChildren }}
       className={className}
     >

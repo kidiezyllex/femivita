@@ -14,7 +14,7 @@ const GLOW =
 export const Distributors: React.FC<DistributorsProps> = ({ data = DEFAULT_DISTRIBUTORS_DATA }) => (
   <section
     id="distributors"
-    className="relative w-full overflow-hidden bg-white px-4 pb-16 pt-[140px] md:px-8 md:pb-24 md:pt-40 lg:pb-[200px] lg:pt-[200px]"
+    className="relative w-full overflow-clip bg-white px-4 pb-16 pt-[140px] md:px-8 md:pb-24 md:pt-40 lg:pb-[200px] lg:pt-[200px]"
   >
     <div aria-hidden className={`${GLOW} right-[-1134px] top-[-1221px]`} />
     <div aria-hidden className={`${GLOW} left-[-990px] top-[calc(50%+346.9px)] -translate-y-1/2`} />

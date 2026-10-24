@@ -1,4 +1,5 @@
 import { Distributors } from '@/components/Distributors';
+import { OfficialChannels } from '@/components/Distributors/OfficialChannels';
 import { Footer } from '@/components/Landing/Footer';
 import { Header } from '@/components/Landing/Header';
 import { buildPageMetadata } from '@/lib/seo';
@@ -17,6 +18,7 @@ export default function DistributorsPage() {
       <Header overlay />
       <main className="w-full flex-1">
         <Distributors />
+        <OfficialChannels />
         <Footer />
       </main>
     </div>
