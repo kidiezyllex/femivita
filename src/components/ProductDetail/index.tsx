@@ -10,7 +10,6 @@ export * from "./MobileProductDetail";
 export * from "./TabletProductDetail";
 export * from "./types";
 
-/** Product detail body: one layout per breakpoint. The footer is added by the page. */
 export const ProductDetailContent: React.FC<ProductDetailLayoutProps> = ({ product }) => (
   <>
     {/* Mobile: < 768px */}

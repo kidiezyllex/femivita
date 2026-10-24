@@ -1,9 +1,13 @@
-import { Footer } from '@/components/Landing/Footer';
-import { Header } from '@/components/Landing/Header';
-import { getProductDetail, PRODUCT_DETAILS, ProductDetailContent } from '@/components/ProductDetail';
-import { buildPageMetadata } from '@/lib/seo';
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { Footer } from "@/components/Landing/Footer";
+import { Header } from "@/components/Landing/Header";
+import {
+  getProductDetail,
+  PRODUCT_DETAILS,
+  ProductDetailContent,
+} from "@/components/ProductDetail";
+import { buildPageMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;

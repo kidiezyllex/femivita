@@ -7,7 +7,6 @@ import { ProductGalleryImage } from "./types";
 
 interface ProductGalleryProps {
   images: ProductGalleryImage[];
-  /** Height (and any other size) of the frame, set by the layout of each breakpoint. */
   className?: string;
   sizes?: string;
 }
@@ -38,7 +37,11 @@ const ArrowButton: React.FC<{ label: string; direction: "prev" | "next"; onClick
 );
 
 /** Image slider with arrows and a dot indicator (Figma "product-img", 550px high on desktop). */
-export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, className, sizes = "100vw" }) => {
+export const ProductGallery: React.FC<ProductGalleryProps> = ({
+  images,
+  className,
+  sizes = "100vw",
+}) => {
   const [index, setIndex] = useState(0);
   const count = images.length;
   const go = (step: number) => setIndex((current) => (current + step + count) % count);
@@ -47,7 +50,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, classNam
     <div className={cn("relative overflow-hidden rounded-[20px] bg-white", className)}>
       {images.map((image, i) => (
         <Image
-          key={image.src}
+          key={`${image.src}-${i}`}
           src={image.src}
           alt={image.alt}
           fill
@@ -72,7 +75,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({ images, classNam
             <div className="flex gap-2 rounded-full bg-white px-4 py-1">
               {images.map((image, i) => (
                 <button
-                  key={image.src}
+                  key={`${image.src}-${i}`}
                   type="button"
                   aria-label={`Xem ảnh ${i + 1}`}
                   aria-current={i === index}

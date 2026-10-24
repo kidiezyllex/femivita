@@ -88,14 +88,12 @@ const GEL_VENUS_Y_PASSION: ProductDetailData = {
   ],
   infographics: [
     {
-      src: "/images/products/gel-venus-ingredients.webp",
+      src: "/images/products/gel-venus-y-passion/info1.webp",
       alt: "5 thành phần vàng của Gel Venus Y Passion: NMN, Peptide, Axitamin, Estrogen và lợi khuẩn, công nghệ Exosome",
     },
     {
-      src: "/images/products/gel-venus-usage.webp",
+      src: "/images/products/gel-venus-y-passion/info2.webp",
       alt: "Hướng dẫn sử dụng sản phẩm: làm sạch, lấy sản phẩm, bôi sản phẩm và thư giãn",
-      backgroundClassName: "bg-[#F7F2F9]",
-      objectPositionClassName: "object-[50%_8%]",
     },
   ],
   faq: {
@@ -199,10 +197,15 @@ const ZONE_FRESH_MOUSSE: ProductDetailData = {
       ],
     },
   ],
-  // PLACEHOLDERS: 2 square infographic slots like the Gel Venus page; swap in the final artwork.
   infographics: [
-    { src: PACKSHOT, alt: "Bọt vệ sinh Zone Fresh Mousse và hộp sản phẩm" },
-    { src: IN_HAND, alt: "Bàn tay cầm chai bọt vệ sinh Zone Fresh Mousse" },
+    {
+      src: "/images/products/zone-fresh-mousse/info1.webp",
+      alt: "7 thành phần thiên nhiên của Zone Fresh Mousse: Lactobacillus, chiết xuất hạt bưởi, Exosome, rau má, hoa sen vàng, nấm tuyết và Prebiotics",
+    },
+    {
+      src: "/images/products/zone-fresh-mousse/info2.webp",
+      alt: "Lợi khuẩn vượt trội, ngứa ngáy tiêu tan: giảm ngứa khử mùi, tươi mát khô thoáng, cân bằng pH 4.5 và mềm mại không khô rát",
+    },
   ],
   faq: {
     eyebrow: "FAQs",
