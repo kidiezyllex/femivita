@@ -9,9 +9,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { DEFAULT_FOOTER_CONTENT } from "../Footer/types";
-import { HeaderCTA } from "./HeaderCTA";
+import { HeaderBuyButton } from "./HeaderBuyButton";
 import { HeaderLogo } from "./HeaderLogo";
-import { HEADER_MENUS, NAV_LINKS } from "./types";
+import { BUY_MENU, BuyMenuChild, HEADER_MENUS, NAV_LINKS } from "./types";
 
 const SITE_PHONE_DISPLAY = "0914 14 2464";
 
@@ -25,8 +25,65 @@ const PANEL_VARIANTS = {
   exit: (direction: number) => ({ x: direction > 0 ? "-100%" : "100%" }),
 };
 
+/** Panel ids: a HEADER_MENUS key, "buy" for the "Mua chính hãng" list, or "buy/<item id>" for the sub-list of one of its items. */
+const BUY_PANEL_ID = BUY_MENU.id;
+const buyItemPanelId = (itemId: string) => `${BUY_PANEL_ID}/${itemId}`;
+const parentPanelId = (panelId: string | null) => (panelId?.startsWith(`${BUY_PANEL_ID}/`) ? BUY_PANEL_ID : null);
+
+const BackRow: React.FC<{ label: string; onBack: () => void }> = ({ label, onBack }) => (
+  <button
+    type="button"
+    onClick={onBack}
+    aria-label="Quay lại"
+    className="flex w-full cursor-pointer items-center gap-2 border-b border-ink/10 py-4 text-left font-google-sans text-lg text-ink transition-colors hover:text-brand"
+  >
+    <Icon path={mdiChevronLeft} className="size-6 shrink-0" />
+    <span>{label}</span>
+  </button>
+);
+
+/** Channel or distributor link of the buy menu; channels carry the same icon tile as on desktop. */
+const BuyChildRow: React.FC<{ child: BuyMenuChild; onNavigate: () => void }> = ({ child, onNavigate }) => {
+  const content = (
+    <>
+      {child.icon && (
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-pink">
+          {child.icon.fullColor ? (
+            <Image src={child.icon.src} alt="" width={24} height={24} draggable={false} />
+          ) : (
+            <span
+              aria-hidden
+              className="size-6 bg-brand"
+              style={{
+                maskImage: `url(${child.icon.src})`,
+                WebkitMaskImage: `url(${child.icon.src})`,
+                maskSize: "24px 24px",
+                WebkitMaskSize: "24px 24px",
+                maskRepeat: "no-repeat",
+                WebkitMaskRepeat: "no-repeat",
+              }}
+            />
+          )}
+        </span>
+      )}
+      <span className="min-w-0 flex-1">{child.label}</span>
+    </>
+  );
+  const className = cn(ROW_CLASS, "justify-start text-ink");
+
+  return child.external ? (
+    <a href={child.href} target="_blank" rel="noopener noreferrer" onClick={onNavigate} className={className}>
+      {content}
+    </a>
+  ) : (
+    <Link href={child.href} onClick={onNavigate} className={className}>
+      {content}
+    </Link>
+  );
+};
+
 interface MobileMenuNavProps {
-  /** null shows the main list; otherwise the sub-list of that HEADER_MENUS entry. */
+  /** null shows the main list; otherwise the panel with that id (see BUY_PANEL_ID). */
   activeMenuId: string | null;
   direction: number;
   onOpenMenu: (menuId: string) => void;
@@ -44,6 +101,8 @@ const MobileMenuNav: React.FC<MobileMenuNavProps> = ({
 }) => {
   const pathname = usePathname();
   const menu = activeMenuId ? HEADER_MENUS[activeMenuId] : null;
+  const isBuyPanel = activeMenuId === BUY_PANEL_ID;
+  const buyItem = BUY_MENU.items.find((item) => buyItemPanelId(item.id) === activeMenuId);
 
   const menuRow = (menuId: string, label: string, isActive?: boolean) => (
     <li key={menuId}>
@@ -63,7 +122,7 @@ const MobileMenuNav: React.FC<MobileMenuNavProps> = ({
     <div className="relative min-h-[300px] flex-1 overflow-hidden">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
-          key={menu ? menu.id : "main"}
+          key={activeMenuId ?? "main"}
           custom={direction}
           variants={PANEL_VARIANTS}
           initial="enter"
@@ -74,15 +133,7 @@ const MobileMenuNav: React.FC<MobileMenuNavProps> = ({
         >
           {menu ? (
             <>
-              <button
-                type="button"
-                onClick={onBack}
-                aria-label="Quay lại"
-                className="flex w-full cursor-pointer items-center gap-2 border-b border-ink/10 py-4 text-left font-google-sans text-lg text-ink transition-colors hover:text-brand"
-              >
-                <Icon path={mdiChevronLeft} className="size-6 shrink-0" />
-                <span>{menu.label}</span>
-              </button>
+              <BackRow label={menu.label} onBack={onBack} />
               <ul>
                 {menu.links.map((link) => (
                   <li key={link.href}>
@@ -94,6 +145,45 @@ const MobileMenuNav: React.FC<MobileMenuNavProps> = ({
                       <span>{link.label}</span>
                       <Icon path={mdiChevronRight} className="size-6 shrink-0" />
                     </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : isBuyPanel ? (
+            <>
+              <BackRow label={BUY_MENU.label} onBack={onBack} />
+              <ul>
+                {BUY_MENU.items.map((item) =>
+                  item.children ? (
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        onClick={() => onOpenMenu(buyItemPanelId(item.id))}
+                        aria-haspopup="true"
+                        className={cn(ROW_CLASS, "cursor-pointer text-ink")}
+                      >
+                        <span>{item.label}</span>
+                        <Icon path={mdiChevronRight} className="size-6 shrink-0" />
+                      </button>
+                    </li>
+                  ) : (
+                    <li key={item.id}>
+                      <Link href={item.href ?? "#"} onClick={onNavigate} className={cn(ROW_CLASS, "text-ink")}>
+                        <span>{item.label}</span>
+                        <Icon path={mdiChevronRight} className="size-6 shrink-0" />
+                      </Link>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </>
+          ) : buyItem?.children ? (
+            <>
+              <BackRow label={buyItem.label} onBack={onBack} />
+              <ul>
+                {buyItem.children.map((child) => (
+                  <li key={child.id}>
+                    <BuyChildRow child={child} onNavigate={onNavigate} />
                   </li>
                 ))}
               </ul>
@@ -142,9 +232,9 @@ export const MobileHeader: React.FC = () => {
     setDirection(1);
     setActiveMenuId(id);
   };
-  const backToMain = () => {
+  const goBack = () => {
     setDirection(-1);
-    setActiveMenuId(null);
+    setActiveMenuId(parentPanelId(activeMenuId));
   };
 
   return (
@@ -205,7 +295,7 @@ export const MobileHeader: React.FC = () => {
               activeMenuId={activeMenuId}
               direction={direction}
               onOpenMenu={openMenu}
-              onBack={backToMain}
+              onBack={goBack}
               onNavigate={handleClose}
             />
 
@@ -232,7 +322,12 @@ export const MobileHeader: React.FC = () => {
               </ul>
 
               <div className="border-t border-ink/10 pt-4">
-                <HeaderCTA onClick={handleClose} className="w-full justify-between" />
+                <HeaderBuyButton
+                  isOpen={false}
+                  onCard={false}
+                  onClick={() => openMenu(BUY_PANEL_ID)}
+                  className="w-full justify-between"
+                />
               </div>
             </div>
           </motion.div>

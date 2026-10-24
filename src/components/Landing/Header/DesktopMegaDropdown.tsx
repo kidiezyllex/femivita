@@ -47,6 +47,7 @@ const MenuPicture: React.FC<{ image: BuyMenuImage }> = ({ image }) => (
         width={image.width}
         height={image.height}
         quality={100}
+        sizes="900px"
         draggable={false}
         className={image.className}
       />
@@ -56,7 +57,8 @@ const MenuPicture: React.FC<{ image: BuyMenuImage }> = ({ image }) => (
         alt={image.alt}
         fill
         quality={100}
-        sizes="(min-width: 1280px) 400px, 320px"
+        // About twice the displayed width (max 448px) so the picture stays sharp on high-DPI screens; see docs/IMAGE-SHARPNESS.md.
+        sizes="900px"
         draggable={false}
         className="object-cover"
       />

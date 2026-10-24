@@ -7,12 +7,13 @@ interface HeaderBuyButtonProps {
   isOpen: boolean;
   /** The header sits on its white card (scrolled, or a menu is open) rather than on the hero. */
   onCard: boolean;
-  controls: string;
+  controls?: string;
   onClick: () => void;
+  className?: string;
 }
 
 /** Desktop "Mua chính hãng": opens the buy panel. Open state is the pink pill with the arrow turned up-right (Figma). */
-export const HeaderBuyButton: React.FC<HeaderBuyButtonProps> = ({ isOpen, onCard, controls, onClick }) => {
+export const HeaderBuyButton: React.FC<HeaderBuyButtonProps> = ({ isOpen, onCard, controls, onClick, className }) => {
   const look = isOpen
     ? { button: "bg-brand-text text-white", circle: "bg-white", arrow: "/logos/arrow-right-pink.svg", rotate: true }
     : onCard
@@ -29,6 +30,7 @@ export const HeaderBuyButton: React.FC<HeaderBuyButtonProps> = ({ isOpen, onCard
       className={cn(
         "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full py-2 pl-4 pr-2 font-inter text-sm font-medium leading-normal transition-colors",
         look.button,
+        className,
       )}
     >
       {HEADER_CTA.label}
