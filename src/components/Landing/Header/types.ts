@@ -1,3 +1,4 @@
+import { DEFAULT_OFFICIAL_CHANNELS_DATA, OfficialChannel } from "../../Distributors/types";
 import { DEFAULT_FOOTER_CONTENT } from "../Footer/types";
 
 export interface DropdownProductItem {
@@ -174,6 +175,28 @@ export interface HeaderBuyMenu {
 
 const FOOTER_SOCIALS = Object.fromEntries(DEFAULT_FOOTER_CONTENT.socialLinks.map((social) => [social.id, social]));
 
+/** Channel rows of the "Mua chính hãng" menu, built from the same data as the /distributors page. */
+const toBuyMenuChild = (channel: OfficialChannel): BuyMenuChild => {
+  const isShopee = channel.id.startsWith("shopee");
+
+  return {
+    id: channel.id,
+    label: channel.name,
+    href: channel.href ?? "/distributors",
+    external: Boolean(channel.href),
+    // Only Femivita's own channels get the icon tile (as in Figma); distributor rows are plain text.
+    icon:
+      channel.group === "direct"
+        ? isShopee
+          ? { src: FOOTER_SOCIALS.shopee.icon, fullColor: true }
+          : { src: FOOTER_SOCIALS.facebook.icon }
+        : undefined,
+  };
+};
+
+const DIRECT_CHANNELS = DEFAULT_OFFICIAL_CHANNELS_DATA.channels.filter((channel) => channel.group === "direct");
+const DISTRIBUTOR_CHANNELS = DEFAULT_OFFICIAL_CHANNELS_DATA.channels.filter((channel) => channel.group === "distributor");
+
 export const BUY_MENU: HeaderBuyMenu = {
   id: "buy",
   label: "Mua chính hãng",
@@ -183,20 +206,8 @@ export const BUY_MENU: HeaderBuyMenu = {
       id: "channels",
       label: "Kênh trực tiếp",
       children: [
-        {
-          id: "facebook",
-          label: "Femivita Hàn Quốc - Dứt điểm khô hạn - Mất cảm hứng",
-          href: FOOTER_SOCIALS.facebook.href,
-          external: true,
-          icon: { src: FOOTER_SOCIALS.facebook.icon },
-        },
-        {
-          id: "shopee",
-          label: "Femivita Shopee Shop",
-          href: FOOTER_SOCIALS.shopee.href,
-          external: true,
-          icon: { src: FOOTER_SOCIALS.shopee.icon, fullColor: true },
-        },
+        ...DIRECT_CHANNELS.map(toBuyMenuChild),
+        // Last row: the Zalo contact (not one of the /distributors channels).
         {
           id: "zalo",
           label: "Liên hệ: 0838 09 8866",
@@ -209,11 +220,7 @@ export const BUY_MENU: HeaderBuyMenu = {
     {
       id: "distributors",
       label: "Nhà phân phối chính thức Femivita",
-      children: DEFAULT_FOOTER_CONTENT.distributors.map((name, index) => ({
-        id: `distributor-${index + 1}`,
-        label: name,
-        href: "/distributors",
-      })),
+      children: DISTRIBUTOR_CHANNELS.map(toBuyMenuChild),
       // Figma shows the distributor's Facebook page here.
       image: {
         src: "/images/header/header-buy-distributor.webp",

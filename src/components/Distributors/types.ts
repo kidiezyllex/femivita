@@ -104,6 +104,8 @@ export interface OfficialChannel {
   id: string;
   name: string;
   image: { src: string; alt: string };
+  /** "direct": Femivita's own pages and shop. "distributor": pages run by official distributors. Used by the header "Mua chính hãng" menu. */
+  group: "direct" | "distributor";
   /** Page the card opens; cards without one are not links. */
   href?: string;
 }
@@ -135,54 +137,63 @@ export const DEFAULT_OFFICIAL_CHANNELS_DATA: OfficialChannelsData = {
   channels: [
     {
       id: "femivita-hanquoc",
+      group: "direct",
       name: "Fanpage: Femivita- Gel cảm hứng số 1 Hàn Quốc",
       image: { src: "/images/distributors/channels/ch1.webp", alt: "Trang Facebook: Femivita- Gel cảm hứng số 1 Hàn Quốc" },
       href: "https://www.facebook.com/femivita.hanquoc/",
     },
     {
       id: "gia-dinh-yeu-thuong",
+      group: "distributor",
       name: "Fanpage: Gia Đình Yêu Thương",
       image: { src: "/images/distributors/channels/ch2.webp", alt: "Trang Facebook: Gia Đình Yêu Thương" },
       href: "https://www.facebook.com/giadinhyeuthuon/",
     },
     {
       id: "hoi-chi-em-u40-50-60",
+      group: "distributor",
       name: "Hội chị em U40-50-60",
       image: { src: "/images/distributors/channels/ch3.webp", alt: "Trang Facebook: Hội chị em U40-50-60" },
       href: "https://www.facebook.com/hoichiemGenS/",
     },
     {
       id: "hoi-chi-em-tham-kin",
+      group: "distributor",
       name: "Hội chị em thầm kín",
       image: { src: "/images/distributors/channels/ch4.webp", alt: "Trang Facebook: Hội chị em thầm kín" },
       href: "https://www.facebook.com/hoichiemthamkinGenS/",
     },
     {
       id: "tam-su-dan-ba",
+      group: "distributor",
       name: "Fanpage: Tâm sự đàn bà",
       image: { src: "/images/distributors/channels/ch5.webp", alt: "Trang Facebook: Tâm sự đàn bà" },
       href: "https://www.facebook.com/TamsuDanBaGenS/",
     },
     {
       id: "femivita-korea",
+      group: "direct",
       name: "Fanpage: Femivita-Gel đánh thức khoái cảm Hàn Quốc",
       image: { src: "/images/distributors/channels/ch6.webp", alt: "Trang Facebook: Femivita-Gel đánh thức khoái cảm Hàn Quốc" },
       href: "https://www.facebook.com/femivita.korea/",
     },
     {
       id: "shopee-femivita-vn",
+      group: "direct",
       name: "Shopee: Femivita Việt Nam",
       image: { src: "/images/distributors/channels/ch7.webp", alt: "Trang Shopee: Femivita Việt Nam" },
       href: "https://shopee.vn/femivitavn",
     },
     {
       id: "gel-cham-soc-co-be",
+      group: "direct",
       name: "Fanpage: Gel chăm sóc cô bé số 1 Hàn Quốc",
       image: { src: "/images/distributors/channels/ch8.webp", alt: "Trang Facebook: Gel chăm sóc cô bé số 1 Hàn Quốc" },
       href: "https://www.facebook.com/venus.femivita/",
     },
     {
       id: "femivita-vietnam",
+      group: "direct",
       name: "Fanpage: Femivita Việt Nam",
       image: { src: "/images/distributors/channels/ch9.webp", alt: "Trang Facebook: Femivita Việt Nam" },
       href: "https://www.facebook.com/femivitavietnam/",

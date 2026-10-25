@@ -25,7 +25,7 @@ const Caret: React.FC<{ visible?: boolean }> = ({ visible = false }) => (
     height={24}
     draggable={false}
     className={cn(
-      "-mr-[3px] ml-8 shrink-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0 group-hover:opacity-100",
+      "-mr-[3px] shrink-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0 group-hover:opacity-100",
       visible ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0",
     )}
   />
@@ -134,7 +134,7 @@ const ChildRow: React.FC<{ child: BuyMenuChild; onClose?: () => void }> = ({ chi
     </>
   );
   const className = cn(
-    "group flex items-center gap-5 py-4 font-google-sans text-base leading-[1.6] text-[#3D3935] transition-colors hover:text-brand-text",
+    "group flex items-center gap-4 py-3 font-google-sans text-base leading-[1.6] text-[#3D3935] transition-colors hover:text-brand-text",
     ROW_BORDER,
     child.icon && "min-h-[66px]",
   );
@@ -174,7 +174,7 @@ const BuyMenuBody: React.FC<{ menu: HeaderBuyMenu; onClose?: () => void }> = ({
     <>
       <nav
         aria-label={menu.label}
-        className="col-span-4 flex flex-col border-r border-brand-rule/30 p-10"
+        className="col-span-4 flex flex-col border-r border-brand-rule/30 p-8 pt-4"
       >
         {menu.items.map((item) => {
           const isActive = item.id === active?.id;
@@ -211,7 +211,11 @@ const BuyMenuBody: React.FC<{ menu: HeaderBuyMenu; onClose?: () => void }> = ({
       </nav>
 
       {active?.children && (
-        <div key={active.id} className="col-span-4 col-start-5 flex flex-col p-10">
+        <div
+          key={active.id}
+          data-lenis-prevent
+          className="col-span-4 col-start-5 flex flex-col p-8 pt-4"
+        >
           {active.children.map((child) => (
             <ChildRow key={child.id} child={child} onClose={onClose} />
           ))}
