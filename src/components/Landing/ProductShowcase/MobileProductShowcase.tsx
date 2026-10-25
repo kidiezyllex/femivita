@@ -95,7 +95,7 @@ export const MobileProductShowcase: React.FC<ProductShowcaseProps> = ({ data }) 
       <MobileHeroProduct src={data.heroImage} alt={data.heroImageAlt} />
 
       {/* Product lineup */}
-      <div className="flex flex-col gap-6 px-4 pb-10 pt-12">
+      <div className="flex flex-col gap-6 px-4 py-12">
         <ScrollReveal direction="up" delay={0.05}>
           <div className="flex flex-col items-start gap-4">
             <h3 className="font-sans text-[32px] font-semibold leading-[1.3] text-black">

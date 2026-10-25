@@ -7,7 +7,7 @@ import { KnowledgeArticleCard } from "./KnowledgeArticleCard";
 import { KnowledgeArticlesProps } from "./types";
 
 export const MobileKnowledgeArticles: React.FC<KnowledgeArticlesProps> = ({ data }) => (
-  <div className="bg-brand-lavender px-4 pt-8">
+  <div className="bg-brand-lavender px-4 pt-12">
     <div className="overflow-hidden rounded-2xl bg-white">
       {/* Title */}
       <ScrollReveal direction="up" delay={0.05}>
