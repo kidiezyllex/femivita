@@ -19,7 +19,7 @@ export const ArrowLink: React.FC<ArrowLinkProps> = ({ href, label, className }) 
     <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-ink-line transition-colors duration-200 ease-out group-hover:border-brand">
       <span
         aria-hidden
-        className="size-3 bg-ink-dark transition-colors duration-200 ease-out group-hover:bg-brand"
+        className="size-3 bg-ink-dark transition-[background-color,transform] duration-200 ease-out group-hover:-rotate-45 group-hover:bg-brand"
         style={{
           maskImage: "url(/logos/arrow-right-dark.svg)",
           WebkitMaskImage: "url(/logos/arrow-right-dark.svg)",

@@ -20,7 +20,7 @@ export const KnowledgeArticleItem: React.FC<KnowledgeArticleItemProps> = ({
     <div className="flex flex-wrap items-center gap-2 font-google-sans text-base leading-[1.6] text-ink-muted">
       <span>{categoryLabel ?? article.category}</span>
       <Image src="/logos/dot.svg" alt="" width={3} height={4} draggable={false} />
-      <span>{article.date}</span>
+      <span className="line-clamp-1">{article.date}</span>
     </div>
 
     <Link
@@ -39,7 +39,6 @@ export const KnowledgeArticleItem: React.FC<KnowledgeArticleItemProps> = ({
           className="object-cover"
         />
       ) : (
-        // A few old posts have no usable cover image.
         <span className="absolute inset-0 flex items-center justify-center">
           <Image
             src="/logos/femivita-logo.svg"

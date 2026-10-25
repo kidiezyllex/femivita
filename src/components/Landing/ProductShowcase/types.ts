@@ -40,7 +40,7 @@ export interface ProductShowcaseProps {
 const FOAM_PRODUCT = {
   name: "Bọt vệ sinh lợi khuẩn Probiotics cho vùng Y",
   size: "20ml | 0.67FL.OZ",
-  image: "/images/product-showcase/zone-fresh-mousse.png",
+  image: "/images/products/zone-fresh-mousse/sp2.webp",
   imageAlt: "Bọt vệ sinh lợi khuẩn Probiotics Zone Fresh Mousse cho vùng Y",
   href: "/products/zone-fresh-mousse",
 };
@@ -89,7 +89,7 @@ export const DEFAULT_PRODUCT_SHOWCASE_DATA: ProductShowcaseData = {
       id: "gel-venus-y-passion",
       name: "Gel Venus Y Passion",
       size: "20ml | 0.67FL.OZ",
-      image: "/images/product-showcase/gel-venus-y-passion.png",
+      image: "/images/products/gel-venus-y-passion/sp2.webp",
       imageAlt: "Gel Venus Y Passion và hộp sản phẩm",
       href: "/products/gel-venus-y-passion",
     },

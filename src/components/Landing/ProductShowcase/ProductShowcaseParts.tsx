@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowLink } from "@/components/ui/ArrowLink";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -78,14 +79,15 @@ export const SpotlightCard: React.FC<{
   </Link>
 );
 
-/** Lineup card (Figma "SP"): white rounded card, picture on the left (on top when narrow), name, size and a "Xem sản phẩm" link. */
 export const ProductCard: React.FC<{ product: ShowcaseProduct; className?: string }> = ({
   product,
   className,
 }) => (
-  <Link
-    href={product.href}
-    className={cn("group flex flex-col gap-4 rounded-[20px] bg-white p-4 md:flex-row", className)}
+  <div
+    className={cn(
+      "group relative flex flex-col gap-4 rounded-[20px] bg-white p-4 md:flex-row",
+      className,
+    )}
   >
     <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-[18px] bg-[#FAF9FF] md:w-[51%] md:max-w-[320px]">
       <Image
@@ -93,7 +95,8 @@ export const ProductCard: React.FC<{ product: ShowcaseProduct; className?: strin
         alt={product.imageAlt}
         fill
         quality={100}
-        sizes="(min-width: 1440px) 320px, (min-width: 768px) 30vw, 100vw"
+        // Picture is at most 320px wide from md up: ask for about twice that so it stays sharp on high-DPI screens (docs/IMAGE-SHARPNESS.md).
+        sizes="(min-width: 768px) 640px, 100vw"
         draggable={false}
         className="object-cover transition-transform duration-300 group-hover:scale-105"
       />
@@ -106,27 +109,20 @@ export const ProductCard: React.FC<{ product: ShowcaseProduct; className?: strin
       <p className="font-inter text-[15px] font-light leading-[25.6px] tracking-[0.16px] text-ink-dark/60">
         {product.size}
       </p>
-      <span className="flex items-center gap-4 pt-4 font-[Arial,Helvetica,sans-serif] text-base text-ink-dark">
-        <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-[#E6E6E6] transition-colors group-hover:border-brand">
-          <Image
-            src="/logos/arrow-right-small-dark.svg"
-            alt=""
-            width={12}
-            height={12}
-            draggable={false}
-            className="transition-transform duration-200 group-hover:translate-x-0.5"
-          />
-        </span>
-        Xem sản phẩm
-      </span>
+      <div className="pt-4">
+        {/* The ::after stretches the link over the whole card, so the card stays fully clickable */}
+        <ArrowLink
+          href={product.href}
+          label="Xem sản phẩm"
+          className="after:absolute after:inset-0 after:rounded-[20px]"
+        />
+      </div>
     </div>
-  </Link>
+  </div>
 );
 
 const ENTRANCE_AT = 0.4;
-// How far above the final position the bottle and glow start, in % of the stage height.
 const START_Y_PERCENT = 14;
-// How much smaller the bottle and glow start, relative to their Figma size (0.92 = 92%).
 const START_SCALE = 0.92;
 
 export const ShowcaseStage: React.FC<{ data: ProductShowcaseData }> = ({ data }) => {
