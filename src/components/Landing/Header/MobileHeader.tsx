@@ -2,7 +2,13 @@
 
 import { Icon } from "@/components/ui/mdi-icon";
 import { cn } from "@/lib/utils";
-import { mdiChevronLeft, mdiChevronRight, mdiClose, mdiMapMarkerOutline, mdiPhoneOutline } from "@mdi/js";
+import {
+  mdiChevronLeft,
+  mdiChevronRight,
+  mdiClose,
+  mdiMapMarkerOutline,
+  mdiPhoneOutline,
+} from "@mdi/js";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +34,8 @@ const PANEL_VARIANTS = {
 /** Panel ids: a HEADER_MENUS key, "buy" for the "Mua chính hãng" list, or "buy/<item id>" for the sub-list of one of its items. */
 const BUY_PANEL_ID = BUY_MENU.id;
 const buyItemPanelId = (itemId: string) => `${BUY_PANEL_ID}/${itemId}`;
-const parentPanelId = (panelId: string | null) => (panelId?.startsWith(`${BUY_PANEL_ID}/`) ? BUY_PANEL_ID : null);
+const parentPanelId = (panelId: string | null) =>
+  panelId?.startsWith(`${BUY_PANEL_ID}/`) ? BUY_PANEL_ID : null;
 
 const BackRow: React.FC<{ label: string; onBack: () => void }> = ({ label, onBack }) => (
   <button
@@ -43,7 +50,10 @@ const BackRow: React.FC<{ label: string; onBack: () => void }> = ({ label, onBac
 );
 
 /** Channel or distributor link of the buy menu; channels carry the same icon tile as on desktop. */
-const BuyChildRow: React.FC<{ child: BuyMenuChild; onNavigate: () => void }> = ({ child, onNavigate }) => {
+const BuyChildRow: React.FC<{ child: BuyMenuChild; onNavigate: () => void }> = ({
+  child,
+  onNavigate,
+}) => {
   const content = (
     <>
       {child.icon && (
@@ -72,7 +82,13 @@ const BuyChildRow: React.FC<{ child: BuyMenuChild; onNavigate: () => void }> = (
   const className = cn(ROW_CLASS, "justify-start text-ink");
 
   return child.external ? (
-    <a href={child.href} target="_blank" rel="noopener noreferrer" onClick={onNavigate} className={className}>
+    <a
+      href={child.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={onNavigate}
+      className={className}
+    >
       {content}
     </a>
   ) : (
@@ -168,7 +184,11 @@ const MobileMenuNav: React.FC<MobileMenuNavProps> = ({
                     </li>
                   ) : (
                     <li key={item.id}>
-                      <Link href={item.href ?? "#"} onClick={onNavigate} className={cn(ROW_CLASS, "text-ink")}>
+                      <Link
+                        href={item.href ?? "#"}
+                        onClick={onNavigate}
+                        className={cn(ROW_CLASS, "text-ink")}
+                      >
                         <span>{item.label}</span>
                         <Icon path={mdiChevronRight} className="size-6 shrink-0" />
                       </Link>
@@ -240,7 +260,7 @@ export const MobileHeader: React.FC = () => {
   return (
     <header
       className={cn(
-        "relative z-50 flex h-[90px] w-full items-center justify-between px-3",
+        "relative z-50 flex h-[90px] w-full items-center justify-between px-4",
         isOpen || isClosing ? "bg-white" : "bg-transparent",
       )}
     >

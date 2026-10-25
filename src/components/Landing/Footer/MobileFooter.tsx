@@ -13,6 +13,7 @@ import { FooterProps } from "./types";
  */
 export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
   const {
+    tone,
     border,
     label,
     slogan,
@@ -26,7 +27,7 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
 
   return (
     <div className="relative px-4 py-12">
-      {/* Tall background picture; it already carries its own gradient, so there is no overlay */}
+      {/* Tall background picture; it already carries its own gradient */}
       <Image
         src={mobileBackground}
         alt=""
@@ -36,6 +37,9 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
         draggable={false}
         className="object-cover object-top"
       />
+
+      {/* Dark footer only: a black veil so the white text stands out from the bright picture */}
+      {tone === "dark" && <div aria-hidden className="absolute inset-0 bg-black/40" />}
 
       <div className="relative flex flex-col">
         {/* Logo and slogan */}
@@ -58,7 +62,7 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
 
         {/* Contact */}
         <div className={cn("flex flex-col border-t pt-6", border)}>
-          <p className={cn("font-google-sans text-base leading-[1.6] opacity-80", label)}>
+          <p className={cn("font-google-sans text-base leading-[1.6]", label)}>
             {data.contactLabel}
           </p>
 
@@ -94,7 +98,7 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
 
         {/* Purchase: direct channels and distributors */}
         <div className={cn("flex flex-col gap-4 border-t py-6", border)}>
-          <p className={cn("font-google-sans text-base leading-[1.6] opacity-80", label)}>
+          <p className={cn("font-google-sans text-base leading-[1.6]", label)}>
             {data.purchaseLabel}
           </p>
 
@@ -111,7 +115,7 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
                     aria-label={social.label}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex size-10 items-center justify-center rounded-lg border border-black/[0.02] bg-brand-pink transition-opacity hover:opacity-80"
+                    className="hover flex size-10 items-center justify-center rounded-lg border border-black/[0.02] bg-brand-pink transition-opacity"
                   >
                     {social.fullColor ? (
                       <Image
@@ -163,7 +167,7 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
 
         {/* Policy */}
         <div className={cn("flex flex-col gap-4 border-y py-6", border)}>
-          <p className={cn("font-google-sans text-base leading-[1.6] opacity-80", label)}>
+          <p className={cn("font-google-sans text-base leading-[1.6]", label)}>
             {data.policyLabel}
           </p>
 

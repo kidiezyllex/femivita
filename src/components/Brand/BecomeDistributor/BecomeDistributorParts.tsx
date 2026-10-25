@@ -4,7 +4,9 @@ import React from "react";
 import { BecomeDistributorData } from "./types";
 
 /** Head-office photo filling the card, anchored to the right. */
-export const BecomeDistributorBackground: React.FC<{ data: BecomeDistributorData }> = ({ data }) => (
+export const BecomeDistributorBackground: React.FC<{ data: BecomeDistributorData }> = ({
+  data,
+}) => (
   <div className="absolute inset-0 z-0">
     <img
       src={data.image}
@@ -31,7 +33,7 @@ export const BecomeDistributorText: React.FC<{
           <span className="text-brand-text">{data.headlineHighlight}</span>
         </h2>
       </div>
-      <p className="whitespace-pre-line font-google-sans text-base leading-[1.6] text-[#171717]/60">
+      <p className="whitespace-pre-line font-google-sans text-base leading-[1.6] text-gray-700">
         {data.description}
       </p>
       <div>

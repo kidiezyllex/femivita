@@ -10,11 +10,10 @@ export * from "./types";
 const GLOW =
   "pointer-events-none absolute h-[2085px] w-[2106px] bg-[radial-gradient(closest-side,rgba(179,118,194,1),rgba(219,193,243,0))] opacity-50";
 
-/** "Trở thành Nhà phân phối": intro copy and the registration form on a soft lavender background (Figma 1440 wide). */
 export const Distributors: React.FC<DistributorsProps> = ({ data = DEFAULT_DISTRIBUTORS_DATA }) => (
   <section
     id="distributors"
-    className="relative w-full overflow-clip bg-white px-4 pb-16 pt-[140px] md:px-8 md:pb-24 md:pt-40 lg:pb-[200px] lg:pt-[200px]"
+    className="relative w-full overflow-clip bg-white px-4 pb-12 pt-[140px] md:px-8 md:pb-24 md:pt-40 lg:pb-[200px] lg:pt-[200px]"
   >
     <div aria-hidden className={`${GLOW} right-[-1134px] top-[-1221px]`} />
     <div aria-hidden className={`${GLOW} left-[-990px] top-[calc(50%+346.9px)] -translate-y-1/2`} />
@@ -30,10 +29,7 @@ export const Distributors: React.FC<DistributorsProps> = ({ data = DEFAULT_DISTR
           </h1>
           <div className="flex flex-col gap-6 pt-6">
             {data.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="font-google-sans text-base leading-[1.6] text-[#171717]/60"
-              >
+              <p key={paragraph} className="font-google-sans text-base leading-[1.6] text-gray-700">
                 {paragraph}
               </p>
             ))}

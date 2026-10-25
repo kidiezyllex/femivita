@@ -21,8 +21,10 @@ export const FaqSupport: React.FC<FaqSupportProps> = ({
 }) => (
   <div className={cn("flex flex-col", className)}>
     <div className="flex flex-col gap-4 lg:pr-6">
-      {eyebrow && <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{eyebrow}</p>}
-      <p className="font-sans text-2xl font-medium leading-[1.4] text-ink-dark md:text-[28px] lg:text-[32px]">
+      {eyebrow && (
+        <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{eyebrow}</p>
+      )}
+      <p className="font-sans text-xl font-medium leading-[1.4] text-ink-dark md:text-[28px] lg:text-[32px]">
         {segments.map((segment, index) =>
           segment.href ? (
             <a
