@@ -37,7 +37,7 @@ const CarouselArrow: React.FC<{
 
 const CertificateCard: React.FC<{ certificate: BrandCertificate }> = ({ certificate }) => (
   <article className="flex shrink-0 flex-col items-center justify-center gap-[10px] rounded-[20px] border border-ink-iron p-3">
-    <div className="relative w-full overflow-hidden rounded-[6.222px] aspect-[220/300] md:aspect-[280/380]">
+    <div className="relative aspect-[220/300] w-full overflow-hidden rounded-[6.222px] md:aspect-[280/380]">
       <Image
         src={certificate.image}
         alt={certificate.imageAlt}
@@ -52,7 +52,9 @@ const CertificateCard: React.FC<{ certificate: BrandCertificate }> = ({ certific
       <h3 className="w-[220px] text-center font-google-sans text-xl font-medium leading-[1.6] text-ink-dark md:w-[250px]">
         {certificate.title}
       </h3>
-      <p className="font-google-sans text-base leading-[1.6] text-ink-soft">{certificate.subtitle}</p>
+      <p className="font-google-sans text-base leading-[1.6] text-ink-soft">
+        {certificate.subtitle}
+      </p>
     </div>
   </article>
 );
@@ -76,7 +78,10 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
   const slides = useMemo(
     () =>
       Array.from({ length: LOOP_REPEAT }, (_, round) =>
-        data.certificates.map((certificate) => ({ certificate, key: `${certificate.id}-${round}` })),
+        data.certificates.map((certificate) => ({
+          certificate,
+          key: `${certificate.id}-${round}`,
+        })),
       ).flat(),
     [data.certificates],
   );
@@ -86,7 +91,7 @@ export const BrandCertificates: React.FC<BrandCertificatesSectionProps> = ({
       <ScrollReveal direction="up" delay={0.05} amount={0.4} once>
         <div className="flex flex-col items-center px-4 py-12 md:px-12 md:py-16 lg:px-[161px] lg:py-20">
           <p className="font-google-sans text-lg leading-[1.6] text-ink-muted">{data.eyebrow}</p>
-          <h2 className="font-sans font-bold leading-[1.3] text-gray-700 text-center [font-size:clamp(32px,3.34vw,48px)]">
+          <h2 className="text-center font-sans font-bold leading-[1.3] text-gray-700 [font-size:clamp(32px,3.34vw,48px)]">
             <span className="text-brand-text">{data.headlineHighlight}</span>
             {data.headlineRest}
           </h2>

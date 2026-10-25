@@ -29,7 +29,7 @@ export const MobileBecomeDistributor: React.FC<BecomeDistributorProps> = ({
             <p className="font-google-sans text-[14px] leading-[1.2] text-ink-muted">
               {data.eyebrow}
             </p>
-            <h2 className="font-sans text-2xl font-medium leading-[1.4] text-black">
+            <h2 className="font-sans text-xl font-medium leading-[1.4] text-black">
               {data.headlineStart}
               <br />
               <span className="text-brand-text">{data.headlineHighlight}</span>

@@ -21,7 +21,7 @@ export const MobileBrandIntro: React.FC<BrandIntroProps> = ({ data }) => {
       <ScrollReveal direction="up" delay={0.05}>
         <div className="flex flex-col gap-2">
           <p className="font-google-sans text-base leading-[1.6] text-ink-muted">{data.eyebrow}</p>
-          <h2 className="font-sans text-2xl font-medium leading-[1.4] text-black">
+          <h2 className="font-sans text-xl font-medium leading-[1.4] text-black">
             {data.headline}
           </h2>
         </div>
