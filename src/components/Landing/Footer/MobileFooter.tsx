@@ -39,7 +39,7 @@ export const MobileFooter: React.FC<FooterProps> = ({ data }) => {
       />
 
       {/* Dark footer only: a black veil so the white text stands out from the bright picture */}
-      {tone === "dark" && <div aria-hidden className="absolute inset-0 bg-black/40" />}
+      {tone === "dark" && <div aria-hidden className="absolute inset-0 bg-black/20" />}
 
       <div className="relative flex flex-col">
         {/* Logo and slogan */}

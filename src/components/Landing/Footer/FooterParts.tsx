@@ -95,8 +95,8 @@ export const FooterBackground: React.FC<FooterBackgroundProps> = ({
           className="absolute inset-x-0 top-0 h-[1255px] bg-[linear-gradient(180deg,#967AD3_78px,rgba(189,172,219,0.5)_666px,rgba(228,222,228,0)_1255px)]"
         />
       )}
-      {/* Dark footer only: a black veil so the white text stands out from the bright picture. Tune the opacity (/40) here. */}
-      {tone === "dark" && <div aria-hidden className="absolute inset-0 bg-black/40" />}
+      {/* Dark footer only: a black veil so the white text stands out from the bright picture. Tune the opacity (/20) here. */}
+      {tone === "dark" && <div aria-hidden className="absolute inset-0 bg-black/20" />}
     </>
   );
 };

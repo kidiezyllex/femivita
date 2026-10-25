@@ -27,7 +27,7 @@ export const BrandIntroDecor: React.FC<{ textureImage: string }> = ({ textureIma
       aria-hidden
       className="absolute left-[93px] top-[-12px] flex h-[794.757px] w-[898.249px] items-center justify-center"
     >
-      <div className="flex-none -scale-y-100 rotate-[104.07deg]">
+      <div className="flex-none rotate-[104.07deg] -scale-y-100">
         <div className="relative h-[769px] w-[626.635px]">
           <Image
             src={textureImage}
@@ -74,7 +74,12 @@ export const SlideCounter: React.FC<{ current: number; total: number; className?
   total,
   className,
 }) => (
-  <div className={cn("flex items-start text-white [font-family:Arial,Helvetica,sans-serif]", className)}>
+  <div
+    className={cn(
+      "flex items-start text-white [font-family:Arial,Helvetica,sans-serif]",
+      className,
+    )}
+  >
     <p className="text-[56px] leading-[56px] md:text-[72px] md:leading-[72px] lg:text-[96px] lg:leading-[96px]">
       {pad(current)}
     </p>
@@ -138,11 +143,11 @@ export const SlideText: React.FC<{ slide: BrandIntroSlide; className?: string }>
     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
     className={cn("absolute inset-x-0 top-0 flex w-full max-w-[437px] flex-col", className)}
   >
-    <h3 className="font-sans text-xl font-medium leading-[1.4] text-white lg:text-2xl">{slide.title}</h3>
+    <h3 className="font-sans text-xl font-medium leading-[1.4] text-white lg:text-2xl">
+      {slide.title}
+    </h3>
     <div className="flex flex-col gap-6 pt-6">
-      {slide.lead && (
-        <p className="font-google-sans text-base leading-[1.6] text-white/80">{slide.lead}</p>
-      )}
+      {slide.lead && <p className="font-google-sans text-base leading-[1.6]">{slide.lead}</p>}
       <p className="font-google-sans text-sm leading-[1.6] text-white/80">{slide.description}</p>
     </div>
   </motion.div>
