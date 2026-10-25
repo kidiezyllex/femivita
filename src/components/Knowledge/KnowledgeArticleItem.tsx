@@ -54,12 +54,12 @@ export const KnowledgeArticleItem: React.FC<KnowledgeArticleItemProps> = ({
     </Link>
 
     <div className="flex flex-col font-google-sans text-ink-dark">
-      <h3 className="text-2xl font-bold leading-[1.4] lg:text-[32px]">
+      <h3 className="text-xl font-semibold leading-[1.4]">
         <Link href={article.href} className="transition-colors hover:text-brand">
           {article.title}
         </Link>
       </h3>
-      <p className="text-base leading-[1.6] lg:text-xl">{article.excerpt}</p>
+      <p className="text-base leading-[1.6] lg:text-lg">{article.excerpt}</p>
     </div>
 
     <ArrowLink href={article.href} label={readMoreLabel} />
