@@ -141,13 +141,15 @@ export const SlideText: React.FC<{ slide: BrandIntroSlide; className?: string }>
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -8 }}
     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-    className={cn("absolute inset-x-0 top-0 flex w-full max-w-[437px] flex-col", className)}
+    className={cn("absolute inset-x-0 top-0 flex w-full max-w-[440px] flex-col", className)}
   >
     <h3 className="font-sans text-xl font-medium leading-[1.4] text-white lg:text-2xl">
       {slide.title}
     </h3>
     <div className="flex flex-col gap-6 pt-6">
-      {slide.lead && <p className="font-google-sans text-base leading-[1.6]">{slide.lead}</p>}
+      {slide.lead && (
+        <p className="font-google-sans text-base leading-[1.6] text-white/80">{slide.lead}</p>
+      )}
       <p className="font-google-sans text-sm leading-[1.6] text-white/80">{slide.description}</p>
     </div>
   </motion.div>
